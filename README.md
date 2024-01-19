@@ -24,13 +24,3 @@ The idea of distillation plays a important role in these situations by reducing 
 
 - 
 
-
-@article{zhu2021geometric,
-      title={A Geometric Analysis of Neural Collapse with Unconstrained Features}, 
-      author={Zhihui Zhu and Tianyu Ding and Jinxin Zhou and Xiao Li and Chong You and Jeremias Sulam and Qing Qu},
-      year={2021},
-      eprint={2105.02375},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
-}
-```
