@@ -21,6 +21,3 @@ The idea of distillation plays a important role in these situations by reducing 
 - torchvision 0.7.0
 - scipy 1.5.2
 - numpy 1.19.1
-
-- 
-
