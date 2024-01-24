@@ -1,1 +1,0 @@
-[epoch: 1] | train top1: 97.2150 | train top5: 99.8967 | test top1: 97.3700 | test top5: 99.9300 

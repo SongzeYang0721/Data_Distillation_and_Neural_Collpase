@@ -8,7 +8,7 @@ import models
 from models.res_adapt import ResNet18_adapt
 from utils import *
 from args import parse_eval_args
-from datasets import make_dataset
+from data.datasets import make_dataset
 
 
 MNIST_TRAIN_SAMPLES = (5923, 6742, 5958, 6131, 5842, 5421, 5918, 6265, 5851, 5949)

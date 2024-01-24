@@ -11,7 +11,7 @@ Neural collpase
 - https://github.com/tding1/Neural-Collapse
 
 ## Introduction
-The idea of distillation plays a important role in these situations by reducing the resources required for the model to be effective. Can neural collpase play a role in the data distillation? We invetigate the connect here.
+The idea of distillation plays a important role in these situations by reducing the resources required for the model to be effective. Can neural collpase play a role in the data distillation? We invetigate the connection here.
 
 ## Environment
 
@@ -22,4 +22,6 @@ The idea of distillation plays a important role in these situations by reducing 
 - scipy 1.5.2
 - numpy 1.19.1
 
-## 
+## Experiment
+
+The 

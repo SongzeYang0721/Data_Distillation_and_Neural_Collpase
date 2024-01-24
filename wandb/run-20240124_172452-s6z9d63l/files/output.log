@@ -1,0 +1,11 @@
+
+[34m[1mwandb[39m[22m: [33mWARNING[39m Calling wandb.login() after wandb.init() has no effect.
+override this uidtmp
+<arg_loader.train_args object at 0x15809d150>
+cudnn is used
+Dataset: MNIST.
+10
+The number of class in our training set is  10
+Batch size: 1024 Number of channels: 3 input height: 32 input width: 32
+# of model parameters: 11176522
+<class 'models.resnet.ResNet'>
