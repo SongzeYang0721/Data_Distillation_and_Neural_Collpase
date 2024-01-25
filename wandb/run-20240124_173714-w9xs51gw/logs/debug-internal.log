@@ -186,3 +186,19 @@
 2024-01-24 17:42:29,523 DEBUG   SenderThread:83623 [sender.py:send_request():409] send_request: stop_status
 2024-01-24 17:42:31,847 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: status_report
 2024-01-24 17:42:36,865 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: status_report
+2024-01-24 17:42:41,887 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: status_report
+2024-01-24 17:42:44,521 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: internal_messages
+2024-01-24 17:42:44,527 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: stop_status
+2024-01-24 17:42:44,528 DEBUG   SenderThread:83623 [sender.py:send_request():409] send_request: stop_status
+2024-01-24 17:42:46,977 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: status_report
+2024-01-24 17:42:51,994 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: status_report
+2024-01-24 17:42:55,737 DEBUG   SenderThread:83623 [sender.py:send():382] send: stats
+2024-01-24 17:42:57,749 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: status_report
+2024-01-24 17:42:59,521 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: internal_messages
+2024-01-24 17:42:59,529 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: stop_status
+2024-01-24 17:42:59,530 DEBUG   SenderThread:83623 [sender.py:send_request():409] send_request: stop_status
+2024-01-24 17:43:02,804 DEBUG   HandlerThread:83623 [handler.py:handle_request():146] handle_request: status_report
+2024-01-24 17:43:06,007 INFO    MainThread:83623 [internal.py:handle_exit():76] Internal process exited
+2024-01-24 17:43:06,007 INFO    MainThread:83623 [internal.py:handle_exit():76] Internal process exited
+2024-01-24 17:43:06,008 INFO    MainThread:83623 [internal.py:handle_exit():76] Internal process exited
+2024-01-24 17:43:06,008 INFO    MainThread:83623 [internal.py:handle_exit():76] Internal process exited
