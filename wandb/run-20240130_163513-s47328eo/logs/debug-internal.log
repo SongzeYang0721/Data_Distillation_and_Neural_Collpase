@@ -1,0 +1,191 @@
+2024-01-30 16:35:13,051 INFO    StreamThr :94586 [internal.py:wandb_internal():86] W&B internal server running at pid: 94586, started at: 2024-01-30 16:35:13.047709
+2024-01-30 16:35:13,053 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: status
+2024-01-30 16:35:13,069 INFO    WriterThread:94586 [datastore.py:open_for_write():85] open: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/run-s47328eo.wandb
+2024-01-30 16:35:13,070 DEBUG   SenderThread:94586 [sender.py:send():382] send: header
+2024-01-30 16:35:13,095 DEBUG   SenderThread:94586 [sender.py:send():382] send: run
+2024-01-30 16:35:13,908 INFO    SenderThread:94586 [dir_watcher.py:__init__():211] watching files in: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files
+2024-01-30 16:35:13,908 INFO    SenderThread:94586 [sender.py:_start_run_threads():1136] run started: s47328eo with start time 1706592913.046671
+2024-01-30 16:35:13,919 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: check_version
+2024-01-30 16:35:13,920 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: check_version
+2024-01-30 16:35:14,049 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: run_start
+2024-01-30 16:35:14,063 DEBUG   HandlerThread:94586 [system_info.py:__init__():32] System info init
+2024-01-30 16:35:14,063 DEBUG   HandlerThread:94586 [system_info.py:__init__():47] System info init done
+2024-01-30 16:35:14,064 INFO    HandlerThread:94586 [system_monitor.py:start():194] Starting system monitor
+2024-01-30 16:35:14,064 INFO    SystemMonitor:94586 [system_monitor.py:_start():158] Starting system asset monitoring threads
+2024-01-30 16:35:14,064 INFO    HandlerThread:94586 [system_monitor.py:probe():214] Collecting system info
+2024-01-30 16:35:14,065 DEBUG   HandlerThread:94586 [system_info.py:probe():196] Probing system
+2024-01-30 16:35:14,065 INFO    SystemMonitor:94586 [interfaces.py:start():190] Started cpu monitoring
+2024-01-30 16:35:14,065 INFO    SystemMonitor:94586 [interfaces.py:start():190] Started disk monitoring
+2024-01-30 16:35:14,070 INFO    SystemMonitor:94586 [interfaces.py:start():190] Started gpuapple monitoring
+2024-01-30 16:35:14,071 INFO    SystemMonitor:94586 [interfaces.py:start():190] Started memory monitoring
+2024-01-30 16:35:14,072 INFO    SystemMonitor:94586 [interfaces.py:start():190] Started network monitoring
+2024-01-30 16:35:14,077 DEBUG   HandlerThread:94586 [system_info.py:_probe_git():181] Probing git
+2024-01-30 16:35:14,105 DEBUG   HandlerThread:94586 [system_info.py:_probe_git():189] Probing git done
+2024-01-30 16:35:14,105 DEBUG   HandlerThread:94586 [system_info.py:probe():244] Probing system done
+2024-01-30 16:35:14,105 DEBUG   HandlerThread:94586 [system_monitor.py:probe():223] {'os': 'macOS-13.5.1-arm64-arm-64bit', 'python': '3.11.5', 'heartbeatAt': '2024-01-30T05:35:14.065260', 'startedAt': '2024-01-30T05:35:13.029250', 'docker': None, 'cuda': None, 'args': (), 'state': 'running', 'program': 'Documents/GitHub/Data_Distill_with_NC/Data_Distillation_and_Nerual_Collapse_Demo.ipynb', 'codePathLocal': None, 'root': '/Users/songzeyang/Documents/GitHub/Data_Distill_with_NC', 'git': {'remote': 'https://github.com/SongzeYang0721/Data_Distillation_and_Neural_Collpase.git', 'commit': '40cb716424a8bbba7c59d6d393816ff4e7f5c2f7'}, 'email': 'yangsongze2008@gmail.com', 'host': 'Songzes-MacBook-Pro.local', 'username': 'songzeyang', 'executable': '/Users/songzeyang/anaconda3/bin/python', 'cpu_count': 8, 'cpu_count_logical': 8, 'disk': {'/': {'total': 460.4317207336426, 'used': 118.54778671264648}}, 'gpuapple': {'type': 'arm', 'vendor': 'Apple'}, 'memory': {'total': 8.0}}
+2024-01-30 16:35:14,105 INFO    HandlerThread:94586 [system_monitor.py:probe():224] Finished collecting system info
+2024-01-30 16:35:14,105 INFO    HandlerThread:94586 [system_monitor.py:probe():227] Publishing system info
+2024-01-30 16:35:14,105 DEBUG   HandlerThread:94586 [system_info.py:_save_pip():52] Saving list of pip packages installed into the current environment
+2024-01-30 16:35:14,106 DEBUG   HandlerThread:94586 [system_info.py:_save_pip():68] Saving pip packages done
+2024-01-30 16:35:14,106 DEBUG   HandlerThread:94586 [system_info.py:_save_conda():75] Saving list of conda packages installed into the current environment
+2024-01-30 16:35:14,909 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/conda-environment.yaml
+2024-01-30 16:35:14,909 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/requirements.txt
+2024-01-30 16:35:17,656 DEBUG   HandlerThread:94586 [system_info.py:_save_conda():87] Saving conda packages done
+2024-01-30 16:35:17,656 INFO    HandlerThread:94586 [system_monitor.py:probe():229] Finished publishing system info
+2024-01-30 16:35:17,661 DEBUG   SenderThread:94586 [sender.py:send():382] send: files
+2024-01-30 16:35:17,661 INFO    SenderThread:94586 [sender.py:_save_file():1392] saving file wandb-metadata.json with policy now
+2024-01-30 16:35:17,667 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: internal_messages
+2024-01-30 16:35:17,670 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: stop_status
+2024-01-30 16:35:17,670 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: stop_status
+2024-01-30 16:35:17,918 DEBUG   SenderThread:94586 [sender.py:send():382] send: telemetry
+2024-01-30 16:35:17,924 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/conda-environment.yaml
+2024-01-30 16:35:17,924 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/wandb-metadata.json
+2024-01-30 16:35:17,924 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/output.log
+2024-01-30 16:35:18,601 INFO    wandb-upload_0:94586 [upload_job.py:push():131] Uploaded file /var/folders/50/9xzt17gx7hz47b3vjql39fjh0000gn/T/tmp4ap3ts_jwandb/4clp713e-wandb-metadata.json
+2024-01-30 16:35:18,771 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: status_report
+2024-01-30 16:35:19,935 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/output.log
+2024-01-30 16:35:23,796 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: status_report
+2024-01-30 16:35:28,819 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: status_report
+2024-01-30 16:35:32,683 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: stop_status
+2024-01-30 16:35:32,684 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: internal_messages
+2024-01-30 16:35:32,686 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: stop_status
+2024-01-30 16:35:34,016 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: status_report
+2024-01-30 16:35:39,030 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: status_report
+2024-01-30 16:35:44,057 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: status_report
+2024-01-30 16:35:45,056 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/config.yaml
+2024-01-30 16:35:45,390 DEBUG   SenderThread:94586 [sender.py:send():382] send: telemetry
+2024-01-30 16:35:45,391 DEBUG   SenderThread:94586 [sender.py:send():382] send: exit
+2024-01-30 16:35:45,392 INFO    SenderThread:94586 [sender.py:send_exit():589] handling exit code: 1
+2024-01-30 16:35:45,392 INFO    SenderThread:94586 [sender.py:send_exit():591] handling runtime: 31
+2024-01-30 16:35:45,394 INFO    SenderThread:94586 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2024-01-30 16:35:45,394 INFO    SenderThread:94586 [sender.py:send_exit():597] send defer
+2024-01-30 16:35:45,395 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:45,395 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 0
+2024-01-30 16:35:45,395 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:45,395 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 0
+2024-01-30 16:35:45,395 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 1
+2024-01-30 16:35:45,395 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:45,395 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 1
+2024-01-30 16:35:45,395 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:45,395 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 1
+2024-01-30 16:35:45,395 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 2
+2024-01-30 16:35:45,396 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:45,396 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 2
+2024-01-30 16:35:45,396 INFO    HandlerThread:94586 [system_monitor.py:finish():203] Stopping system monitor
+2024-01-30 16:35:45,396 DEBUG   SystemMonitor:94586 [system_monitor.py:_start():172] Starting system metrics aggregation loop
+2024-01-30 16:35:45,397 INFO    HandlerThread:94586 [interfaces.py:finish():202] Joined cpu monitor
+2024-01-30 16:35:45,397 DEBUG   SystemMonitor:94586 [system_monitor.py:_start():179] Finished system metrics aggregation loop
+2024-01-30 16:35:45,397 DEBUG   SystemMonitor:94586 [system_monitor.py:_start():183] Publishing last batch of metrics
+2024-01-30 16:35:45,397 INFO    HandlerThread:94586 [interfaces.py:finish():202] Joined disk monitor
+2024-01-30 16:35:45,398 INFO    HandlerThread:94586 [interfaces.py:finish():202] Joined gpuapple monitor
+2024-01-30 16:35:45,398 INFO    HandlerThread:94586 [interfaces.py:finish():202] Joined memory monitor
+2024-01-30 16:35:45,399 INFO    HandlerThread:94586 [interfaces.py:finish():202] Joined network monitor
+2024-01-30 16:35:45,399 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:45,399 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 2
+2024-01-30 16:35:45,399 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 3
+2024-01-30 16:35:45,399 DEBUG   SenderThread:94586 [sender.py:send():382] send: telemetry
+2024-01-30 16:35:45,399 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:45,399 DEBUG   SenderThread:94586 [sender.py:send():382] send: stats
+2024-01-30 16:35:45,399 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 3
+2024-01-30 16:35:45,400 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:45,400 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 3
+2024-01-30 16:35:45,400 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 4
+2024-01-30 16:35:45,400 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:45,400 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 4
+2024-01-30 16:35:45,400 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:45,400 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 4
+2024-01-30 16:35:45,400 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 5
+2024-01-30 16:35:45,400 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:45,400 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 5
+2024-01-30 16:35:45,400 DEBUG   SenderThread:94586 [sender.py:send():382] send: summary
+2024-01-30 16:35:45,401 INFO    SenderThread:94586 [sender.py:_save_file():1392] saving file wandb-summary.json with policy end
+2024-01-30 16:35:45,401 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:45,401 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 5
+2024-01-30 16:35:45,401 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 6
+2024-01-30 16:35:45,402 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:45,402 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 6
+2024-01-30 16:35:45,402 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:45,402 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 6
+2024-01-30 16:35:45,405 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: status_report
+2024-01-30 16:35:45,641 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 7
+2024-01-30 16:35:45,641 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:45,641 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 7
+2024-01-30 16:35:45,642 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:45,642 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 7
+2024-01-30 16:35:46,057 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/config.yaml
+2024-01-30 16:35:46,057 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_created():271] file/dir created: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/wandb-summary.json
+2024-01-30 16:35:46,393 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: poll_exit
+2024-01-30 16:35:47,059 INFO    Thread-12 :94586 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/output.log
+2024-01-30 16:35:47,399 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 8
+2024-01-30 16:35:47,399 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: poll_exit
+2024-01-30 16:35:47,399 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:47,401 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 8
+2024-01-30 16:35:47,402 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:47,402 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 8
+2024-01-30 16:35:47,402 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 9
+2024-01-30 16:35:47,402 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:47,403 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 9
+2024-01-30 16:35:47,403 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:47,403 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 9
+2024-01-30 16:35:47,403 INFO    SenderThread:94586 [dir_watcher.py:finish():358] shutting down directory watcher
+2024-01-30 16:35:48,066 INFO    SenderThread:94586 [dir_watcher.py:_on_file_modified():288] file/dir modified: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/output.log
+2024-01-30 16:35:48,066 INFO    SenderThread:94586 [dir_watcher.py:finish():388] scan: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files
+2024-01-30 16:35:48,067 INFO    SenderThread:94586 [dir_watcher.py:finish():402] scan save: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/requirements.txt requirements.txt
+2024-01-30 16:35:48,067 INFO    SenderThread:94586 [dir_watcher.py:finish():402] scan save: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/output.log output.log
+2024-01-30 16:35:48,071 INFO    SenderThread:94586 [dir_watcher.py:finish():402] scan save: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/config.yaml config.yaml
+2024-01-30 16:35:48,074 INFO    SenderThread:94586 [dir_watcher.py:finish():402] scan save: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/wandb-summary.json wandb-summary.json
+2024-01-30 16:35:48,077 INFO    SenderThread:94586 [dir_watcher.py:finish():402] scan save: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/conda-environment.yaml conda-environment.yaml
+2024-01-30 16:35:48,080 INFO    SenderThread:94586 [dir_watcher.py:finish():402] scan save: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/wandb-metadata.json wandb-metadata.json
+2024-01-30 16:35:48,080 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 10
+2024-01-30 16:35:48,082 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:48,083 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 10
+2024-01-30 16:35:48,084 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:48,084 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 10
+2024-01-30 16:35:48,084 INFO    SenderThread:94586 [file_pusher.py:finish():175] shutting down file pusher
+2024-01-30 16:35:48,404 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: poll_exit
+2024-01-30 16:35:48,405 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: poll_exit
+2024-01-30 16:35:48,609 INFO    wandb-upload_0:94586 [upload_job.py:push():131] Uploaded file /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/requirements.txt
+2024-01-30 16:35:48,793 INFO    wandb-upload_2:94586 [upload_job.py:push():131] Uploaded file /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/config.yaml
+2024-01-30 16:35:48,822 INFO    wandb-upload_3:94586 [upload_job.py:push():131] Uploaded file /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/wandb-summary.json
+2024-01-30 16:35:48,850 INFO    wandb-upload_4:94586 [upload_job.py:push():131] Uploaded file /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/conda-environment.yaml
+2024-01-30 16:35:48,978 INFO    wandb-upload_1:94586 [upload_job.py:push():131] Uploaded file /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/files/output.log
+2024-01-30 16:35:49,184 INFO    Thread-11 (_thread_body):94586 [sender.py:transition_state():617] send defer: 11
+2024-01-30 16:35:49,185 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:49,185 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 11
+2024-01-30 16:35:49,186 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:49,186 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 11
+2024-01-30 16:35:49,186 INFO    SenderThread:94586 [file_pusher.py:join():181] waiting for file pusher
+2024-01-30 16:35:49,186 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 12
+2024-01-30 16:35:49,187 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:49,187 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 12
+2024-01-30 16:35:49,187 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:49,187 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 12
+2024-01-30 16:35:49,187 INFO    SenderThread:94586 [file_stream.py:finish():595] file stream finish called
+2024-01-30 16:35:49,401 INFO    SenderThread:94586 [file_stream.py:finish():599] file stream finish is done
+2024-01-30 16:35:49,402 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 13
+2024-01-30 16:35:49,402 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:49,402 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 13
+2024-01-30 16:35:49,403 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:49,403 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 13
+2024-01-30 16:35:49,403 INFO    SenderThread:94586 [sender.py:transition_state():617] send defer: 14
+2024-01-30 16:35:49,404 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: defer
+2024-01-30 16:35:49,404 DEBUG   SenderThread:94586 [sender.py:send():382] send: final
+2024-01-30 16:35:49,404 INFO    HandlerThread:94586 [handler.py:handle_request_defer():172] handle defer: 14
+2024-01-30 16:35:49,404 DEBUG   SenderThread:94586 [sender.py:send():382] send: footer
+2024-01-30 16:35:49,404 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: defer
+2024-01-30 16:35:49,404 INFO    SenderThread:94586 [sender.py:send_request_defer():613] handle sender defer: 14
+2024-01-30 16:35:49,406 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: poll_exit
+2024-01-30 16:35:49,407 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: poll_exit
+2024-01-30 16:35:49,410 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: internal_messages
+2024-01-30 16:35:49,411 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: server_info
+2024-01-30 16:35:49,411 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: get_summary
+2024-01-30 16:35:49,412 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: server_info
+2024-01-30 16:35:49,412 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: sampled_history
+2024-01-30 16:35:49,414 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: job_info
+2024-01-30 16:35:49,631 DEBUG   SenderThread:94586 [sender.py:send_request():409] send_request: job_info
+2024-01-30 16:35:49,632 DEBUG   HandlerThread:94586 [handler.py:handle_request():146] handle_request: shutdown
+2024-01-30 16:35:49,632 INFO    HandlerThread:94586 [handler.py:finish():866] shutting down handler
+2024-01-30 16:35:50,420 INFO    WriterThread:94586 [datastore.py:close():294] close: /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_163513-s47328eo/run-s47328eo.wandb
+2024-01-30 16:35:50,632 INFO    SenderThread:94586 [sender.py:finish():1548] shutting down sender
+2024-01-30 16:35:50,632 INFO    SenderThread:94586 [file_pusher.py:finish():175] shutting down file pusher
+2024-01-30 16:35:50,632 INFO    SenderThread:94586 [file_pusher.py:join():181] waiting for file pusher

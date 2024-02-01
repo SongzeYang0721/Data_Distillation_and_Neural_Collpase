@@ -1,0 +1,6 @@
+Initialise finished, starting now...
+Dataset: CIFAR10.
+Files already downloaded and verified
+Files already downloaded and verified
+The number of class in our training set is  10
+Batch size: 64 Number of channels: 3 input height: 32 input width: 32

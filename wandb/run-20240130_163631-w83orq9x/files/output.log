@@ -1,0 +1,11 @@
+Initialise finished, starting now...
+Dataset: CIFAR10.
+Files already downloaded and verified
+Files already downloaded and verified
+Traceback (most recent call last):
+  File "/var/folders/50/9xzt17gx7hz47b3vjql39fjh0000gn/T/ipykernel_94296/2031067554.py", line 17, in train_n_validate
+    model = models.__dict__[config.model](num_classes=num_classes,
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^
+KeyError: 'ResNet18_adapt'
+The number of class in our training set is  10
+Batch size: 64 Number of channels: 3 input height: 32 input width: 32

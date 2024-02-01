@@ -1,0 +1,55 @@
+Dataset: CIFAR10.
+Files already downloaded and verified
+Files already downloaded and verified
+[epoch: 1] (1/25) | Loss: 5.4857 | top1: 12.6953 | top5: 50.9766
+Traceback (most recent call last):
+  File "/var/folders/50/9xzt17gx7hz47b3vjql39fjh0000gn/T/ipykernel_89410/2816531575.py", line 16, in train_n_validate
+    train(args, model, trainloader)
+  File "/var/folders/50/9xzt17gx7hz47b3vjql39fjh0000gn/T/ipykernel_89410/2296958155.py", line 10, in train
+    trainer(args, model, trainloader, epoch_id, criterion, optimizer)
+  File "/var/folders/50/9xzt17gx7hz47b3vjql39fjh0000gn/T/ipykernel_89410/3724715608.py", line 31, in trainer
+    outputs = model(inputs)
+              ^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/models/resnet.py", line 289, in forward
+    return self._forward_impl(x)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/models/resnet.py", line 279, in _forward_impl
+    x = self.layer4(x)
+        ^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/container.py", line 215, in forward
+    input = module(input)
+            ^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/models/resnet.py", line 65, in forward
+    out = self.conv1(x)
+          ^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1518, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/module.py", line 1527, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 460, in forward
+    return self._conv_forward(input, self.weight, self.bias)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/nn/modules/conv.py", line 456, in _conv_forward
+    return F.conv2d(input, weight, bias, self.stride,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

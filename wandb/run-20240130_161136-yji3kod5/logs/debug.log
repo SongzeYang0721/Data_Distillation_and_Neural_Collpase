@@ -1,0 +1,41 @@
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_setup.py:_flush():76] Current SDK version is 0.16.1
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_setup.py:_flush():76] Configure stats pid to 91700
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_setup.py:_flush():76] Loading settings from /Users/songzeyang/.config/wandb/settings
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_setup.py:_flush():76] Loading settings from /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/settings
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_setup.py:_flush():76] Loading settings from environment variables: {'project': 'hyper_sweep_4_neural_search', 'entity': 'data-distillation-with-nc', 'root_dir': '/Users/songzeyang/Documents/GitHub/Data_Distill_with_NC', 'run_id': 'yji3kod5', 'sweep_param_path': '/Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/sweep-cqyijzfv/config-yji3kod5.yaml', 'sweep_id': 'cqyijzfv'}
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_setup.py:_flush():76] Applying setup settings: {'_disable_service': False}
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_init.py:_log_setup():524] Logging user logs to /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_161136-yji3kod5/logs/debug.log
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_init.py:_log_setup():525] Logging internal logs to /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240130_161136-yji3kod5/logs/debug-internal.log
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_init.py:_jupyter_setup():470] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x16b3b0e50>
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_init.py:init():564] calling init triggers
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_init.py:init():571] wandb.init called with sweep_config: {'batch_size': 64, 'depth': 4, 'epochs': 10, 'learning_rate': 0.1, 'loss': 'CrossEntropy', 'model': 'MLP', 'optimizer': 'Adam', 'width': 2048}
+config: {'method': 'grid', 'metric': {'name': 'loss', 'goal': 'minimize'}, 'parameters': {'learning_rate': {'values': [0.1, 0.05, 0.001]}, 'optimizer': {'values': ['Adam', 'SGD', 'LBFGS']}, 'width': {'values': [1024, 2048, 4096]}, 'batch_size': {'values': [64, 256, 2048]}, 'model': {'values': ['ResNet18_adapt']}, 'epochs': {'value': 10}, 'loss': {'value': 'CrossEntropy'}}}
+2024-01-30 16:11:36,652 INFO    MainThread:91700 [wandb_init.py:init():589] re-initializing run, found existing run on stack: yji3kod5
+2024-01-30 16:11:36,653 INFO    MainThread:91700 [wandb_run.py:_finish():1962] finishing run data-distillation-with-nc/hyper_sweep_4_neural_search/yji3kod5
+2024-01-30 16:11:36,654 INFO    MainThread:91700 [jupyter.py:save_history():445] not saving jupyter history
+2024-01-30 16:11:36,654 INFO    MainThread:91700 [jupyter.py:save_ipynb():373] not saving jupyter notebook
+2024-01-30 16:11:36,654 INFO    MainThread:91700 [wandb_init.py:_jupyter_teardown():452] cleaning up jupyter logic
+2024-01-30 16:11:36,671 INFO    MainThread:91700 [wandb_init.py:init():614] starting backend
+2024-01-30 16:11:36,671 INFO    MainThread:91700 [wandb_init.py:init():618] setting up manager
+2024-01-30 16:11:36,676 INFO    MainThread:91700 [backend.py:_multiprocessing_setup():105] multiprocessing start_methods=spawn,fork,forkserver, using: spawn
+2024-01-30 16:11:36,676 INFO    MainThread:91700 [wandb_init.py:init():624] backend started and connected
+2024-01-30 16:11:36,681 INFO    MainThread:91700 [wandb_run.py:_config_callback():1342] config_cb None None {'batch_size': 64, 'depth': 4, 'epochs': 10, 'learning_rate': 0.1, 'loss': 'CrossEntropy', 'model': 'MLP', 'optimizer': 'Adam', 'width': 2048}
+2024-01-30 16:11:36,685 INFO    MainThread:91700 [wandb_run.py:_label_probe_notebook():1294] probe notebook
+2024-01-30 16:11:36,685 INFO    MainThread:91700 [wandb_run.py:_label_probe_notebook():1304] Unable to probe notebook: 'NoneType' object has no attribute 'get'
+2024-01-30 16:11:36,685 INFO    MainThread:91700 [wandb_init.py:init():716] updated telemetry
+2024-01-30 16:11:36,727 INFO    MainThread:91700 [wandb_init.py:init():749] communicating run to backend with 90.0 second timeout
+2024-01-30 16:13:07,186 ERROR   MainThread:91700 [wandb_init.py:init():775] encountered error: Run initialization has timed out after 90.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
+2024-01-30 16:13:07,232 ERROR   MainThread:91700 [wandb_init.py:init():1188] Run initialization has timed out after 90.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 1170, in init
+    run = wi.init()
+          ^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 781, in init
+    raise error
+wandb.errors.CommError: Run initialization has timed out after 90.0 sec. 
+Please refer to the documentation for additional information: https://docs.wandb.ai/guides/track/tracking-faq#initstarterror-error-communicating-with-wandb-process-
+2024-01-30 16:15:11,796 INFO    MainThread:91700 [pyagent.py:run():314] Starting sweep agent: entity=None, project=None, count=5
+2024-01-30 16:28:09,660 INFO    MainThread:91700 [pyagent.py:run():314] Starting sweep agent: entity=None, project=None, count=5

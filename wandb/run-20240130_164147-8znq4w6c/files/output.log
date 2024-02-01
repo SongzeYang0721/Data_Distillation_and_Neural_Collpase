@@ -1,0 +1,39 @@
+Initialise finished, starting now...
+Dataset: CIFAR10.
+Files already downloaded and verified
+Files already downloaded and verified
+Exception in threading.excepthook:
+Exception ignored in thread started by: <bound method Thread._bootstrap of <Thread(Thread-30 (_run_job), stopped 11863486464)>>
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/threading.py", line 995, in _bootstrap
+    self._bootstrap_inner()
+  File "/Users/songzeyang/anaconda3/lib/python3.11/threading.py", line 1040, in _bootstrap_inner
+    self._invoke_excepthook(self)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/threading.py", line 1352, in invoke_excepthook
+    local_print("Exception in threading.excepthook:",
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/ipykernel/iostream.py", line 559, in flush
+    self.pub_thread.schedule(self._flush)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/ipykernel/iostream.py", line 251, in schedule
+    self._event_pipe.send(b"")
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/zmq/sugar/socket.py", line 618, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "zmq/backend/cython/socket.pyx", line 740, in zmq.backend.cython.socket.Socket.send
+  File "zmq/backend/cython/socket.pyx", line 781, in zmq.backend.cython.socket.Socket.send
+  File "zmq/backend/cython/socket.pyx", line 137, in zmq.backend.cython.socket._check_closed
+zmq.error.ZMQError: Socket operation on non-socket
+Exception ignored in sys.unraisablehook: <built-in function unraisablehook>
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/ipykernel/iostream.py", line 559, in flush
+    self.pub_thread.schedule(self._flush)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/ipykernel/iostream.py", line 251, in schedule
+    self._event_pipe.send(b"")
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/zmq/sugar/socket.py", line 618, in send
+    return super().send(data, flags=flags, copy=copy, track=track)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "zmq/backend/cython/socket.pyx", line 740, in zmq.backend.cython.socket.Socket.send
+  File "zmq/backend/cython/socket.pyx", line 781, in zmq.backend.cython.socket.Socket.send
+  File "zmq/backend/cython/socket.pyx", line 137, in zmq.backend.cython.socket._check_closed
+zmq.error.ZMQError: Socket operation on non-socket
+The number of class in our training set is  10
+Batch size: 64 Number of channels: 3 input height: 32 input width: 32

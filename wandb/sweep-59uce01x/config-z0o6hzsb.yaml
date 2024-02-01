@@ -1,0 +1,14 @@
+wandb_version: 1
+
+batch_size:
+  value: 64
+depth:
+  value: 4
+learning_rate:
+  value: 0.1
+model:
+  value: MLP
+optimizer:
+  value: Adam
+width:
+  value: 1024

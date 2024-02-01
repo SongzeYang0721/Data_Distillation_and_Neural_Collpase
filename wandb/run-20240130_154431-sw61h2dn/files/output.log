@@ -1,0 +1,19 @@
+Dataset: CIFAR10.
+Files already downloaded and verified
+Files already downloaded and verified
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_config.py", line 162, in __getattr__
+    return self.__getitem__(key)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_config.py", line 130, in __getitem__
+    return self._items[key]
+           ~~~~~~~~~~~^^^^^
+KeyError: 'learning_rate'
+The above exception was the direct cause of the following exception:
+Traceback (most recent call last):
+  File "/var/folders/50/9xzt17gx7hz47b3vjql39fjh0000gn/T/ipykernel_89410/334213946.py", line 16, in train_n_validate
+    args.lr = config.learning_rate
+              ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_config.py", line 164, in __getattr__
+    raise AttributeError(
+AttributeError: <class 'wandb.sdk.wandb_config.Config'> object has no attribute 'learning_rate'

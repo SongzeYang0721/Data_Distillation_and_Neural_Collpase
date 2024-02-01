@@ -1,0 +1,16 @@
+Dataset: CIFAR10.
+Files already downloaded and verified
+Files already downloaded and verified
+10
+The number of class in our training set is  10
+Batch size: 2048 Number of channels: 3 input height: 32 input width: 32
+# of model parameters: 11181642
+<class 'models.resnet.ResNet'>
+[epoch: 1] (1/25) | Loss: 5.4800 | top1: 14.5996 | top5: 57.0801
+[epoch: 1] (11/25) | Loss: 5.0009 | top1: 20.1660 | top5: 70.2814
+[epoch: 1] (21/25) | Loss: 4.7254 | top1: 24.6373 | top5: 75.7696
+Elapsed time:  58.83692789077759 seconds
+override this uidtmp
+<arg_loader.train_args object at 0x16a72af90>
+cudnn is used
+tensor([1.], device='mps:0')
