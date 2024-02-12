@@ -6,7 +6,7 @@ import models
 from models.res_adapt import ResNet18_adapt
 from utils import *
 from args import parse_train_args
-from datasets import make_dataset
+from data.datasets import make_dataset
 
 def loss_compute(args, model, criterion, outputs, targets):
     if args.loss == 'CrossEntropy':
