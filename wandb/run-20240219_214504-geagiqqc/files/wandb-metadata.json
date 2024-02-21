@@ -1,0 +1,36 @@
+{
+    "os": "macOS-13.5.1-arm64-arm-64bit",
+    "python": "3.11.5",
+    "heartbeatAt": "2024-02-19T10:45:05.409321",
+    "startedAt": "2024-02-19T10:45:04.602126",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "Documents/GitHub/Data_Distill_with_NC/DD&NC_Demo.ipynb",
+    "codePathLocal": null,
+    "root": "/Users/songzeyang/Documents/GitHub/Data_Distill_with_NC",
+    "git": {
+        "remote": "https://github.com/SongzeYang0721/Data_Distillation_and_Neural_Collpase.git",
+        "commit": "ed9adb14c7e3d6e6d900d4a00c64a328b772a77e"
+    },
+    "email": "yangsongze2008@gmail.com",
+    "host": "Songzes-MacBook-Pro.local",
+    "username": "songzeyang",
+    "executable": "/Users/songzeyang/anaconda3/bin/python",
+    "cpu_count": 8,
+    "cpu_count_logical": 8,
+    "disk": {
+        "/": {
+            "total": 460.4317207336426,
+            "used": 170.12037658691406
+        }
+    },
+    "gpuapple": {
+        "type": "arm",
+        "vendor": "Apple"
+    },
+    "memory": {
+        "total": 8.0
+    }
+}

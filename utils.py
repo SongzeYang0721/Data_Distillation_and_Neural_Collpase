@@ -107,12 +107,18 @@ def print_and_save(text_str, file_stream):
     print(text_str, file=file_stream)
 
 
-def compute_accuracy(output, target, topk=(1,)):
+def compute_accuracy(output, target, topk=(1,), is_distance=False):
     """Computes the precision@k for the specified values of k"""
     maxk = max(topk)
     batch_size = target.size(0)
 
-    _, pred = output.topk(maxk, 1, True, True)
+    if is_distance:
+        # For distance matrices, smallest distances imply nearest neighbors.
+        # Invert the selection logic by choosing smallest values.
+        _, pred = output.topk(maxk, dim=1, largest=False, sorted=True)
+    else:
+        # For prediction scores, largest values imply highest confidence predictions.
+        _, pred = output.topk(maxk, dim=1, largest=True, sorted=True)
     pred = pred.t()
     correct = pred.eq(target.view(1, -1).expand_as(pred))
 

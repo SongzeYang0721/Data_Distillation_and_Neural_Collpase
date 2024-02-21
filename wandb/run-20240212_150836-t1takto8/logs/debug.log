@@ -1,0 +1,220 @@
+2024-02-12 15:08:36,121 INFO    MainThread:60858 [wandb_setup.py:_flush():76] Current SDK version is 0.16.1
+2024-02-12 15:08:36,122 INFO    MainThread:60858 [wandb_setup.py:_flush():76] Configure stats pid to 60858
+2024-02-12 15:08:36,122 INFO    MainThread:60858 [wandb_setup.py:_flush():76] Loading settings from /Users/songzeyang/.config/wandb/settings
+2024-02-12 15:08:36,122 INFO    MainThread:60858 [wandb_setup.py:_flush():76] Loading settings from /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/settings
+2024-02-12 15:08:36,122 INFO    MainThread:60858 [wandb_setup.py:_flush():76] Loading settings from environment variables: {}
+2024-02-12 15:08:36,122 INFO    MainThread:60858 [wandb_setup.py:_flush():76] Inferring run settings from compute environment: {'program': '<python with no main file>'}
+2024-02-12 15:08:36,122 INFO    MainThread:60858 [wandb_init.py:_log_setup():524] Logging user logs to /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240212_150836-t1takto8/logs/debug.log
+2024-02-12 15:08:36,122 INFO    MainThread:60858 [wandb_init.py:_log_setup():525] Logging internal logs to /Users/songzeyang/Documents/GitHub/Data_Distill_with_NC/wandb/run-20240212_150836-t1takto8/logs/debug-internal.log
+2024-02-12 15:08:36,122 INFO    MainThread:60858 [wandb_init.py:_jupyter_setup():470] configuring jupyter hooks <wandb.sdk.wandb_init._WandbInit object at 0x28adecdd0>
+2024-02-12 15:08:36,123 INFO    MainThread:60858 [wandb_init.py:init():564] calling init triggers
+2024-02-12 15:08:36,124 INFO    MainThread:60858 [wandb_init.py:init():571] wandb.init called with sweep_config: {}
+config: {'model': ResNet(
+  (conv1): Conv2d(3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False)
+  (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+  (relu): ReLU(inplace=True)
+  (maxpool): MaxPool2d(kernel_size=3, stride=2, padding=1, dilation=1, ceil_mode=False)
+  (layer1): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(64, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer2): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(64, 128, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(128, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer3): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(128, 256, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(256, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+    )
+  )
+  (layer4): Sequential(
+    (0): BasicBlock(
+      (conv1): Conv2d(256, 512, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+    (1): BasicBlock(
+      (conv1): Conv2d(512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn1): BatchNorm2d(512, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (relu): ReLU(inplace=True)
+      (conv2): Conv2d(512, 10, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (bn2): BatchNorm2d(10, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      (downsample): Sequential(
+        (0): Conv2d(512, 10, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): BatchNorm2d(10, eps=1e-05, momentum=0.1, affine=True, track_running_stats=True)
+      )
+    )
+  )
+  (avgpool): AdaptiveAvgPool2d(output_size=(1, 1))
+  (fc): Linear(in_features=10, out_features=10, bias=True)
+), 'bias': True, 'ETF_fc': True, 'fixdim': 1, 'SOTA': False, 'width': 32, 'depth': 6, 'gpu_id': 0, 'seed': 6, 'use_cudnn': True, 'dataset': 'cifar10', 'data_dir': '~/data', 'uid': 'Resnet18-design-Adam', 'force': True, 'epochs': 1, 'batch_size': 64, 'loss': 'CrossEntropy', 'sample_size': None, 'lr': 0.001, 'optimizer': 'Adam', 'device': 'mps'}
+2024-02-12 15:08:36,124 INFO    MainThread:60858 [wandb_init.py:init():589] re-initializing run, found existing run on stack: st3d8c8k
+2024-02-12 15:08:36,166 ERROR   MainThread:60858 [wandb_init.py:init():1198] error
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 1170, in init
+    run = wi.init()
+          ^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 599, in init
+    latest_run.finish()
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 420, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 361, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 1953, in finish
+    return self._finish(exit_code, quiet)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 1960, in _finish
+    with telemetry.context(run=self) as tel:
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/telemetry.py", line 42, in __exit__
+    self._run._telemetry_callback(self._obj)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 758, in _telemetry_callback
+    self._telemetry_flush()
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 769, in _telemetry_flush
+    self._backend.interface._publish_telemetry(self._telemetry_obj)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/interface/interface_shared.py", line 101, in _publish_telemetry
+    self._publish(rec)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self.send_server_request(server_req)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self._send_message(msg)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe
+2024-02-12 15:08:49,095 ERROR   MainThread:60858 [wandb_init.py:init():1198] error
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 1166, in init
+    wi.setup(kwargs)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 225, in setup
+    with telemetry.context(obj=self._init_telemetry_obj) as tel:
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/telemetry.py", line 42, in __exit__
+    self._run._telemetry_callback(self._obj)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 758, in _telemetry_callback
+    self._telemetry_flush()
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 769, in _telemetry_flush
+    self._backend.interface._publish_telemetry(self._telemetry_obj)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/interface/interface_shared.py", line 101, in _publish_telemetry
+    self._publish(rec)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self.send_server_request(server_req)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self._send_message(msg)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe
+2024-02-12 15:10:10,419 ERROR   MainThread:60858 [wandb_init.py:init():1198] error
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 1166, in init
+    kwargs = dict(locals())
+        ^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 225, in setup
+    with telemetry.context(obj=self._init_telemetry_obj) as tel:
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/telemetry.py", line 42, in __exit__
+    self._run._telemetry_callback(self._obj)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 758, in _telemetry_callback
+    self._telemetry_obj_dirty = True
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 769, in _telemetry_flush
+    return
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/interface/interface_shared.py", line 101, in _publish_telemetry
+    self._publish(rec)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self.send_server_request(server_req)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self._send_message(msg)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe
+2024-02-12 15:10:42,023 ERROR   MainThread:60858 [wandb_init.py:init():1198] error
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 1166, in init
+    kwargs = dict(locals())
+        ^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_init.py", line 225, in setup
+    with telemetry.context(obj=self._init_telemetry_obj) as tel:
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/telemetry.py", line 42, in __exit__
+    self._run._telemetry_callback(self._obj)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 758, in _telemetry_callback
+    self._telemetry_obj_dirty = True
+    ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/wandb_run.py", line 769, in _telemetry_flush
+    return
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/interface/interface_shared.py", line 101, in _publish_telemetry
+    self._publish(rec)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/interface/interface_sock.py", line 51, in _publish
+    self._sock_client.send_record_publish(record)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 221, in send_record_publish
+    self.send_server_request(server_req)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 155, in send_server_request
+    self._send_message(msg)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 152, in _send_message
+    self._sendall_with_error_handle(header + data)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/wandb/sdk/lib/sock_client.py", line 130, in _sendall_with_error_handle
+    sent = self._sock.send(data)
+           ^^^^^^^^^^^^^^^^^^^^^
+BrokenPipeError: [Errno 32] Broken pipe

@@ -10,6 +10,7 @@ from utils import *
 from args import parse_eval_args
 from data.datasets import make_dataset
 
+import wandb
 
 MNIST_TRAIN_SAMPLES = (5923, 6742, 5958, 6131, 5842, 5421, 5918, 6265, 5851, 5949)
 MNIST_TEST_SAMPLES = (980, 1135, 1032, 1010, 982, 892, 958, 1028, 974, 1009)
@@ -78,6 +79,58 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
     return mu_G, mu_c_dict, top1.avg, top5.avg
 
 
+def compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloader):
+    top1_train = AverageMeter()
+    top5_train = AverageMeter()
+    top1_test = AverageMeter()
+    top5_test = AverageMeter()
+    device = H.device
+
+    for batch_idx, (inputs, targets) in enumerate(trainloader):
+
+        inputs, targets = inputs.to(args.device), targets.to(args.device)
+
+        with torch.no_grad():
+            outputs = model(inputs)
+
+        features = fc_features.outputs[0][0]
+        features = features.to(device)
+        fc_features.clear()
+
+        features_exp = torch.unsqueeze(features, dim=1) 
+        H_exp = torch.unsqueeze(H, dim=0)
+
+        # Compute squared differences, sum over features (axis=2), and take square root
+        distances = torch.sqrt(torch.sum((features_exp - H_exp) ** 2, dim=2))
+
+        prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, 5), is_distance=True)
+        top1_train.update(prec1.item(), inputs.size(0))
+        top5_train.update(prec5.item(), inputs.size(0))
+
+    for batch_idx, (inputs, targets) in enumerate(testloader):
+
+        inputs, targets = inputs.to(args.device), targets.to(args.device)
+
+        with torch.no_grad():
+            outputs = model(inputs)
+
+        features = fc_features.outputs[0][0]
+        features = features.to(device)
+        fc_features.clear()
+
+        features_exp = torch.unsqueeze(features, dim=1) 
+        H_exp = torch.unsqueeze(H, dim=0)
+
+        # Compute squared differences, sum over features (axis=2), and take square root
+        distances = torch.sqrt(torch.sum((features_exp - H_exp) ** 2, dim=2))
+
+        prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, 5), is_distance=True)
+        top1_test.update(prec1.item(), inputs.size(0))
+        top5_test.update(prec5.item(), inputs.size(0))
+
+    return top1_train.avg, top5_train.avg, top1_test.avg, top5_test.avg
+
+
 def compute_Sigma_W(args, model, fc_features, mu_c_dict, dataloader, isTrain=True):
 
     Sigma_W = 0
@@ -121,33 +174,149 @@ def compute_Sigma_B(mu_c_dict, mu_G):
 
 
 def compute_ETF(W):
+    device = W.device
     K = W.shape[0]
     WWT = torch.mm(W, W.T)
     WWT /= torch.norm(WWT, p='fro')
 
-    sub = (torch.eye(K) - 1 / K * torch.ones((K, K))).cuda() / pow(K - 1, 0.5)
+    sub = (torch.eye(K,device=device) - 1 / K * torch.ones((K, K), device=device)) / pow(K - 1, 0.5)
     ETF_metric = torch.norm(WWT - sub, p='fro')
     return ETF_metric.detach().cpu().numpy().item()
 
 
 def compute_W_H_relation(W, mu_c_dict, mu_G):
+    device = W.device
     K = len(mu_c_dict)
-    H = torch.empty(mu_c_dict[0].shape[0], K)
+    H = torch.empty(mu_c_dict[0].shape[0], K, device=device)
     for i in range(K):
         H[:, i] = mu_c_dict[i] - mu_G
 
-    WH = torch.mm(W, H.cuda())
+    WH = torch.mm(W, H)
     WH /= torch.norm(WH, p='fro')
-    sub = 1 / pow(K - 1, 0.5) * (torch.eye(K) - 1 / K * torch.ones((K, K))).cuda()
+    sub = 1 / pow(K - 1, 0.5) * (torch.eye(K, device=device) - 1 / K * torch.ones((K, K), device = W.device))
 
     res = torch.norm(WH - sub, p='fro')
     return res.detach().cpu().numpy().item(), H
 
 
 def compute_Wh_b_relation(W, mu_G, b):
-    Wh = torch.mv(W, mu_G.cuda())
+    Wh = torch.mv(W, mu_G)
     res_b = torch.norm(Wh + b, p='fro')
     return res_b.detach().cpu().numpy().item()
+
+
+def evaluate_NC(args,model,trainloader, testloader, nearest_neighbor = False):
+    
+    if 'google.colab' in sys.modules:
+        args.load_path = "/content/drive/MyDrive/model_weights/"+args.uid+"/"
+    else:
+        args.load_path = "./model_weights/"+args.uid+"/"
+
+    fc_features = FCFeatures()
+    model.fc.register_forward_pre_hook(fc_features)
+    info_dict = {
+            'collapse_metric': [],
+            'ETF_metric': [],
+            'WH_relation_metric': [],
+            'Wh_b_relation_metric': [],
+            'W': [],
+            'b': [],
+            'H': [],
+            'mu_G_train': [],
+            # 'mu_G_test': [],
+            'train_acc1': [],
+            'train_acc5': [],
+            'test_acc1': [],
+            'test_acc5': []
+        }
+
+    print('--------------------- Evaluating -------------------------------')
+    for i in range(args.epochs):
+        
+        
+        map_location=torch.device(args.device)
+        model.load_state_dict(torch.load(args.load_path + 'epoch_' + str(i + 1).zfill(3) + '.pth', 
+                                         map_location=map_location))
+
+        model.eval()
+
+        for n, p in model.named_parameters():
+            if 'fc.weight' in n:
+                W = p
+            if 'fc.bias' in n:
+                b = p
+
+        mu_G_train, mu_c_dict_train, train_acc1, train_acc5 = compute_info(args, model, fc_features, trainloader, isTrain=True)
+        mu_G_test, mu_c_dict_test, test_acc1, test_acc5 = compute_info(args, model, fc_features, testloader, isTrain=False)
+
+        Sigma_W = compute_Sigma_W(args, model, fc_features, mu_c_dict_train, trainloader, isTrain=True)
+        # Sigma_W_test_norm = compute_Sigma_W(args, model, fc_features, mu_c_dict_train, testloader, isTrain=False)
+        Sigma_B = compute_Sigma_B(mu_c_dict_train, mu_G_train)
+
+        collapse_metric = np.trace(Sigma_W @ scilin.pinv(Sigma_B)) / len(mu_c_dict_train)
+        ETF_metric = compute_ETF(W)
+        WH_relation_metric, H = compute_W_H_relation(W, mu_c_dict_train, mu_G_train)
+        if args.bias:
+            Wh_b_relation_metric = compute_Wh_b_relation(W, mu_G_train, b)
+        else:
+            Wh_b_relation_metric = compute_Wh_b_relation(W, mu_G_train, torch.zeros((W.shape[0], )))
+
+        if nearest_neighbor:
+            near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5 = compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloader)
+        
+        info_dict['collapse_metric'].append(collapse_metric)
+        info_dict['ETF_metric'].append(ETF_metric)
+        info_dict['WH_relation_metric'].append(WH_relation_metric)
+        info_dict['Wh_b_relation_metric'].append(Wh_b_relation_metric)
+
+        info_dict['W'].append((W.detach().cpu().numpy()))
+        if args.bias:
+            info_dict['b'].append(b.detach().cpu().numpy())
+        info_dict['H'].append(H.detach().cpu().numpy())
+
+        info_dict['mu_G_train'].append(mu_G_train.detach().cpu().numpy())
+        # info_dict['mu_G_test'].append(mu_G_test.detach().cpu().numpy())
+
+        info_dict['train_acc1'].append(train_acc1)
+        info_dict['train_acc5'].append(train_acc5)
+        info_dict['test_acc1'].append(test_acc1)
+        info_dict['test_acc5'].append(test_acc5)
+
+
+        print('[epoch: %d] | collapsemetric: %.4f | ETF metric: %.4f | WH metric: %.4f | Wh_b metric: %.4f ' %
+                        (i + 1, collapse_metric, ETF_metric, WH_relation_metric, Wh_b_relation_metric))
+
+        print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f ' %
+                        (i + 1, train_acc1, train_acc5, test_acc1, test_acc5))
+        
+        print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f ' %
+                        (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5),"(nearest neighbor accuracy)")
+
+        if 'wandb' in sys.modules:
+            wandb.log({
+                        "train_acc1":train_acc1, 
+                        "train_acc5":train_acc5,
+                        "test_acc1":test_acc1,
+                        "test_acc5":test_acc5
+                        })
+
+            wandb.log({"collapse_metric":collapse_metric, 
+                        "ETF_metric":ETF_metric, 
+                        "WH_relation_metric":WH_relation_metric,
+                        "Wh_b_relation_metric":Wh_b_relation_metric
+                        })
+            
+            wandb.log({
+                        "nearest neighbor: train_acc1":near_train_acc1, 
+                        "nearest neighbor: train_acc5":near_train_acc5,
+                        "nearest neighbor: test_acc1":near_test_acc1,
+                        "nearest neighbor: test_acc5":near_test_acc5
+                        })
+
+
+    with open(args.load_path + 'info.pkl', 'wb') as f:
+        pickle.dump(info_dict, f)
+
 
 
 def main():

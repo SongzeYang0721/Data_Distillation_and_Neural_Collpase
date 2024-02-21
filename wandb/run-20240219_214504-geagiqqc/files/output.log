@@ -1,0 +1,408 @@
+Initalize training...
+Optimizer:  Adam
+# of model parameters: 8867442
+--------------------- Training -------------------------------
+Training Epoch: [1 | 200] LR: 0.001000
+[epoch: 1] (782/782) | Loss: 1.3956 | top1: 52.5260 | top5: 92.0420
+Training Epoch: [2 | 200] LR: 0.001000
+[epoch: 2] (782/782) | Loss: 1.0422 | top1: 67.0640 | top5: 96.7760
+Training Epoch: [3 | 200] LR: 0.001000
+[epoch: 3] (782/782) | Loss: 0.9050 | top1: 72.7620 | top5: 97.7020
+Training Epoch: [4 | 200] LR: 0.001000
+[epoch: 4] (782/782) | Loss: 0.8098 | top1: 76.5660 | top5: 98.3280
+Training Epoch: [5 | 200] LR: 0.001000
+[epoch: 5] (782/782) | Loss: 0.7397 | top1: 79.4880 | top5: 98.6060
+Training Epoch: [6 | 200] LR: 0.001000
+[epoch: 6] (782/782) | Loss: 0.6733 | top1: 82.0500 | top5: 98.9320
+Training Epoch: [7 | 200] LR: 0.001000
+[epoch: 7] (782/782) | Loss: 0.6105 | top1: 84.4440 | top5: 99.1340
+Training Epoch: [8 | 200] LR: 0.001000
+[epoch: 8] (782/782) | Loss: 0.5556 | top1: 86.6700 | top5: 99.3420
+Training Epoch: [9 | 200] LR: 0.001000
+[epoch: 9] (782/782) | Loss: 0.5046 | top1: 88.4700 | top5: 99.4400
+Training Epoch: [10 | 200] LR: 0.001000
+[epoch: 10] (782/782) | Loss: 0.4652 | top1: 90.1620 | top5: 99.5380
+Training Epoch: [11 | 200] LR: 0.001000
+[epoch: 11] (782/782) | Loss: 0.4247 | top1: 91.6140 | top5: 99.6560
+Training Epoch: [12 | 200] LR: 0.001000
+[epoch: 12] (782/782) | Loss: 0.3951 | top1: 92.6260 | top5: 99.6520
+Training Epoch: [13 | 200] LR: 0.001000
+[epoch: 13] (782/782) | Loss: 0.3608 | top1: 93.8200 | top5: 99.7860
+Training Epoch: [14 | 200] LR: 0.001000
+[epoch: 14] (782/782) | Loss: 0.3395 | top1: 94.3180 | top5: 99.7880
+Training Epoch: [15 | 200] LR: 0.001000
+[epoch: 15] (782/782) | Loss: 0.3118 | top1: 95.4900 | top5: 99.8200
+Training Epoch: [16 | 200] LR: 0.001000
+[epoch: 16] (782/782) | Loss: 0.3042 | top1: 95.4400 | top5: 99.8540
+Training Epoch: [17 | 200] LR: 0.001000
+[epoch: 17] (782/782) | Loss: 0.2861 | top1: 96.1460 | top5: 99.8860
+Training Epoch: [18 | 200] LR: 0.001000
+[epoch: 18] (782/782) | Loss: 0.2675 | top1: 96.4980 | top5: 99.8760
+Training Epoch: [19 | 200] LR: 0.001000
+[epoch: 19] (782/782) | Loss: 0.2617 | top1: 96.8360 | top5: 99.8920
+Training Epoch: [20 | 200] LR: 0.001000
+[epoch: 20] (782/782) | Loss: 0.2524 | top1: 96.9500 | top5: 99.9240
+Training Epoch: [21 | 200] LR: 0.001000
+[epoch: 21] (782/782) | Loss: 0.2446 | top1: 97.2760 | top5: 99.9220
+Training Epoch: [22 | 200] LR: 0.001000
+[epoch: 22] (782/782) | Loss: 0.2383 | top1: 97.0400 | top5: 99.9400
+Training Epoch: [23 | 200] LR: 0.001000
+[epoch: 23] (782/782) | Loss: 0.2307 | top1: 97.4080 | top5: 99.9440
+Training Epoch: [24 | 200] LR: 0.001000
+[epoch: 24] (782/782) | Loss: 0.2241 | top1: 97.4440 | top5: 99.9380
+Training Epoch: [25 | 200] LR: 0.001000
+[epoch: 25] (782/782) | Loss: 0.2255 | top1: 97.5200 | top5: 99.9500
+Training Epoch: [26 | 200] LR: 0.001000
+[epoch: 26] (782/782) | Loss: 0.2145 | top1: 97.7700 | top5: 99.9580
+Training Epoch: [27 | 200] LR: 0.001000
+[epoch: 27] (782/782) | Loss: 0.2131 | top1: 97.7120 | top5: 99.9640
+Training Epoch: [28 | 200] LR: 0.001000
+[epoch: 28] (782/782) | Loss: 0.2096 | top1: 97.7700 | top5: 99.9540
+Training Epoch: [29 | 200] LR: 0.001000
+[epoch: 29] (782/782) | Loss: 0.1995 | top1: 98.0240 | top5: 99.9560
+Training Epoch: [30 | 200] LR: 0.001000
+[epoch: 30] (782/782) | Loss: 0.2034 | top1: 97.8020 | top5: 99.9560
+Training Epoch: [31 | 200] LR: 0.001000
+[epoch: 31] (782/782) | Loss: 0.1941 | top1: 98.0700 | top5: 99.9680
+Training Epoch: [32 | 200] LR: 0.001000
+[epoch: 32] (782/782) | Loss: 0.1977 | top1: 97.9400 | top5: 99.9520
+Training Epoch: [33 | 200] LR: 0.001000
+[epoch: 33] (782/782) | Loss: 0.1936 | top1: 97.9860 | top5: 99.9640
+Training Epoch: [34 | 200] LR: 0.001000
+[epoch: 34] (782/782) | Loss: 0.1896 | top1: 98.0780 | top5: 99.9720
+Training Epoch: [35 | 200] LR: 0.001000
+[epoch: 35] (782/782) | Loss: 0.1853 | top1: 98.1520 | top5: 99.9720
+Training Epoch: [36 | 200] LR: 0.001000
+[epoch: 36] (782/782) | Loss: 0.1919 | top1: 98.0480 | top5: 99.9620
+Training Epoch: [37 | 200] LR: 0.001000
+[epoch: 37] (782/782) | Loss: 0.1825 | top1: 98.2580 | top5: 99.9640
+Training Epoch: [38 | 200] LR: 0.001000
+[epoch: 38] (782/782) | Loss: 0.1899 | top1: 98.0820 | top5: 99.9520
+Training Epoch: [39 | 200] LR: 0.001000
+[epoch: 39] (782/782) | Loss: 0.1785 | top1: 98.2780 | top5: 99.9720
+Training Epoch: [40 | 200] LR: 0.001000
+[epoch: 40] (782/782) | Loss: 0.1827 | top1: 98.3580 | top5: 99.9560
+Training Epoch: [41 | 200] LR: 0.000100
+[epoch: 41] (782/782) | Loss: 0.0791 | top1: 98.5480 | top5: 99.9760
+Training Epoch: [42 | 200] LR: 0.000100
+[epoch: 42] (782/782) | Loss: 0.0341 | top1: 99.7720 | top5: 99.9840
+Training Epoch: [43 | 200] LR: 0.000100
+[epoch: 43] (782/782) | Loss: 0.0201 | top1: 99.9480 | top5: 99.9860
+Training Epoch: [44 | 200] LR: 0.000100
+[epoch: 44] (782/782) | Loss: 0.0143 | top1: 99.9720 | top5: 99.9860
+Training Epoch: [45 | 200] LR: 0.000100
+[epoch: 45] (782/782) | Loss: 0.0109 | top1: 99.9800 | top5: 99.9880
+Training Epoch: [46 | 200] LR: 0.000100
+[epoch: 46] (782/782) | Loss: 0.0097 | top1: 99.9800 | top5: 99.9880
+Training Epoch: [47 | 200] LR: 0.000100
+[epoch: 47] (782/782) | Loss: 0.0095 | top1: 99.9840 | top5: 99.9900
+Training Epoch: [48 | 200] LR: 0.000100
+[epoch: 48] (782/782) | Loss: 0.0095 | top1: 99.9840 | top5: 99.9900
+Training Epoch: [49 | 200] LR: 0.000100
+[epoch: 49] (782/782) | Loss: 0.0077 | top1: 99.9880 | top5: 99.9920
+Training Epoch: [50 | 200] LR: 0.000100
+[epoch: 50] (782/782) | Loss: 0.0097 | top1: 99.9860 | top5: 99.9920
+Training Epoch: [51 | 200] LR: 0.000100
+[epoch: 51] (782/782) | Loss: 0.0072 | top1: 99.9880 | top5: 99.9900
+Training Epoch: [52 | 200] LR: 0.000100
+[epoch: 52] (782/782) | Loss: 0.0078 | top1: 99.9880 | top5: 99.9940
+Training Epoch: [53 | 200] LR: 0.000100
+[epoch: 53] (782/782) | Loss: 0.0070 | top1: 99.9840 | top5: 99.9940
+Training Epoch: [54 | 200] LR: 0.000100
+[epoch: 54] (782/782) | Loss: 0.0070 | top1: 99.9880 | top5: 99.9940
+Training Epoch: [55 | 200] LR: 0.000100
+[epoch: 55] (782/782) | Loss: 0.0097 | top1: 99.9840 | top5: 99.9940
+Training Epoch: [56 | 200] LR: 0.000100
+[epoch: 56] (782/782) | Loss: 0.0073 | top1: 99.9880 | top5: 99.9920
+Training Epoch: [57 | 200] LR: 0.000100
+[epoch: 57] (782/782) | Loss: 0.0080 | top1: 99.9840 | top5: 99.9920
+Training Epoch: [58 | 200] LR: 0.000100
+[epoch: 58] (782/782) | Loss: 0.0081 | top1: 99.9800 | top5: 99.9940
+Training Epoch: [59 | 200] LR: 0.000100
+[epoch: 59] (782/782) | Loss: 0.0092 | top1: 99.9860 | top5: 99.9940
+Training Epoch: [60 | 200] LR: 0.000100
+[epoch: 60] (782/782) | Loss: 0.0084 | top1: 99.9780 | top5: 99.9940
+Training Epoch: [61 | 200] LR: 0.000100
+[epoch: 61] (782/782) | Loss: 0.0077 | top1: 99.9880 | top5: 99.9980
+Training Epoch: [62 | 200] LR: 0.000100
+[epoch: 62] (782/782) | Loss: 0.0079 | top1: 99.9900 | top5: 99.9960
+Training Epoch: [63 | 200] LR: 0.000100
+[epoch: 63] (782/782) | Loss: 0.0078 | top1: 99.9880 | top5: 99.9980
+Training Epoch: [64 | 200] LR: 0.000100
+[epoch: 64] (782/782) | Loss: 0.0087 | top1: 99.9860 | top5: 99.9960
+Training Epoch: [65 | 200] LR: 0.000100
+[epoch: 65] (782/782) | Loss: 0.0091 | top1: 99.9820 | top5: 99.9960
+Training Epoch: [66 | 200] LR: 0.000100
+[epoch: 66] (782/782) | Loss: 0.0083 | top1: 99.9840 | top5: 99.9960
+Training Epoch: [67 | 200] LR: 0.000100
+[epoch: 67] (782/782) | Loss: 0.0094 | top1: 99.9840 | top5: 99.9980
+Training Epoch: [68 | 200] LR: 0.000100
+[epoch: 68] (782/782) | Loss: 0.0081 | top1: 99.9840 | top5: 99.9940
+Training Epoch: [69 | 200] LR: 0.000100
+[epoch: 69] (782/782) | Loss: 0.0094 | top1: 99.9860 | top5: 99.9980
+Training Epoch: [70 | 200] LR: 0.000100
+[epoch: 70] (782/782) | Loss: 0.0087 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [71 | 200] LR: 0.000100
+[epoch: 71] (782/782) | Loss: 0.0095 | top1: 99.9860 | top5: 99.9960
+Training Epoch: [72 | 200] LR: 0.000100
+[epoch: 72] (782/782) | Loss: 0.0092 | top1: 99.9880 | top5: 99.9980
+Training Epoch: [73 | 200] LR: 0.000100
+[epoch: 73] (782/782) | Loss: 0.0072 | top1: 99.9880 | top5: 99.9980
+Training Epoch: [74 | 200] LR: 0.000100
+[epoch: 74] (782/782) | Loss: 0.0094 | top1: 99.9780 | top5: 99.9980
+Training Epoch: [75 | 200] LR: 0.000100
+[epoch: 75] (782/782) | Loss: 0.0083 | top1: 99.9880 | top5: 99.9980
+Training Epoch: [76 | 200] LR: 0.000100
+[epoch: 76] (782/782) | Loss: 0.0107 | top1: 99.9860 | top5: 99.9960
+Training Epoch: [77 | 200] LR: 0.000100
+[epoch: 77] (782/782) | Loss: 0.0099 | top1: 99.9840 | top5: 99.9980
+Training Epoch: [78 | 200] LR: 0.000100
+[epoch: 78] (782/782) | Loss: 0.0093 | top1: 99.9820 | top5: 99.9980
+Training Epoch: [79 | 200] LR: 0.000100
+[epoch: 79] (782/782) | Loss: 0.0091 | top1: 99.9820 | top5: 99.9960
+Training Epoch: [80 | 200] LR: 0.000100
+[epoch: 80] (782/782) | Loss: 0.0109 | top1: 99.9820 | top5: 99.9960
+Training Epoch: [81 | 200] LR: 0.000010
+[epoch: 81] (782/782) | Loss: 0.0069 | top1: 99.9780 | top5: 99.9960
+Training Epoch: [82 | 200] LR: 0.000010
+[epoch: 82] (782/782) | Loss: 0.0049 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [83 | 200] LR: 0.000010
+[epoch: 83] (782/782) | Loss: 0.0043 | top1: 99.9900 | top5: 99.9960
+Training Epoch: [84 | 200] LR: 0.000010
+[epoch: 84] (782/782) | Loss: 0.0043 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [85 | 200] LR: 0.000010
+[epoch: 85] (782/782) | Loss: 0.0039 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [86 | 200] LR: 0.000010
+[epoch: 86] (782/782) | Loss: 0.0033 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [87 | 200] LR: 0.000010
+[epoch: 87] (782/782) | Loss: 0.0034 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [88 | 200] LR: 0.000010
+[epoch: 88] (782/782) | Loss: 0.0034 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [89 | 200] LR: 0.000010
+[epoch: 89] (782/782) | Loss: 0.0034 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [90 | 200] LR: 0.000010
+[epoch: 90] (782/782) | Loss: 0.0031 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [91 | 200] LR: 0.000010
+[epoch: 91] (782/782) | Loss: 0.0033 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [92 | 200] LR: 0.000010
+[epoch: 92] (782/782) | Loss: 0.0030 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [93 | 200] LR: 0.000010
+[epoch: 93] (782/782) | Loss: 0.0031 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [94 | 200] LR: 0.000010
+[epoch: 94] (782/782) | Loss: 0.0028 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [95 | 200] LR: 0.000010
+[epoch: 95] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [96 | 200] LR: 0.000010
+[epoch: 96] (782/782) | Loss: 0.0029 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [97 | 200] LR: 0.000010
+[epoch: 97] (782/782) | Loss: 0.0028 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [98 | 200] LR: 0.000010
+[epoch: 98] (782/782) | Loss: 0.0028 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [99 | 200] LR: 0.000010
+[epoch: 99] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [100 | 200] LR: 0.000010
+[epoch: 100] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [101 | 200] LR: 0.000010
+[epoch: 101] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [102 | 200] LR: 0.000010
+[epoch: 102] (782/782) | Loss: 0.0029 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [103 | 200] LR: 0.000010
+[epoch: 103] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [104 | 200] LR: 0.000010
+[epoch: 104] (782/782) | Loss: 0.0029 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [105 | 200] LR: 0.000010
+[epoch: 105] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [106 | 200] LR: 0.000010
+[epoch: 106] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [107 | 200] LR: 0.000010
+[epoch: 107] (782/782) | Loss: 0.0029 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [108 | 200] LR: 0.000010
+[epoch: 108] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [109 | 200] LR: 0.000010
+[epoch: 109] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [110 | 200] LR: 0.000010
+[epoch: 110] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [111 | 200] LR: 0.000010
+[epoch: 111] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [112 | 200] LR: 0.000010
+[epoch: 112] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [113 | 200] LR: 0.000010
+[epoch: 113] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [114 | 200] LR: 0.000010
+[epoch: 114] (782/782) | Loss: 0.0030 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [115 | 200] LR: 0.000010
+[epoch: 115] (782/782) | Loss: 0.0030 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [116 | 200] LR: 0.000010
+[epoch: 116] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [117 | 200] LR: 0.000010
+[epoch: 117] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [118 | 200] LR: 0.000010
+[epoch: 118] (782/782) | Loss: 0.0030 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [119 | 200] LR: 0.000010
+[epoch: 119] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [120 | 200] LR: 0.000010
+[epoch: 120] (782/782) | Loss: 0.0028 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [121 | 200] LR: 0.000001
+[epoch: 121] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [122 | 200] LR: 0.000001
+[epoch: 122] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [123 | 200] LR: 0.000001
+[epoch: 123] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [124 | 200] LR: 0.000001
+[epoch: 124] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [125 | 200] LR: 0.000001
+[epoch: 125] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [126 | 200] LR: 0.000001
+[epoch: 126] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [127 | 200] LR: 0.000001
+[epoch: 127] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [128 | 200] LR: 0.000001
+[epoch: 128] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [129 | 200] LR: 0.000001
+[epoch: 129] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [130 | 200] LR: 0.000001
+[epoch: 130] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [131 | 200] LR: 0.000001
+[epoch: 131] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [132 | 200] LR: 0.000001
+[epoch: 132] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [133 | 200] LR: 0.000001
+[epoch: 133] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [134 | 200] LR: 0.000001
+[epoch: 134] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [135 | 200] LR: 0.000001
+[epoch: 135] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [136 | 200] LR: 0.000001
+[epoch: 136] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [137 | 200] LR: 0.000001
+[epoch: 137] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [138 | 200] LR: 0.000001
+[epoch: 138] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [139 | 200] LR: 0.000001
+[epoch: 139] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [140 | 200] LR: 0.000001
+[epoch: 140] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [141 | 200] LR: 0.000001
+[epoch: 141] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [142 | 200] LR: 0.000001
+[epoch: 142] (782/782) | Loss: 0.0029 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [143 | 200] LR: 0.000001
+[epoch: 143] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [144 | 200] LR: 0.000001
+[epoch: 144] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [145 | 200] LR: 0.000001
+[epoch: 145] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [146 | 200] LR: 0.000001
+[epoch: 146] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [147 | 200] LR: 0.000001
+[epoch: 147] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [148 | 200] LR: 0.000001
+[epoch: 148] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [149 | 200] LR: 0.000001
+[epoch: 149] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [150 | 200] LR: 0.000001
+[epoch: 150] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [151 | 200] LR: 0.000001
+[epoch: 151] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [152 | 200] LR: 0.000001
+[epoch: 152] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [153 | 200] LR: 0.000001
+[epoch: 153] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [154 | 200] LR: 0.000001
+[epoch: 154] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [155 | 200] LR: 0.000001
+[epoch: 155] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [156 | 200] LR: 0.000001
+[epoch: 156] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [157 | 200] LR: 0.000001
+[epoch: 157] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [158 | 200] LR: 0.000001
+[epoch: 158] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [159 | 200] LR: 0.000001
+[epoch: 159] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [160 | 200] LR: 0.000001
+[epoch: 160] (782/782) | Loss: 0.0029 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [161 | 200] LR: 0.000000
+[epoch: 161] (782/782) | Loss: 0.0028 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [162 | 200] LR: 0.000000
+[epoch: 162] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [163 | 200] LR: 0.000000
+[epoch: 163] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [164 | 200] LR: 0.000000
+[epoch: 164] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [165 | 200] LR: 0.000000
+[epoch: 165] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [166 | 200] LR: 0.000000
+[epoch: 166] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [167 | 200] LR: 0.000000
+[epoch: 167] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [168 | 200] LR: 0.000000
+[epoch: 168] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [169 | 200] LR: 0.000000
+[epoch: 169] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [170 | 200] LR: 0.000000
+[epoch: 170] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [171 | 200] LR: 0.000000
+[epoch: 171] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [172 | 200] LR: 0.000000
+[epoch: 172] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [173 | 200] LR: 0.000000
+[epoch: 173] (782/782) | Loss: 0.0028 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [174 | 200] LR: 0.000000
+[epoch: 174] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [175 | 200] LR: 0.000000
+[epoch: 175] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [176 | 200] LR: 0.000000
+[epoch: 176] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [177 | 200] LR: 0.000000
+[epoch: 177] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [178 | 200] LR: 0.000000
+[epoch: 178] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [179 | 200] LR: 0.000000
+[epoch: 179] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [180 | 200] LR: 0.000000
+[epoch: 180] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [181 | 200] LR: 0.000000
+[epoch: 181] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [182 | 200] LR: 0.000000
+[epoch: 182] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [183 | 200] LR: 0.000000
+[epoch: 183] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [184 | 200] LR: 0.000000
+[epoch: 184] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [185 | 200] LR: 0.000000
+[epoch: 185] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [186 | 200] LR: 0.000000
+[epoch: 186] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [187 | 200] LR: 0.000000
+[epoch: 187] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [188 | 200] LR: 0.000000
+[epoch: 188] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [189 | 200] LR: 0.000000
+[epoch: 189] (782/782) | Loss: 0.0028 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [190 | 200] LR: 0.000000
+[epoch: 190] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [191 | 200] LR: 0.000000
+[epoch: 191] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [192 | 200] LR: 0.000000
+[epoch: 192] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [193 | 200] LR: 0.000000
+[epoch: 193] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [194 | 200] LR: 0.000000
+[epoch: 194] (782/782) | Loss: 0.0026 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [195 | 200] LR: 0.000000
+[epoch: 195] (782/782) | Loss: 0.0024 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [196 | 200] LR: 0.000000
+[epoch: 196] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [197 | 200] LR: 0.000000
+[epoch: 197] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [198 | 200] LR: 0.000000
+[epoch: 198] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [199 | 200] LR: 0.000000
+[epoch: 199] (782/782) | Loss: 0.0025 | top1: 99.9900 | top5: 99.9980
+Training Epoch: [200 | 200] LR: 0.000000
+[epoch: 200] (782/782) | Loss: 0.0027 | top1: 99.9900 | top5: 99.9980
+--------------------- Evaluating -------------------------------
+[epoch: 1] | collapsemetric: 2.3067 | ETF metric: 0.0000 | WH metric: 0.6353 | Wh_b metric: 0.8803
+[epoch: 1] | train top1: 58.9660 | train top5: 95.4660 | test top1: 57.2800 | test top5: 95.1300
+[epoch: 2] | collapsemetric: 1.3702 | ETF metric: 0.0000 | WH metric: 0.5205 | Wh_b metric: 0.9755

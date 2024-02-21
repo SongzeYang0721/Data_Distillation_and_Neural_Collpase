@@ -279,8 +279,8 @@ class ResNet(nn.Module):
         x = self.layer4(x)
 
         x = self.avgpool(x)
-        x = torch.flatten(x, 1)
-        features = F.normalize(x)
+        x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
+        features = F.normalize(x) # normalized H ready to feed to the linear layer
         x = self.fc(x)
 
         return x, features

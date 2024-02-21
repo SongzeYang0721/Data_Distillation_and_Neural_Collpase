@@ -1,0 +1,31 @@
+Initalize training...
+Optimizer:  Adam
+# of model parameters: 8867442
+--------------------- Training -------------------------------
+Training Epoch: [1 | 5] LR: 0.001000
+[epoch: 1] (782/782) | Loss: 1.4034 | top1: 52.7880 | top5: 92.1320
+Training Epoch: [2 | 5] LR: 0.001000
+[epoch: 2] (782/782) | Loss: 1.0445 | top1: 66.9480 | top5: 96.8380
+Training Epoch: [3 | 5] LR: 0.001000
+[epoch: 3] (782/782) | Loss: 0.9045 | top1: 72.9160 | top5: 97.7640
+Training Epoch: [4 | 5] LR: 0.001000
+[epoch: 4] (782/782) | Loss: 0.8045 | top1: 76.8920 | top5: 98.3580
+Training Epoch: [5 | 5] LR: 0.001000
+[epoch: 5] (782/782) | Loss: 0.7369 | top1: 79.9760 | top5: 98.6720
+--------------------- Evaluating -------------------------------
+wandb: Network error (ConnectionError), entering retry loop.
+--- Logging error ---
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/logging/__init__.py", line 1114, in emit
+    self.flush()
+  File "/Users/songzeyang/anaconda3/lib/python3.11/logging/__init__.py", line 1094, in flush
+    self.stream.flush()
+OSError: [Errno 5] Input/output error
+Call stack:
+  File "/Users/songzeyang/anaconda3/lib/python3.11/threading.py", line 995, in _bootstrap
+    self._bootstrap_inner()
+  File "/Users/songzeyang/anaconda3/lib/python3.11/threading.py", line 1038, in _bootstrap_inner
+    self.run()
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/ipykernel/parentpoller.py", line 38, in run
+    get_logger().warning("Parent appears to have exited, shutting down.")
+Message: 'Parent appears to have exited, shutting down.'

@@ -1,0 +1,12 @@
+
+Training Epoch: [1 | 1]
+override this uidresnet18-design-LBFGS
+<arg_loader.train_args object at 0x2928293d0>
+cudnn is used
+Dataset: CIFAR10.
+Files already downloaded and verified
+Files already downloaded and verified
+10
+The number of class in our training set is  10
+Batch size: 512 Number of channels: 3 input height: 32 input width: 32
+# of model parameters: 8859762

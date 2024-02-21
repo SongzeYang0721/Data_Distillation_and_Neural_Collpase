@@ -1,0 +1,57 @@
+Initalize training...
+Optimizer:  Adam
+# of model parameters: 8867442
+--------------------- Training -------------------------------
+Training Epoch: [1 | 200] LR: 0.001000
+[epoch: 1] (782/782) | Loss: 1.4156 | top1: 52.1740 | top5: 91.6080
+Training Epoch: [2 | 200] LR: 0.001000
+[epoch: 2] (782/782) | Loss: 1.0400 | top1: 67.3280 | top5: 96.9620
+Training Epoch: [3 | 200] LR: 0.001000
+[epoch: 3] (782/782) | Loss: 0.9065 | top1: 72.6440 | top5: 97.7900
+Training Epoch: [4 | 200] LR: 0.001000
+[epoch: 4] (782/782) | Loss: 0.8181 | top1: 76.2320 | top5: 98.2800
+Training Epoch: [5 | 200] LR: 0.001000
+[epoch: 5] (782/782) | Loss: 0.7411 | top1: 79.5280 | top5: 98.7000
+Training Epoch: [6 | 200] LR: 0.001000
+[epoch: 6] (782/782) | Loss: 0.6740 | top1: 81.8440 | top5: 98.9780
+Training Epoch: [7 | 200] LR: 0.001000
+[epoch: 7] (782/782) | Loss: 0.6197 | top1: 84.1920 | top5: 99.1640
+Training Epoch: [8 | 200] LR: 0.001000
+[epoch: 8] (782/782) | Loss: 0.5623 | top1: 86.2920 | top5: 99.3460
+Training Epoch: [9 | 200] LR: 0.001000
+[epoch: 9] (782/782) | Loss: 0.5188 | top1: 87.8740 | top5: 99.4540
+Training Epoch: [10 | 200] LR: 0.001000
+[epoch: 10] (782/782) | Loss: 0.4703 | top1: 90.1360 | top5: 99.5600
+Training Epoch: [11 | 200] LR: 0.001000
+[epoch: 11] (782/782) | Loss: 0.4348 | top1: 91.4200 | top5: 99.6040
+Training Epoch: [12 | 200] LR: 0.001000
+[epoch: 12] (782/782) | Loss: 0.3990 | top1: 92.4280 | top5: 99.6760
+Training Epoch: [13 | 200] LR: 0.001000
+[epoch: 13] (782/782) | Loss: 0.3662 | top1: 93.5580 | top5: 99.7340
+Training Epoch: [14 | 200] LR: 0.001000
+[epoch: 14] (782/782) | Loss: 0.3388 | top1: 94.5340 | top5: 99.7900
+Training Epoch: [15 | 200] LR: 0.001000
+[epoch: 15] (782/782) | Loss: 0.3208 | top1: 95.0200 | top5: 99.8120
+Training Epoch: [16 | 200] LR: 0.001000
+[epoch: 16] (782/782) | Loss: 0.3037 | top1: 95.5380 | top5: 99.8580
+Training Epoch: [17 | 200] LR: 0.001000
+[epoch: 17] (782/782) | Loss: 0.2873 | top1: 95.9380 | top5: 99.8580
+Training Epoch: [18 | 200] LR: 0.001000
+[epoch: 18] (782/782) | Loss: 0.2709 | top1: 96.4680 | top5: 99.8880
+Training Epoch: [19 | 200] LR: 0.001000
+[epoch: 19] (782/782) | Loss: 0.2659 | top1: 96.3940 | top5: 99.8880
+Training Epoch: [20 | 200] LR: 0.001000
+[epoch: 20] (782/782) | Loss: 0.2527 | top1: 96.7940 | top5: 99.8920
+Training Epoch: [21 | 200] LR: 0.001000
+[34m[1mwandb[39m[22m: [33mWARNING[39m Calling wandb.login() after wandb.init() has no effect.
+Using device: mps, Apple Silicon GPU
+override this uidtmp
+<arg_loader.train_args object at 0x1670b4710>
+cudnn is used
+Dataset: CIFAR10.
+Files already downloaded and verified
+Files already downloaded and verified
+The number of class in our training set is  10
+Batch size: 64 | Input size: (32, 32, 3)
+# of model parameters: 8867442
+<class 'models.resnet.ResNet'>

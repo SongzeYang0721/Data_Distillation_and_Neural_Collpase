@@ -1,0 +1,10 @@
+Initalize training...
+Optimizer:  Adam
+# of model parameters: 8867442
+--------------------- Training -------------------------------
+Training Epoch: [1 | 1] LR: 0.001000
+[epoch: 1] (782/782) | Loss: 1.3865 | top1: 53.4240 | top5: 92.3740
+--------------------- Evaluating -------------------------------
+[epoch: 1] | collapsemetric: 2.0136 | ETF metric: 0.0000 | WH metric: 0.6250 | Wh_b metric: 0.5925
+[epoch: 1] | train top1: 63.4760 | train top5: 95.9260 | test top1: 61.2600 | test top5: 95.9500
+Elapsed time: 3.47 minutes

@@ -1,0 +1,37 @@
+Initalize training...
+Optimizer:  LBFGS
+# of model parameters: 8867442
+--------------------- Training -------------------------------
+Training Epoch: [1 | 200]
+wandb: Network error (ConnectionError), entering retry loop.
+Exception ignored in atexit callback: <bound method finalize._exitfunc of <class 'weakref.finalize'>>
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/weakref.py", line 641, in _exitfunc
+Exception ignored in: <module 'threading' from '/Users/songzeyang/anaconda3/lib/python3.11/threading.py'>
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/threading.py", line 1534, in _shutdown
+Exception ignored in atexit callback: <bound method finalize._exitfunc of <class 'weakref.finalize'>>
+Exception ignored in atexit callback: <bound method finalize._exitfunc of <class 'weakref.finalize'>>
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/weakref.py", line 641, in _exitfunc
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/weakref.py", line 641, in _exitfunc
+Exception ignored in: <function _MultiProcessingDataLoaderIter.__del__ at 0x15c99b1a0>
+Traceback (most recent call last):
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1478, in __del__
+    self._shutdown_workers()
+  File "/Users/songzeyang/anaconda3/lib/python3.11/site-packages/torch/utils/data/dataloader.py", line 1442, in _shutdown_workers
+    w.join(timeout=_utils.MP_STATUS_CHECK_INTERVAL)
+  File "/Users/songzeyang/anaconda3/lib/python3.11/multiprocessing/process.py", line 149, in join
+    res = self._popen.wait(timeout)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/multiprocessing/popen_fork.py", line 40, in wait
+    if not wait([self.sentinel], timeout):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/multiprocessing/connection.py", line 930, in wait
+    ready = selector.select(timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/songzeyang/anaconda3/lib/python3.11/selectors.py", line 415, in select
+    fd_event_list = self._selector.poll(timeout)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt:
