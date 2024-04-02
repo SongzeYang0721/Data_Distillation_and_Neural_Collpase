@@ -1,1 +1,0 @@
-{"epoch id": 21, "epochs": 200, "LR": 0.001, "_timestamp": 1708063342.4543822, "_runtime": 1332.9628002643585, "_step": 40, "losses.avg": 0.2527034936094284, "top1.avg": 96.794, "top5.avg": 99.892, "_wandb": {"runtime": 1408}}

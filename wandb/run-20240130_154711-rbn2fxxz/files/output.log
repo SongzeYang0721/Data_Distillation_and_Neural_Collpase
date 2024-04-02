@@ -1,7 +1,0 @@
-Dataset: CIFAR10.
-Files already downloaded and verified
-Files already downloaded and verified
-[epoch: 1] (1/782) | Loss: 5.2711 | top1: 20.3125 | top5: 67.1875
-[epoch: 1] (11/782) | Loss: 4.9972 | top1: 23.5795 | top5: 73.1534
-[34m[1mwandb[39m[22m: Ctrl + C detected. Stopping sweep.
-[epoch: 1] (21/782) | Loss: 4.9305 | top1: 22.6190 | top5: 74.1071

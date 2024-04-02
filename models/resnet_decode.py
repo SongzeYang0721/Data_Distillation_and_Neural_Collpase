@@ -34,6 +34,7 @@ def deconv1x1(in_planes, out_planes, stride=1, padding=0, output_padding=0):
     """
     # For deconv1x1, padding and output_padding are typically not as critical
     # as for deconv3x3, given the kernel size of 1.
+    output_padding = 1 if stride > 1 else 0
     return nn.ConvTranspose2d(in_planes, out_planes, kernel_size=1, stride=stride, 
                               padding=padding, output_padding=output_padding, 
                               bias=False)
@@ -91,7 +92,7 @@ class BasicBlock(nn.Module):
 
         if self.upsample is not None:
             identity = self.upsample(x)
-
+        
         out += identity
         out = self.relu(out)
 
@@ -126,10 +127,10 @@ class Bottleneck(nn.Module):
         self.bn2 = norm_layer(width)
 
         if outdim == 0:
-            self.conv3 = deconv1x1(width, planes*self.expansion)
+            self.deconv3 = deconv1x1(width, planes*self.expansion)
             self.bn3 = norm_layer(planes*self.expansion)
         else:
-            self.conv3 = deconv1x1(width, outdim)
+            self.deconv3 = deconv1x1(width, outdim)
             self.bn3 = norm_layer(outdim)
         
         self.relu = nn.ReLU(inplace=True)
@@ -163,10 +164,8 @@ class ResNet(nn.Module):
 
     def __init__(
         self,
-        inplanes: int,
         block: Type[Union[BasicBlock, Bottleneck]],
         layers: List[int],
-        outplanes: int = 3,
         num_classes: int = 1000,
         zero_init_residual: bool = False,
         groups: int = 1,
@@ -182,9 +181,7 @@ class ResNet(nn.Module):
         if norm_layer is None:
             norm_layer = nn.BatchNorm2d
         self._norm_layer = norm_layer
-        
-        self.inplanes = 64 ###
-        self.outplanes = outplanes ### adjust as needed
+
         self.dilation = 1
         if replace_stride_with_dilation is None:
             # each element in the tuple indicates if we should replace
@@ -195,32 +192,49 @@ class ResNet(nn.Module):
                              "or a 3-element tuple, got {}".format(replace_stride_with_dilation))
         self.groups = groups
         self.base_width = width_per_group
+            
+        if not fixdim:
+            self.inplanes = 512 * block.expansion
+            if not SOTA:
+                self.avgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=1, stride=1, padding=0, 
+                                                bias=False)
+            else:
+                self.avgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
+                                                bias=False)
+            self.layer4 = self._make_layer(block, 256, layers[3], stride=2,
+                                           dilate=replace_stride_with_dilation[2])
+            # self.avgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=1, padding=1, 
+            #                                   bias=False)
+        else:
+            self.inplanes = 10 ###
+            if not SOTA:
+                self.avgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=1, stride=1, padding=0, 
+                                                bias=False)
+            else:
+                self.avgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
+                                                bias=False)
+            self.layer4 = self._make_layer(block, 256, layers[3], stride=2,
+                                           dilate=replace_stride_with_dilation[2])
+            # print("self.inplanes", self.inplanes)
+            
+        
+        self.layer3 = self._make_layer(block, 128, layers[2], stride=2, upsample=True, 
+                                       dilate=replace_stride_with_dilation[1])
+        self.layer2 = self._make_layer(block, 64, layers[1], stride=2, upsample=True,
+                                       dilate=replace_stride_with_dilation[0])
+        self.layer1 = self._make_layer(block, 64, layers[0], upsample=False)  # No upsampling in the first layer
+
         self.SOTA = SOTA
         if SOTA:
-            self.deconv1 = nn.ConvTranspose2d(inplanes, outplanes, kernel_size=3, stride=1, padding=1, 
+            self.deconv1 = nn.ConvTranspose2d(self.inplanes, 3, kernel_size=3, stride=1, padding=1, 
                                               bias=False)
         else:
-            self.deconv1 = nn.ConvTranspose2d(inplanes, outplanes, kernel_size=7, stride=2, padding=3, output_padding=1, 
+            self.deconv1 = nn.ConvTranspose2d(self.inplanes, 3, kernel_size=7, stride=2, padding=3, output_padding=1, 
                                               bias=False)
-        self.bn1 = norm_layer(self.inplanes)
+        self.bn1 = norm_layer(3)
         self.relu = nn.ReLU(inplace=True)
 
-        self.maxpool = nn.ConvTranspose2d(outplanes, outplanes, kernel_size=3, stride=2, padding=1) ### Use a transposed convoluation to learn the reversed MaxPool2d
-
-        self.layer1 = self._make_layer(block, 64, layers[0], upsample=False)  # No upsampling in the first layer
-        self.layer2 = self._make_layer(block, 128, layers[1], stride=2, upsample=True)
-        self.layer3 = self._make_layer(block, 256, layers[2], stride=2, upsample=True)
-
-        if not fixdim:
-            self.layer4 = self._make_layer(block, 512, layers[3], stride=2,
-                                           dilate=replace_stride_with_dilation[2])
-            self.avgpool = nn.ConvTranspose2d(inplanes, outplanes, kernel_size=3, stride=1, padding=1, 
-                                              bias=False)
-        else:
-            self.layer4 = self._make_layer(block, inplanes/2, layers[3], stride=2,
-                                           dilate=replace_stride_with_dilation[2], outdim=num_classes)
-            self.avgpool = nn.ConvTranspose2d(inplanes, outplanes, kernel_size=3, stride=1, padding=1, 
-                                              bias=False)
+        self.maxpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) 
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -248,36 +262,64 @@ class ResNet(nn.Module):
                     outdim: int = 0,
                     upsample=False
                     ) -> nn.Sequential:
-        upsample_layer = None
-        if upsample:
-            upsample_layer = nn.Sequential(
-                nn.Upsample(scale_factor=stride, mode='bilinear', align_corners=True),
-                nn.Conv2d(self.inplanes, planes * block.expansion, kernel_size=1, stride=1, bias=False),
-                nn.BatchNorm2d(planes * block.expansion),
+        norm_layer = self._norm_layer
+        upsample = None
+        previous_dilation = self.dilation
+        if dilate:
+            self.dilation *= stride
+            stride = 1
+        if stride != 1 or self.inplanes != planes * block.expansion:
+            upsample = nn.Sequential(
+                deconv1x1(self.inplanes, planes * block.expansion, stride),
+                norm_layer(planes * block.expansion),
             )
 
         layers = []
-        layers.append(block(self.inplanes, planes, stride, upsample_layer))
+        layers.append(block(self.inplanes, planes, stride, upsample, self.groups,
+                            self.base_width, previous_dilation, norm_layer))
         self.inplanes = planes * block.expansion
-        for _ in range(1, blocks):
-            layers.append(block(self.inplanes, planes))
+        for _ in range(1, blocks-1):
+            layers.append(block(self.inplanes, planes, groups=self.groups,
+                                base_width=self.base_width, dilation=self.dilation,
+                                norm_layer=norm_layer))
+        
+        upsample = None
+        if outdim != 0:
+            upsample = nn.Sequential(
+                deconv1x1(self.inplanes, outdim),
+                norm_layer(outdim)
+            )
+        
+        layers.append(block(self.inplanes, planes, groups=self.groups,
+                            base_width=self.base_width, dilation=self.dilation,
+                            norm_layer=norm_layer, upsample=upsample, outdim=outdim))
 
         return nn.Sequential(*layers)
 
     def _forward_impl(self, x: Tensor):
 
         x = x.view(x.shape[0], x.shape[1], 1, 1)
+        # print("x", x.shape)
+        # if self.SOTA:
         x = self.avgpool(x)
+        # print("x = self.avgpool(x)", x.shape)
 
         x = self.layer4(x)
+        # print("x = self.layer4(x)", x.shape)
         x = self.layer3(x)
+        # print("x = self.layer3(x)", x.shape)
         x = self.layer2(x)
+        # print("x = self.layer2(x)", x.shape)
         x = self.layer1(x)
+        # print("x = self.layer1(x)", x.shape)
 
         if not self.SOTA:
             x = self.maxpool(x)
+            # print("if not self.SOTA:x = self.maxpool(x)", x.shape)
 
-        x = self.conv1(x)
+
+        x = self.deconv1(x)
+        # print("self.deconv1(x)", x.shape)
         x = self.bn1(x)
         x = self.relu(x)
         

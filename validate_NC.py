@@ -297,23 +297,17 @@ def evaluate_NC(args,model,trainloader, testloader, nearest_neighbor = False):
                         "train_acc1":train_acc1, 
                         "train_acc5":train_acc5,
                         "test_acc1":test_acc1,
-                        "test_acc5":test_acc5
-                        })
-
-            wandb.log({"collapse_metric":collapse_metric, 
+                        "test_acc5":test_acc5,
+                        "collapse_metric":collapse_metric, 
                         "ETF_metric":ETF_metric, 
                         "WH_relation_metric":WH_relation_metric,
-                        "Wh_b_relation_metric":Wh_b_relation_metric
-                        })
-            
-            wandb.log({
+                        "Wh_b_relation_metric":Wh_b_relation_metric,
                         "nearest neighbor: train_acc1":near_train_acc1, 
                         "nearest neighbor: train_acc5":near_train_acc5,
                         "nearest neighbor: test_acc1":near_test_acc1,
                         "nearest neighbor: test_acc5":near_test_acc5
                         })
-
-
+            
     with open(args.load_path + 'info.pkl', 'wb') as f:
         pickle.dump(info_dict, f)
 

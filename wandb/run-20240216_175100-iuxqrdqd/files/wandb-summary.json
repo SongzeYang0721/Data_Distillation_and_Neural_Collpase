@@ -1,1 +1,0 @@
-{"epoch id": 5, "epochs": 200, "_timestamp": 1708075028.2966661, "_runtime": 8735.124141216278, "_step": 8, "losses.avg": 1.7110376069641113, "top1.avg": 43.244, "top5.avg": 78.75}
