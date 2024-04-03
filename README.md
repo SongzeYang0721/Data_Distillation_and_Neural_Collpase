@@ -2,22 +2,13 @@
 
 This research project is contributing to an NSF-CSIRO research project titled "Responsible AI for Climate Change" (GLC ID SCE200E4), and the machine learning algorithm is the foundation of this research.
 
-The research project aims at linking the novel neural collapse with data distillation with potential application in nterpretable AI system. The research is mainly consist of 3 parts:
+The research project aims at linking the novel neural collapse with data distillation with potential application in interpretable AI system. The research is mainly consist of 3 parts:
 
 - Data Distillation
 - Neural Collapse
 - Interpretable AI
 
 I have created this Github repository to update my research process.
-
-## Environment
-
-- CUDA 12.0
-- python 3.11.5
-- torch 2.1.1
-- torchvision 0.15.2
-- scipy 1.11.1
-- numpy 1.23.5
 
 ## Introduction
 
@@ -69,12 +60,13 @@ Han Liu, Yizhou Tian, Chacha Chen, Shi Feng, Yuxin Chen, and Chenhao Tan. 
 
 #### Connect Data Distillation with Neural collapse
 
-Can neural collpase play a role in the data distillation? We invetigate the connection here. 
+Neural collapse build a new path towards the data distillation (see neural collapse). In the terminal phase of neural network training, the class means and the last-layer classifiers all collapse to the vertices of a Simplex Equiangular Tight Frame (ETF) up to scaling. In other words, the neural network has a tendency to reduce the data. This opens doors to do data distillation for us. 
 
-It is widely known that increase of inner loop can lead to a better performance for data distillation  trained on the neural network in the original paper. However, the latest method, namely KIP and LS, does not distinguish the inner and outer loop in the data distillation process. The real data is only used in calculating the kernel matrix. This potentially open door to methods that can train and distill the data in one go. 
+## Environment
 
-We can potentially improve the data distillation by connecting it with the neural collapse. If we can fix the last layer of the neural network with the Simplex Equiangular Tight Frame (ETF) and train the neural work on the train data and distilled data (support data) and we backpropagate the gradient back to the distilled data, we should get a perfect distillation method that can reserve all the information of the training dataset.
-
-We can calculate the simplex ETF from the number of classes of the training data and plug-in ETF for neural network training has proved to perform equally with the classical method (see NC paper).
-
-## Experiment towards Neural Collapse
+- CUDA 12.0
+- python 3.11.5
+- torch 2.1.1
+- torchvision 0.15.2
+- scipy 1.11.1
+- numpy 1.23.5
