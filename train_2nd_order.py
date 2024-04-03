@@ -25,11 +25,6 @@ def trainer(args, model, trainloader, epoch_id, criterion, optimizer):
     top1 = AverageMeter()
     top5 = AverageMeter()
 
-    wandb.log({
-        "epoch id":epoch_id + 1, 
-        "epochs":args.epochs
-    })
-
     print('\nTraining Epoch: [%d | %d]' % (epoch_id + 1, args.epochs))
     for batch_idx, (inputs, targets) in enumerate(trainloader):
 
@@ -77,6 +72,7 @@ def trainer(args, model, trainloader, epoch_id, criterion, optimizer):
 
     if 'wandb' in sys.modules:
         wandb.log({
+            "epoch id":epoch_id + 1, 
             "losses.avg":losses.avg, 
             "top1.avg":top1.avg,
             "top5.avg":top5.avg
