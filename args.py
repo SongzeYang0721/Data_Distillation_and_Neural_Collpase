@@ -59,9 +59,9 @@ def parse_train_args():
         print("revise the unique id to a random number " + str(unique_id))
         args.uid = unique_id
         timestamp = datetime.datetime.now().strftime("%a-%b-%d-%H-%M")
-        save_path = './model_weights/' + args.uid + '-' + timestamp
+        save_path = '/data/model_weights/' + args.uid + '-' + timestamp
     else:
-        save_path = './model_weights/' + str(args.uid)
+        save_path = '/data/model_weights/' + str(args.uid)
 
     if not os.path.exists(save_path):
         os.makedirs(save_path, exist_ok=True)

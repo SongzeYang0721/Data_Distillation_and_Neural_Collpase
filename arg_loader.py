@@ -75,9 +75,9 @@ class train_args:
             print("revise the unique id to a random number " + str(unique_id))
             self.uid = unique_id
             timestamp = datetime.datetime.now().strftime("%a-%b-%d-%H-%M")
-            save_path = './model_weights/' + self.uid + '-' + timestamp
+            save_path = '/data5/model_weights/' + self.uid + '-' + timestamp
         else:
-            save_path = './model_weights/' + str(self.uid)
+            save_path = '/data5/model_weights/' + str(self.uid)
         
         if not os.path.exists(save_path):
             os.makedirs(save_path, exist_ok=True)
