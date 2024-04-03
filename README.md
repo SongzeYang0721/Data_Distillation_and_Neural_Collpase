@@ -35,10 +35,15 @@ Survey Papers:
 
 ### Neural Collapse
 
-NeuralCollapse -- an intriguing empirical phenomenon that arises in the last-layer classifiers and features of neural networks during the terminal phase of training. As recently reported in [1], this phenomenon implies that:
+Neural collapse, emerged in the terminal phase of training(TPT), let us understand the behavior of a special class of neural network, deep classifier neural network. It has widely observed in a number of data set and model structures. Is has mainly 4 fold of meaning:
 
-- (i) the class means and the last-layer classifiers all collapse to the vertices of a Simplex Equiangular Tight Frame (ETF) up to scaling, and
-- (ii) cross-example within-class variability of last-layer activations collapses to zero.
+(NC1) Cross-example within-class variability of last-layer training activations collapses to zero, as the individual activations themselves collapse to their class means.
+
+(NC2) The class means collapse to the vertices of a simplex equiangular tight frame (ETF).
+
+(NC3) Up to rescaling, the last-layer classifiers collapse to the class means or in other words, to the simplex ETF (i.e., to a self-dual configuration).
+
+(NC4) For a given activation, the classifier’s decision collapses to simply choosing whichever class has the closest train class mean (i.e., the nearest class center decision rule).
 
 [A Geometric Analysis of Neural Collapse with Unconstrained Features](https://arxiv.org/abs/2105.02375)
 
@@ -56,6 +61,14 @@ Chenhao Tan (UChicago) gave this nice 30 min talk on explanable ML. One of the k
 ### Connect Data Distillation with Neural collapse
 
 Neural collapse build a new path towards the data distillation (see neural collapse). In the terminal phase of neural network training, the class means and the last-layer classifiers all collapse to the vertices of a Simplex Equiangular Tight Frame (ETF) up to scaling. In other words, the neural network has a tendency to reduce the data. This opens doors to do data distillation for us. 
+
+### To-do list
+
+- [ ]  Link data distillation with neural collapse:
+    - [x]  Why do we plug in ETF in the neural net why does this make sense/feasible/doable?
+    - [ ]  Find the best ETF on train data and the best generalized ETF on test data.
+    - [ ]  Find the best reverse map that maps the data from the latent space to the data space.
+- [ ]  The possible way to improve our model.
 
 ## Environment
 
