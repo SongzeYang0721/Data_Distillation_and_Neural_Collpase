@@ -18,11 +18,9 @@ This code aims at drawing a connenction between data distillation, neural collpa
 
 ***The idea of distillation plays an important role in these situations by reducing the resources required for the model to be effective.***
 
-Dataset distillation, in which a large dataset is distilled into a synthetic, smaller dataset. The original paper on data distillation: https://arxiv.org/abs/1811.10959. In this paper, we consider an alternative formulation called dataset distillation: we keep the model fixed and instead attempt to distill the knowledge from a large training dataset into a small one.
+Dataset distillation, in which a large dataset is distilled into a synthetic, smaller dataset. The original paper on data distillation: https://arxiv.org/abs/1811.10959. In this paper, they keep the model fixed and instead attempt to distill the knowledge from a large training dataset into a small one.
 
-We started by considering the latest method in data distillation:https://blog.research.google/2021/12/training-machine-learning-models-more.html.
-
-The KIP and LS methods mentioned in the text are notable for their lack of distinction between the inner and outer loops. This means that they do not differentiate between the training process and the distillation process, resulting in a more streamlined approach to dataset distillation.
+We started by considering the latest method in data distillation:https://blog.research.google/2021/12/training-machine-learning-models-more.html. The KIP and LS methods mentioned in the text are notable for their lack of distinction between the inner and outer loops. This means that they do not differentiate between the training process and the distillation process, resulting in a more streamlined approach to dataset distillation.
 
 For more information on this topic, you can refer to the related papers provided:
 
@@ -39,10 +37,8 @@ Survey Papers:
 
 NeuralCollapse -- an intriguing empirical phenomenon that arises in the last-layer classifiers and features of neural networks during the terminal phase of training. As recently reported in [1], this phenomenon implies that:
 
-(i) the class means and the last-layer classifiers all collapse to the vertices of a Simplex Equiangular Tight Frame (ETF) up to scaling, and
-(ii) cross-example within-class variability of last-layer activations collapses to zero.
-
-[1] Vardan Papyan, XY Han, and David L Donoho. Prevalence of neural collapse during the terminal phase of deep learning training. Proceedings of the National Academy of Sciences, 117(40):24652–24663, 2020.
+- (i) the class means and the last-layer classifiers all collapse to the vertices of a Simplex Equiangular Tight Frame (ETF) up to scaling, and
+- (ii) cross-example within-class variability of last-layer activations collapses to zero.
 
 [A Geometric Analysis of Neural Collapse with Unconstrained Features](https://arxiv.org/abs/2105.02375)
 
@@ -52,13 +48,12 @@ NeuralCollapse -- an intriguing empirical phenomenon that arises in the last-la
 
 A pointer:
 
-Chenhao Tan (UChicago) gave this nice 30 min talk on explanable ML  https://www.youtube.com/watch?v=QlOuWbPECqM
+Chenhao Tan (UChicago) gave this nice 30 min talk on explanable ML. One of the key papers mentioned in the talk is this one, his other papers on the topic are interesting too (e.g. CHI 2023):
 
-One of the key papers mentioned in the talk is this one, his other papers on the topic are interesting too (e.g. CHI 2023)
+- https://www.youtube.com/watch?v=QlOuWbPECqM
+- https://arxiv.org/abs/2303.04809
 
-Han Liu, Yizhou Tian, Chacha Chen, Shi Feng, Yuxin Chen, and Chenhao Tan. Learning Human-Compatible Representations for Case-Based Decision Support. In Proceedings of ICLR 2023.
-
-#### Connect Data Distillation with Neural collapse
+### Connect Data Distillation with Neural collapse
 
 Neural collapse build a new path towards the data distillation (see neural collapse). In the terminal phase of neural network training, the class means and the last-layer classifiers all collapse to the vertices of a Simplex Equiangular Tight Frame (ETF) up to scaling. In other words, the neural network has a tendency to reduce the data. This opens doors to do data distillation for us. 
 
