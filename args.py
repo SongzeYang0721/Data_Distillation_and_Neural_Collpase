@@ -5,6 +5,7 @@ import argparse
 
 import torch
 import numpy as np
+import socket
 
 
 def parse_train_args():
@@ -59,10 +60,22 @@ def parse_train_args():
         print("revise the unique id to a random number " + str(unique_id))
         args.uid = unique_id
         timestamp = datetime.datetime.now().strftime("%a-%b-%d-%H-%M")
-        save_path = '/data/model_weights/' + args.uid + '-' + timestamp
+        # create the save path for the dijkstra
+        if socket.gethostname() == "dijkstra":
+            save_path = '/data5/model_weights/' + args.uid + '-' + timestamp
+        else:
+            save_path = './model_weights/' + args.uid + '-' + timestamp
     else:
-        save_path = '/data/model_weights/' + str(args.uid)
-
+        # create the save path for the dijkstra
+        if socket.gethostname() == "dijkstra":
+            save_path = '/data5/model_weights/' + str(args.uid)
+        else:
+            save_path = './model_weights/' + str(args.uid)
+    
+    
+    if socket.gethostname() == "dijkstra":
+            save_path = save_path
+    
     if not os.path.exists(save_path):
         os.makedirs(save_path, exist_ok=True)
     else:

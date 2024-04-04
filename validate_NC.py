@@ -11,6 +11,7 @@ from args import parse_eval_args
 from data.datasets import make_dataset
 
 import wandb
+import socket
 
 MNIST_TRAIN_SAMPLES = (5923, 6742, 5958, 6131, 5842, 5421, 5918, 6265, 5851, 5949)
 MNIST_TEST_SAMPLES = (980, 1135, 1032, 1010, 982, 892, 958, 1028, 974, 1009)
@@ -205,12 +206,12 @@ def compute_Wh_b_relation(W, mu_G, b):
     return res_b.detach().cpu().numpy().item()
 
 
-def evaluate_NC(args,model,trainloader, testloader, nearest_neighbor = False):
+def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = False):
     
-    if 'google.colab' in sys.modules:
-        args.load_path = "/content/drive/MyDrive/model_weights/"+args.uid+"/"
-    else:
-        args.load_path = "./model_weights/"+args.uid+"/"
+    args.load_path = load_path
+
+    if args.load_path is None:
+        sys.exit('Need to input the path to a pre-trained model!')
 
     fc_features = FCFeatures()
     model.fc.register_forward_pre_hook(fc_features)

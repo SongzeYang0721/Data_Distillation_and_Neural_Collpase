@@ -3,6 +3,7 @@ import shutil
 import datetime
 import torch
 import numpy as np
+import socket
 
 class train_args:
     def __init__(self, model='resnet18', bias=True, ETF_fc=False, fixdim=0, SOTA=False,
@@ -75,9 +76,17 @@ class train_args:
             print("revise the unique id to a random number " + str(unique_id))
             self.uid = unique_id
             timestamp = datetime.datetime.now().strftime("%a-%b-%d-%H-%M")
-            save_path = '/data5/model_weights/' + self.uid + '-' + timestamp
+            # create the save path for the dijkstra
+            if socket.gethostname() == "dijkstra":
+                save_path = '/data5/model_weights/' + self.uid + '-' + timestamp
+            else:
+                save_path = './model_weights/' + self.uid + '-' + timestamp
         else:
-            save_path = '/data5/model_weights/' + str(self.uid)
+            # create the save path for the dijkstra
+            if socket.gethostname() == "dijkstra":
+                save_path = '/data5/model_weights/' + str(self.uid)
+            else:
+                save_path = './model_weights/' + str(self.uid)
         
         if not os.path.exists(save_path):
             os.makedirs(save_path, exist_ok=True)
