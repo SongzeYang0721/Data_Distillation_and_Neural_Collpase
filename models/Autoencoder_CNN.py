@@ -1,4 +1,3 @@
-import torch
 import torch.nn as nn
 
 class Autoencoder(nn.Module):
@@ -9,9 +8,6 @@ class Autoencoder(nn.Module):
 
     def forward(self, x):
         _, features = self.encoder(x)
-#         print(features.shape)
-#         print(len(features))
-#         print(type(features))
         decoded = self.decoder(features)
         return decoded
 
