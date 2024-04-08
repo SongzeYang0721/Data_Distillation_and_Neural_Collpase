@@ -298,28 +298,19 @@ class ResNet(nn.Module):
 
     def _forward_impl(self, x: Tensor):
 
-        x = x.view(x.shape[0], x.shape[1], 1, 1)
-        # print("x", x.shape)
-        # if self.SOTA:
-        x = self.avgpool(x)
-        # print("x = self.avgpool(x)", x.shape)
+        # x = x.view(x.shape[0], x.shape[1], 1, 1)
+        # x = self.avgpool(x)
 
         x = self.layer4(x)
-        # print("x = self.layer4(x)", x.shape)
         x = self.layer3(x)
-        # print("x = self.layer3(x)", x.shape)
         x = self.layer2(x)
-        # print("x = self.layer2(x)", x.shape)
         x = self.layer1(x)
-        # print("x = self.layer1(x)", x.shape)
 
         if not self.SOTA:
             x = self.maxpool(x)
-            # print("if not self.SOTA:x = self.maxpool(x)", x.shape)
 
 
         x = self.deconv1(x)
-        # print("self.deconv1(x)", x.shape)
         x = self.bn1(x)
         x = self.relu(x)
         
