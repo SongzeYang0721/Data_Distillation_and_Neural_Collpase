@@ -80,9 +80,9 @@ class BasicBlock(nn.Module):
         self.relu = nn.ReLU(inplace=True)
 
         if outdim == 0:
-            self.deconv2 = deconv3x3(planes, planes, padding=1)
+            self.deconv2 = deconv3x3(planes, planes)
         else:
-            self.deconv2 = deconv3x3(outdim, planes, padding=1)
+            self.deconv2 = deconv3x3(outdim, planes)
         self.bn2 = norm_layer(planes)
         
         self.upsample = upsample
