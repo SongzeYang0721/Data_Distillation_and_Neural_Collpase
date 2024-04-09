@@ -31,7 +31,7 @@ def deconv3x3(in_planes, out_planes, stride=1, groups=1, output_padding=0, dilat
         output_padding=output_padding)
 
 
-def deconv1x1(in_planes, out_planes, stride=1 output_padding=0):
+def deconv1x1(in_planes, out_planes, stride=1, output_padding=0):
     """
     Creates a transposed convolution layer to reverse a conv1x1 operation.
     This function primarily aims to adjust the number of channels, with the
