@@ -275,22 +275,31 @@ class ResNet(nn.Module):
     def _forward_impl(self, x: Tensor):
         # See note [TorchScript super()]
         x = self.conv1(x)
+        print("x = self.conv1(x)", x.shape)
         x = self.bn1(x)
         x = self.relu(x)
         if not self.SOTA:
             x = self.maxpool(x)
+            print("if not SOTA: x = self.maxpool(x)", x.shape)
 
         x = self.layer1(x)
+        print("x = self.layer1(x)", x.shape)
         x = self.layer2(x)
+        print("x = self.layer2(x)", x.shape)
         x = self.layer3(x)
+        print("x = self.layer3(x)", x.shape)
         x = self.layer4(x)
+        print("x = self.layer4(x)", x.shape)
 
         return x
         
         # x = self.avgpool(x)
+        # print("x = self.avgpool(x)", x.shape)
         # x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
+        # print("x = torch.flatten(x, 1)", x.shape)
         # features = F.normalize(x) # normalized H ready to feed to the linear layer
         # x = self.fc(x)
+        # print("x = self.fc(x)", x.shape)
 
         # return x, features
 
