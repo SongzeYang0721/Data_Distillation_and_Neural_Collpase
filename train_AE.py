@@ -32,7 +32,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         train_loss.append(loss.detach().cpu().numpy())
         
 
-    print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
+    print('[epoch: %d] (%d/%d) | Loss: %.4f | Train_loss: %.4f |' %
           (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, np.mean(train_loss)))
 
     if 'wandb' in sys.modules:
