@@ -184,14 +184,14 @@ class ResNet(nn.Module):
         self.SOTA = SOTA
         if SOTA:
             self.conv1 = nn.Conv2d(3, self.inplanes, kernel_size=3, stride=1, padding=1,
-                                   bias=False)
+                                   bias=False) # does not change heights and wideth
         else:
             self.conv1 = nn.Conv2d(3, self.inplanes, kernel_size=7, stride=2, padding=3,
-                                bias=False)
+                                bias=False) # height and width 32 ----> 16
         self.bn1 = norm_layer(self.inplanes)
         self.relu = nn.ReLU(inplace=True)
 
-        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1)
+        self.maxpool = nn.MaxPool2d(kernel_size=3, stride=2, padding=1) # height and width 16 ----> 8
 
         self.layer1 = self._make_layer(block, 64, layers[0])
         self.layer2 = self._make_layer(block, 128, layers[1], stride=2,
@@ -275,33 +275,33 @@ class ResNet(nn.Module):
     def _forward_impl(self, x: Tensor):
         # See note [TorchScript super()]
         x = self.conv1(x)
-        print("x = self.conv1(x)", x.shape)
+        # print("x = self.conv1(x)", x.shape)
         x = self.bn1(x)
         x = self.relu(x)
         if not self.SOTA:
             x = self.maxpool(x)
-            print("if not SOTA: x = self.maxpool(x)", x.shape)
+            # print("if not SOTA: x = self.maxpool(x)", x.shape)
 
         x = self.layer1(x)
-        print("x = self.layer1(x)", x.shape)
+        # print("x = self.layer1(x)", x.shape)
         x = self.layer2(x)
-        print("x = self.layer2(x)", x.shape)
+        # print("x = self.layer2(x)", x.shape)
         x = self.layer3(x)
-        print("x = self.layer3(x)", x.shape)
+        # print("x = self.layer3(x)", x.shape)
         x = self.layer4(x)
-        print("x = self.layer4(x)", x.shape)
+        # print("x = self.layer4(x)", x.shape)
 
-        return x
+        # return x
         
-        # x = self.avgpool(x)
+        x = self.avgpool(x)
         # print("x = self.avgpool(x)", x.shape)
-        # x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
+        x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
         # print("x = torch.flatten(x, 1)", x.shape)
-        # features = F.normalize(x) # normalized H ready to feed to the linear layer
-        # x = self.fc(x)
+        features = F.normalize(x) # normalized H ready to feed to the linear layer
+        x = self.fc(x)
         # print("x = self.fc(x)", x.shape)
 
-        # return x, features
+        return x, features
 
     def forward(self, x: Tensor):
         return self._forward_impl(x)
