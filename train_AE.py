@@ -2,10 +2,12 @@ import sys
 import wandb
 from utils import *
 
+import numpy as np
 
 def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None):
 
     losses = AverageMeter()
+    train_loss = []
 
     if args.optimizer == 'LBFGS':
         print('\nTraining Epoch: [%d | %d]' % (epoch_id + 1, args.epochs))
@@ -26,11 +28,13 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
 
         # measure accuracy and record loss
         autoencoder.eval()
-        outputs = autoencoder(inputs)
-        losses.update(loss.item(), inputs.size(0))
+        losses.update(loss.detached.item(), inputs.size(0))
+        print("loss.detached.item()", loss.detached.item())
+        train_loss.append(loss.detach().cpu().numpy())
+        
 
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
-          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg))
+          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, print(np.mean(train_loss))))
 
     if 'wandb' in sys.modules:
         wandb.log({

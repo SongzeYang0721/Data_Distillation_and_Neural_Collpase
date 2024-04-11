@@ -262,7 +262,7 @@ class ResNet(nn.Module):
         self.bn1 = norm_layer(3)
         self.relu = nn.ReLU(inplace=True)
 
-        self.unpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) # o = 14 + a +1, output_padding = 1
+        self.unmaxpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) # o = 14 + a +1, output_padding = 1
 
         self.layer1 = self._make_layer(block, 64, layers[0])  # No upsampling in the first layer
         self.layer2 = self._make_layer(block, 128, layers[1], stride = 2, output_padding = 1,
@@ -273,19 +273,19 @@ class ResNet(nn.Module):
             self.layer4 = self._make_layer(block, 512, layers[3], stride=2, output_padding = 1,
                                            dilate=replace_stride_with_dilation[2])
             if not SOTA:
-                self.avgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=1, stride=1, padding=0, 
+                self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=1, stride=1, padding=0, 
                                                 bias=False)
             else:
-                self.avgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
+                self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
                                                 bias=False)
         else:
             self.layer4 = self._make_layer(block, 512, layers[3], stride=2, output_padding = 1,
                                            dilate=replace_stride_with_dilation[2],outdim=num_classes)
             if not SOTA:
-                self.avgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=1, stride=1, padding=0, 
+                self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=1, stride=1, padding=0, 
                                                 bias=False)
             else:
-                self.avgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=4, stride=1, padding=0, 
+                self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=4, stride=1, padding=0, 
                                                 bias=False)
         
         
@@ -369,8 +369,8 @@ class ResNet(nn.Module):
         # print("x", x.shape)
         x = x.view(x.shape[0], x.shape[1], 1, 1)
         # print("x = x.view(x.shape[0], x.shape[1], 1, 1)", x.shape)
-        x = self.avgpool(x)
-        # print("x = self.avgpool(x)", x.shape)
+        x = self.unavgpool(x)
+        # print("x = self.unavgpool(x)", x.shape)
         x = self.layer4(x)
         # print("x = self.layer4(x)", x.shape)
         x = self.layer3(x)
@@ -381,8 +381,8 @@ class ResNet(nn.Module):
         # print("x = self.layer1(x)", x.shape)
 
         if not self.SOTA:
-            x = self.unpool(x)
-            # print("x = self.unpool(x)", x.shape)
+            x = self.unmaxpool(x)
+            # print("x = self.unmaxpool(x)", x.shape)
 
 
         x = self.deconv1(x)
