@@ -29,12 +29,11 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         # measure accuracy and record loss
         autoencoder.eval()
         losses.update(loss.item(), inputs.size(0))
-        print("loss.item()", loss.item())
         train_loss.append(loss.detach().cpu().numpy())
         
 
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
-          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, print(np.mean(train_loss))))
+          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, np.mean(train_loss)))
 
     if 'wandb' in sys.modules:
         wandb.log({
