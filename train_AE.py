@@ -30,7 +30,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         autoencoder.eval()
         losses.update(loss.detached.item(), inputs.size(0))
         print("loss.detached.item()", loss.detached.item())
-        train_loss.append(loss.detach().cpu().numpy())
+        train_loss.append(losses.detach().cpu().numpy())
         
 
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
