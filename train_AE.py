@@ -29,7 +29,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         # measure accuracy and record loss
         autoencoder.eval()
         losses.update(loss.item(), inputs.size(0))
-        print("loss.detached.item()", loss.detached.item())
+        print("loss.item()", loss.item())
         train_loss.append(loss.detach().cpu().numpy())
         
 
