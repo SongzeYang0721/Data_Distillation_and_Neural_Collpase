@@ -57,8 +57,6 @@ def trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, schedu
             if args.loss == 'CrossEntropy':
                 loss = criterion(outputs[0], targets)
             elif args.loss == 'MSE':
-                print("outputs[0]", outputs[0].shape)
-                print("nn.functional.one_hot(targets).type(torch.FloatTensor)", nn.functional.one_hot(targets).type(torch.FloatTensor).shape)
                 loss = criterion(outputs[0], nn.functional.one_hot(targets).type(torch.FloatTensor).to(args.device))
 
         optimizer.zero_grad()
