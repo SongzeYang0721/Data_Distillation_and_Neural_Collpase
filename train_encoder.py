@@ -14,7 +14,7 @@ def loss_compute(args, model, criterion, outputs, targets):
     if args.loss == 'CrossEntropy':
         loss = criterion(outputs[0], targets)
     elif args.loss == 'MSE':
-        loss = criterion(outputs[0], nn.functional.one_hot(targets).type(torch.FloatTensor).to(args.device))
+        loss = criterion(outputs[0], nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args.device))
 
     # Now decide whether to add weight decay on last weights and last features
     if args.sep_decay:
@@ -57,7 +57,7 @@ def trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, schedu
             if args.loss == 'CrossEntropy':
                 loss = criterion(outputs[0], targets)
             elif args.loss == 'MSE':
-                loss = criterion(outputs[0], nn.functional.one_hot(targets).type(torch.FloatTensor).to(args.device))
+                loss = criterion(outputs[0], nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args.device))
 
         optimizer.zero_grad()
         loss.backward()
@@ -108,7 +108,7 @@ def trainer_2nd(args, model, trainloader, epoch_id, criterion, optimizer):
             if args.loss == 'CrossEntropy':
                 loss = criterion(outputs[0], targets) + weight_decay(args, model)
             elif args.loss == 'MSE':
-                loss = criterion(outputs[0], nn.functional.one_hot(targets).type(torch.FloatTensor).to(args.device)) \
+                loss = criterion(outputs[0], nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args.device)) \
                        + weight_decay(args, model)
 
             optimizer.zero_grad()
@@ -126,7 +126,7 @@ def trainer_2nd(args, model, trainloader, epoch_id, criterion, optimizer):
         if args.loss == 'CrossEntropy':
             loss = criterion(outputs[0], targets) + weight_decay(args, model)
         elif args.loss == 'MSE':
-            loss = criterion(outputs[0], nn.functional.one_hot(targets).type(torch.FloatTensor).to(args.device)) \
+            loss = criterion(outputs[0], nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args.device)) \
                    + weight_decay(args, model)
 
         losses.update(loss.item(), inputs.size(0))
