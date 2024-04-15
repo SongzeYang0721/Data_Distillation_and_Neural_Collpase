@@ -92,11 +92,11 @@ class BasicBlock(nn.Module):
         identity = x
 
         out = self.deconv2(x)
-        out = self.bn2(out)
+        # out = self.bn2(out)
         out = self.relu(out)
 
         out = self.deconv1(out)
-        out = self.bn1(out)
+        # out = self.bn1(out)
 
         if self.upsample is not None:
             identity = self.upsample(x)
@@ -152,15 +152,15 @@ class Bottleneck(nn.Module):
         identity = x
 
         out = self.deconv3(x)
-        out = self.bn3(out)
+        # out = self.bn3(out)
         out = self.relu(out)
 
         out = self.deconv2(out)
-        out = self.bn2(out)
+        # out = self.bn2(out)
         out = self.relu(out)
 
         out = self.deconv1(out)
-        out = self.bn1(out)
+        # out = self.bn1(out)
 
         if self.upsample is not None:
             identity = self.upsample(x)
