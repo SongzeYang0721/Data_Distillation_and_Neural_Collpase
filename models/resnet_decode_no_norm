@@ -66,8 +66,8 @@ class BasicBlock(nn.Module):
         outdim: int = 0
     ) -> None:
         super(BasicBlock, self).__init__()
-        if norm_layer is None:
-            norm_layer = nn.BatchNorm2d
+        # if norm_layer is None:
+        #     norm_layer = nn.BatchNorm2d
         if groups != 1 or base_width != 64:
             raise ValueError('BasicBlock only supports groups=1 and base_width=64')
         if dilation > 1:
@@ -76,14 +76,14 @@ class BasicBlock(nn.Module):
         # Reverse of conv3x3
         # Both self.deconv1 and self.upsample layers upsample the input when stride != 1
         self.deconv1 = deconv3x3(planes, inplanes, stride, output_padding=output_padding)
-        self.bn1 = norm_layer(inplanes)
+        # self.bn1 = norm_layer(inplanes)
         self.relu = nn.ReLU(inplace=True)
 
         if outdim == 0:
             self.deconv2 = deconv3x3(planes, planes) # this will not change the height and width, only change channels
         else:
             self.deconv2 = deconv3x3(outdim, planes) # this will not change the height and width, only change channels
-        self.bn2 = norm_layer(planes)
+        # self.bn2 = norm_layer(planes)
         
         self.upsample = upsample
         self.stride = stride
@@ -125,25 +125,25 @@ class Bottleneck(nn.Module):
         outdim: int = 0
     ) -> None:
         super(Bottleneck, self).__init__()
-        if norm_layer is None:
-            norm_layer = nn.BatchNorm2d
+        # if norm_layer is None:
+        #     norm_layer = nn.BatchNorm2d
         width = int(planes * (base_width / 64.)) * groups
         # Both self.deconv2 and self.upsample layers upsample the input when stride != 1
 
         self.deconv1 = deconv1x1(width, inplanes) # this will not change the height and width, only change channels
-        self.bn1 = norm_layer(inplanes)
+        # self.bn1 = norm_layer(inplanes)
         self.deconv2 = deconv3x3(width, width, 
                                  stride = stride, 
                                  groups = groups, 
                                  dilation = dilation, 
                                  output_padding=output_padding)
-        self.bn2 = norm_layer(width)
+        # self.bn2 = norm_layer(width)
 
         if outdim == 0:
             self.deconv3 = deconv1x1(planes*self.expansion, width) # this will not change the height and width, only change channels
         else:
             self.deconv3 = deconv1x1(outdim, width) # this will not change the height and width, only change channels
-        self.bn3 = norm_layer(width)
+        # self.bn3 = norm_layer(width)
         self.relu = nn.ReLU(inplace=True)
         self.upsample = upsample
         self.stride = stride
@@ -187,9 +187,9 @@ class ResNet(nn.Module):
         SOTA: bool = False,
     ) -> None:
         super(ResNet, self).__init__()
-        if norm_layer is None:
-            norm_layer = nn.BatchNorm2d
-        self._norm_layer = norm_layer
+        # if norm_layer is None:
+        #     norm_layer = nn.BatchNorm2d
+        # self._norm_layer = norm_layer
 
         self.inplanes = 64
         self.dilation = 1
@@ -209,7 +209,7 @@ class ResNet(nn.Module):
         else:
             self.deconv1 = nn.ConvTranspose2d(self.inplanes, 3, kernel_size=7, stride=2, padding=3, output_padding=1, 
                                               bias=False) # o = 30 + a + 1, output_padding a = 1
-        self.bn1 = norm_layer(3)
+        # self.bn1 = norm_layer(3)
         self.relu = nn.ReLU(inplace=True)
 
         self.unmaxpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) # o = 14 + a +1, output_padding = 1
@@ -265,7 +265,7 @@ class ResNet(nn.Module):
                     dilate: bool = False, 
                     outdim: int = 0,
                     ) -> nn.Sequential:
-        norm_layer = self._norm_layer
+        # norm_layer = self._norm_layer
         upsample = None
         previous_dilation = self.dilation
         if dilate:
@@ -274,7 +274,7 @@ class ResNet(nn.Module):
         if stride != 1 or self.inplanes != planes * block.expansion:
             upsample = nn.Sequential(
                 deconv1x1(planes * block.expansion, self.inplanes, stride, output_padding),
-                norm_layer(self.inplanes),
+                # norm_layer(self.inplanes),
             )
     
         layers = []
@@ -285,8 +285,9 @@ class ResNet(nn.Module):
                             upsample = upsample, 
                             groups = self.groups,
                             base_width = self.base_width, 
-                            dilation = previous_dilation, 
-                            norm_layer = norm_layer)
+                            # norm_layer = norm_layer,
+                            dilation = previous_dilation
+                            )
 
         self.inplanes = planes * block.expansion
         # print("self.inplanes = planes * block.expansion, self.inplanes", self.inplanes)
@@ -294,13 +295,13 @@ class ResNet(nn.Module):
         if outdim != 0:
             upsample = nn.Sequential(
                 deconv1x1(outdim, self.inplanes),
-                norm_layer(self.inplanes)
+                # norm_layer(self.inplanes)
             )
         layers.append(block(self.inplanes, planes, 
                             groups=self.groups,
                             base_width=self.base_width, 
                             dilation=self.dilation,
-                            norm_layer=norm_layer, 
+                            # norm_layer=norm_layer, 
                             upsample=upsample, 
                             outdim=outdim))
         
@@ -308,8 +309,9 @@ class ResNet(nn.Module):
             layers.append(block(self.inplanes, planes,
                                 groups=self.groups,
                                 base_width=self.base_width, 
-                                dilation=self.dilation,
-                                norm_layer=norm_layer))
+                                # norm_layer=norm_layer,
+                                dilation=self.dilation
+                                ))
 
         layers.append(lastlayer)
         
