@@ -339,7 +339,7 @@ class ResNet(nn.Module):
 
         x = self.deconv1(x)
         # print("x = self.deconv1(x)", x.shape)
-        x = self.bn1(x)
+        # x = self.bn1(x)
         x = self.relu(x)
         
         return x
