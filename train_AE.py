@@ -7,7 +7,6 @@ import numpy as np
 def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None):
 
     losses = AverageMeter()
-    train_loss = []
 
     if args.optimizer == 'LBFGS':
         print('\nTraining Epoch: [%d | %d]' % (epoch_id + 1, args.epochs))
@@ -29,11 +28,10 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         # measure accuracy and record loss
         autoencoder.eval()
         losses.update(loss.item(), inputs.size(0))
-        train_loss.append(loss.detach().cpu().numpy())
         
 
-    print('[epoch: %d] (%d/%d) | Loss: %.4f | Train_loss: %.4f |' %
-          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, np.mean(train_loss)))
+    print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
+          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg))
 
     if 'wandb' in sys.modules:
         wandb.log({
