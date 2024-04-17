@@ -316,27 +316,19 @@ class ResNet(nn.Module):
         return nn.Sequential(*layers)
 
     def _forward_impl(self, x: Tensor):
-        # print("x", x.shape)
-        x = x.view(x.shape[0], x.shape[1], 1, 1)
-        # print("x = x.view(x.shape[0], x.shape[1], 1, 1)", x.shape)
-        x = self.unavgpool(x)
-        # print("x = self.unavgpool(x)", x.shape)
+
+        # x = x.view(x.shape[0], x.shape[1], 1, 1)
+        # x = self.unavgpool(x)
+
         x = self.layer4(x)
-        # print("x = self.layer4(x)", x.shape)
         x = self.layer3(x)
-        # print("x = self.layer3(x)", x.shape)
         x = self.layer2(x)
-        # print("x = self.layer2(x)", x.shape)
         x = self.layer1(x)
-        # print("x = self.layer1(x)", x.shape)
 
         if not self.SOTA:
             x = self.unmaxpool(x)
-            # print("x = self.unmaxpool(x)", x.shape)
-
 
         x = self.deconv1(x)
-        # print("x = self.deconv1(x)", x.shape)
         x = self.bn1(x)
         x = self.relu(x)
         
