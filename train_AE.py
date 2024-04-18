@@ -1,10 +1,9 @@
 import sys
 import wandb
 from utils import *
+import matplotlib.pyplot as plt
 
-import numpy as np
-
-def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None):
+def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None, visualize = False):
 
     losses = AverageMeter()
 
@@ -12,6 +11,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         print('\nTraining Epoch: [%d | %d]' % (epoch_id + 1, args.epochs))
     else:
         print('\nTraining Epoch: [%d | %d] LR: %f' % (epoch_id + 1, args.epochs, scheduler.get_last_lr()[-1]))
+
     for batch_idx, (inputs, targets) in enumerate(trainloader):
 
         inputs, targets = inputs.to(args.device), targets.to(args.device)
@@ -28,6 +28,26 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         # measure accuracy and record loss
         autoencoder.eval()
         losses.update(loss.item(), inputs.size(0))
+    
+    if visualize:
+        fig, axs = plt.subplots(2, 1, figsize=(5, 10))
+        with torch.no_grad():
+            # Clear current axes
+            axs[0].clear()
+            axs[1].clear()
+            
+            # Display original and reconstructed images
+            axs[0].imshow(inputs[0].cpu().view(28, 28).numpy(), cmap='gray')
+            axs[0].set_title("Original")
+            axs[0].axis('off')
+            
+            axs[1].imshow(outputs[0].cpu().view(28, 28).numpy(), cmap='gray')
+            axs[1].set_title("Reconstructed")
+            axs[1].axis('off')
+            
+            # Draw the updated plot
+            plt.draw()
+            plt.pause(0.001)  # Pause briefly to update plots
         
 
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
@@ -42,7 +62,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
     if args.optimizer != 'LBFGS':
         scheduler.step()
 
-def AE_train(args, model, trainloader):
+def AE_train(args, model, trainloader, viz):
     criterion = make_criterion(args)
     optimizer = make_optimizer(args, model)
     scheduler = make_scheduler(args, optimizer)
@@ -51,5 +71,5 @@ def AE_train(args, model, trainloader):
     print('--------------------- Training -------------------------------')
     for epoch_id in range(args.epochs):
 
-        AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler)
+        AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, viz)
         torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")

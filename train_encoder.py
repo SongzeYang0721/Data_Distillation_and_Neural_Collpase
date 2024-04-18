@@ -182,7 +182,7 @@ def main():
             model = ResNet18_adapt(width = args.width, num_classes=num_classes, fc_bias=args.bias).to(device)
         else:
             model = models.__dict__[args.model](num_classes=num_classes, fc_bias=args.bias, ETF_fc=args.ETF_fc, fixdim=args.fixdim, SOTA=args.SOTA).to(device)
-
+    
     train(args, model, trainloader)
 
 

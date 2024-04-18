@@ -80,33 +80,36 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
     return mu_G, mu_c_dict, top1.avg, top5.avg
 
 
-def compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloader):
-    top1_train = AverageMeter()
-    top5_train = AverageMeter()
+def compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloader, ontest = False):
+    
+    if not ontest:
+        top1_train = AverageMeter()
+        top5_train = AverageMeter()
     top1_test = AverageMeter()
     top5_test = AverageMeter()
     device = H.device
 
-    for batch_idx, (inputs, targets) in enumerate(trainloader):
+    if not ontest:
+        for batch_idx, (inputs, targets) in enumerate(trainloader):
 
-        inputs, targets = inputs.to(args.device), targets.to(args.device)
+            inputs, targets = inputs.to(args.device), targets.to(args.device)
 
-        with torch.no_grad():
-            outputs = model(inputs)
+            with torch.no_grad():
+                outputs = model(inputs)
 
-        features = fc_features.outputs[0][0]
-        features = features.to(device)
-        fc_features.clear()
+            features = fc_features.outputs[0][0]
+            features = features.to(device)
+            fc_features.clear()
 
-        features_exp = torch.unsqueeze(features, dim=1) 
-        H_exp = torch.unsqueeze(H, dim=0)
+            features_exp = torch.unsqueeze(features, dim=1) 
+            H_exp = torch.unsqueeze(H, dim=0)
 
-        # Compute squared differences, sum over features (axis=2), and take square root
-        distances = torch.sqrt(torch.sum((features_exp - H_exp) ** 2, dim=2))
+            # Compute squared differences, sum over features (axis=2), and take square root
+            distances = torch.sqrt(torch.sum((features_exp - H_exp) ** 2, dim=2))
 
-        prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, 5), is_distance=True)
-        top1_train.update(prec1.item(), inputs.size(0))
-        top5_train.update(prec5.item(), inputs.size(0))
+            prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, 5), is_distance=True)
+            top1_train.update(prec1.item(), inputs.size(0))
+            top5_train.update(prec5.item(), inputs.size(0))
 
     for batch_idx, (inputs, targets) in enumerate(testloader):
 
@@ -129,7 +132,10 @@ def compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloade
         top1_test.update(prec1.item(), inputs.size(0))
         top5_test.update(prec5.item(), inputs.size(0))
 
-    return top1_train.avg, top5_train.avg, top1_test.avg, top5_test.avg
+    if not ontest:
+        return top1_train.avg, top5_train.avg, top1_test.avg, top5_test.avg
+    else:
+        return top1_test.avg, top5_test.avg
 
 
 def compute_Sigma_W(args, model, fc_features, mu_c_dict, dataloader, isTrain=True):
@@ -206,7 +212,7 @@ def compute_Wh_b_relation(W, mu_G, b):
     return res_b.detach().cpu().numpy().item()
 
 
-def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = False):
+def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = False,ontest = False):
     
     args.load_path = load_path
 
@@ -224,7 +230,7 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
             'b': [],
             'H': [],
             'mu_G_train': [],
-            # 'mu_G_test': [],
+            'mu_G_test': [],
             'train_acc1': [],
             'train_acc5': [],
             'test_acc1': [],
@@ -257,6 +263,8 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
         collapse_metric = np.trace(Sigma_W @ scilin.pinv(Sigma_B)) / len(mu_c_dict_train)
         ETF_metric = compute_ETF(W)
         WH_relation_metric, H = compute_W_H_relation(W, mu_c_dict_train, mu_G_train)
+        if ontest:
+            _, H_test = compute_W_H_relation(W, mu_c_dict_test, mu_G_test)
         if args.bias:
             Wh_b_relation_metric = compute_Wh_b_relation(W, mu_G_train, b)
         else:
@@ -264,6 +272,8 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
 
         if nearest_neighbor:
             near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5 = compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloader)
+            if ontest:
+                near_test_acc1_ontest, near_test_acc5_ontest = compute_nearest_neighbor(args, model, fc_features, H_test, trainloader, testloader, ontest= True)
         
         info_dict['collapse_metric'].append(collapse_metric)
         info_dict['ETF_metric'].append(ETF_metric)
@@ -276,7 +286,7 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
         info_dict['H'].append(H.detach().cpu().numpy())
 
         info_dict['mu_G_train'].append(mu_G_train.detach().cpu().numpy())
-        # info_dict['mu_G_test'].append(mu_G_test.detach().cpu().numpy())
+        info_dict['mu_G_test'].append(mu_G_test.detach().cpu().numpy())
 
         info_dict['train_acc1'].append(train_acc1)
         info_dict['train_acc5'].append(train_acc5)
@@ -289,9 +299,12 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
 
         print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f ' %
                         (i + 1, train_acc1, train_acc5, test_acc1, test_acc5))
-        
-        print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f ' %
-                        (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5),"(nearest neighbor accuracy)")
+        if not ontest:
+            print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f ' %
+                            (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5),"(nearest neighbor accuracy)")
+        else:
+            print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f | Test ETF test top1: %.4f | Test ETF test top5: %.4f ' %
+                            (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5, near_test_acc1_ontest, near_test_acc5_ontest),"(nearest neighbor accuracy)")
 
         if 'wandb' in sys.modules:
             wandb.log({
@@ -306,7 +319,9 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
                         "nearest neighbor: train_acc1":near_train_acc1, 
                         "nearest neighbor: train_acc5":near_train_acc5,
                         "nearest neighbor: test_acc1":near_test_acc1,
-                        "nearest neighbor: test_acc5":near_test_acc5
+                        "nearest neighbor: test_acc5":near_test_acc5,
+                        "nearest neighbor (Test ETF): test_acc1":near_test_acc1_ontest,
+                        "nearest neighbor (Test ETF): test_acc5":near_test_acc5_ontest
                         })
             
     with open(args.load_path + 'info.pkl', 'wb') as f:
