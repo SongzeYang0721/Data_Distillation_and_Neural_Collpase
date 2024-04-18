@@ -30,6 +30,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         losses.update(loss.item(), inputs.size(0))
     
     if visualize:
+        _, height, width = inputs[0].shape
         fig, axs = plt.subplots(2, 1, figsize=(5, 10))
         with torch.no_grad():
             # Clear current axes
@@ -37,11 +38,11 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
             axs[1].clear()
             
             # Display original and reconstructed images
-            axs[0].imshow(inputs[0].cpu().view(28, 28).numpy(), cmap='gray')
+            axs[0].imshow(inputs[0].cpu().view(height,width).numpy(), cmap='gray')
             axs[0].set_title("Original")
             axs[0].axis('off')
             
-            axs[1].imshow(outputs[0].cpu().view(28, 28).numpy(), cmap='gray')
+            axs[1].imshow(outputs[0].cpu().view(height,width).numpy(), cmap='gray')
             axs[1].set_title("Reconstructed")
             axs[1].axis('off')
             
@@ -62,7 +63,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
     if args.optimizer != 'LBFGS':
         scheduler.step()
 
-def AE_train(args, model, trainloader, viz):
+def AE_train(args, model, trainloader, visualize = False):
     criterion = make_criterion(args)
     optimizer = make_optimizer(args, model)
     scheduler = make_scheduler(args, optimizer)
@@ -71,5 +72,5 @@ def AE_train(args, model, trainloader, viz):
     print('--------------------- Training -------------------------------')
     for epoch_id in range(args.epochs):
 
-        AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, viz)
+        AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, visualize = visualize)
         torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")
