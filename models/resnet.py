@@ -285,14 +285,14 @@ class ResNet(nn.Module):
         x = self.layer3(x)
         x = self.layer4(x)
 
-        # return x
+        return x
         
-        x = self.avgpool(x)
-        x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
-        features = F.normalize(x) # normalized H ready to feed to the linear layer
-        x = self.fc(x)
+        # x = self.avgpool(x)
+        # x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
+        # features = F.normalize(x) # normalized H ready to feed to the linear layer
+        # x = self.fc(x)
 
-        return x, features
+        # return x, features
 
     def forward(self, x: Tensor):
         return self._forward_impl(x)
