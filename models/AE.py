@@ -7,8 +7,8 @@ class Autoencoder(nn.Module):
         self.decoder = decoder
 
     def forward(self, x):
-        features = self.encoder(x)
-        # _, features = self.encoder(x)
+        # features = self.encoder(x)
+        _, features = self.encoder(x)
         decoded = self.decoder(features)
         return decoded
 
