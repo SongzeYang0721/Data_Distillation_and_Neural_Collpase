@@ -38,11 +38,11 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
             axs[1].clear()
             
             # Display original and reconstructed images
-            axs[0].imshow(inputs[0].cpu().view(channels,height,width).numpy(), cmap='gray')
+            axs[0].imshow(inputs[0].cpu().view(channels,height,width).numpy())
             axs[0].set_title("Original")
             axs[0].axis('off')
             
-            axs[1].imshow(outputs[0].cpu().view(channels,height,width).numpy(), cmap='gray')
+            axs[1].imshow(outputs[0].cpu().view(channels,height,width).numpy())
             axs[1].set_title("Reconstructed")
             axs[1].axis('off')
             
