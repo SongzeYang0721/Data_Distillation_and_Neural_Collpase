@@ -2,7 +2,7 @@ import sys
 import wandb
 from utils import *
 import matplotlib.pyplot as plt
-from Visualization import visualize_autoencoder_results
+from Visualization import *
 
 def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None, visualize = False):
 
@@ -12,6 +12,9 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         print('\nTraining Epoch: [%d | %d]' % (epoch_id + 1, args.epochs))
     else:
         print('\nTraining Epoch: [%d | %d] LR: %f' % (epoch_id + 1, args.epochs, scheduler.get_last_lr()[-1]))
+    
+    if visualize:
+        indices = random_sample_images_index(trainloader)
 
     for batch_idx, (inputs, targets) in enumerate(trainloader):
 
@@ -43,12 +46,13 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         scheduler.step()
     
     # Visualization check
-    if visualize and epoch_id % 10 == 0:  # Optionally visualize every 10 epochs
+    if visualize:  # Optionally visualize every 10 epochs
+        inputs, labels = images_from_index(trainloader.dataset, indices)
         with torch.no_grad():
             # Taking a subset for visualization
-            sample_inputs = inputs[:5]  # Assuming batch size is at least 5
-            sample_outputs = autoencoder(sample_inputs)
-            visualize_autoencoder_results(sample_inputs, sample_outputs)
+            outputs = autoencoder(inputs)
+            visualize_images(inputs,labels)
+            visualize_images(outputs,labels)
 
 def AE_train(args, model, trainloader, visualize = False):
     criterion = make_criterion(args)

@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import random
+import torch
 
 def imshow(img, ax, source="cifar10"):
     """ Function to show a torch image on a given Matplotlib axis. """
@@ -19,33 +20,46 @@ def imshow(img, ax, source="cifar10"):
     ax.imshow(img)
     ax.axis('off')  # Hide axis
 
-def visualize_image(image, label, source="cifar10"):
-    fig, ax = plt.subplots()  # Create a new figure and an axes.
-    ax.set_title(f'Label: {label}')
-    imshow(image, ax, source=source)  # Pass ax to imshow
-    plt.show()
-    
+def random_sample_images_index(dataloader,num_images = 10,seed = 512):
+    dataset = dataloader.dataset
+    random.seed(seed)
+    index = random.sample(range(0,len(dataset)-1), num_images)
+    return index
 
-def visualize_autoencoder_results(original_images, reconstructed_images, num_images=5):
-    fig, axes = plt.subplots(2, num_images, figsize=(10, 2))  # Create a subplot with 2 rows and num_images columns
-    for i in range(num_images):
-        # Display original images
-        ax = axes[0, i]
-        img = original_images[i].detach().cpu().numpy().transpose((1, 2, 0))
-        img = np.clip(img, 0, 1)  # Ensure the pixel values are valid
-        ax.imshow(img)
-        ax.set_title("Original")
-        ax.axis('off')
-
-        # Display reconstructed images
-        ax = axes[1, i]
-        img = reconstructed_images[i].detach().cpu().numpy().transpose((1, 2, 0))
-        img = np.clip(img, 0, 1)  # Ensure the pixel values are valid
-        ax.imshow(img)
-        ax.set_title("Reconstructed")
-        ax.axis('off')
+def images_from_index(dataset, indices):
+    images = []
+    labels = []
+    for idx in indices:
+        image, label = dataset[idx]
+        images.append(image)
+        labels.append(label)
     
-    plt.tight_layout()
+    # Stack all images and labels into single tensors
+    images = torch.stack(images)
+    labels = torch.tensor(labels)
+    
+    return images, labels
+
+def random_sample_images(dataloader, num_images=10, seed=512):
+    random.seed(seed)
+    dataset = dataloader.dataset
+    indices = random.sample(range(len(dataset)), num_images)
+    return images_from_index(dataset, indices)
+
+def visualize_images(images, labels, source="cifar10"):
+    num_images = len(images)
+    fig, axes = plt.subplots(1, num_images, figsize=(num_images * 2, 2))  # Create a row of subplots
+
+    # In case there's only one image, `axes` will not be an array but a single object
+    if num_images == 1:
+        axes = [axes]
+
+    for ax, img, lbl in zip(axes, images, labels):
+        imshow(img, ax, source=source)  # Pass ax to imshow
+        ax.set_title(f'Label: {lbl}')
+        ax.axis('off')  # Hide axis
+
+    plt.tight_layout()  # Adjust subplots to fit in the figure area
     plt.show()
 
 def visualize_image_loader(dataloader, index=0, source="cifar10"):
@@ -58,10 +72,11 @@ def visualize_image_loader(dataloader, index=0, source="cifar10"):
 
     fig, ax = plt.subplots()  # Create a new figure and an axes.
     ax.set_title(f'Label: {label}')
+    # ax.set_title("Original")
     imshow(image, ax, source=source)  # Pass ax to imshow
     plt.show()
 
-def visualize_images_loader(dataloader, num_classes=10, seed=512, source="cifar10"):
+def visualize_images_per_class_loader(dataloader, num_classes=10, seed=512, source="cifar10"):
     dataset = dataloader.dataset
     class_indices = {i: [] for i in range(num_classes)}
 
@@ -80,5 +95,32 @@ def visualize_images_loader(dataloader, num_classes=10, seed=512, source="cifar1
         imshow(img, ax, source=source)
         ax.set_title(f'Label: {label}')
 
+    plt.tight_layout()
+    plt.show()
+
+def visualize_autoencoder_results(dataloader, device, num_images=5, seed = 512):
+    fig, axes = plt.subplots(2, num_images, figsize=(10, 2))  # Create a subplot with 2 rows and num_images columns
+    dataset = dataloader.dataset
+    random.seed(seed)
+    index = random.sample(range(0,len(dataset)-1), num_images)
+    
+    inputs = torch.stack([dataset[i][0] for i in index]).to(device)
+    for i in range(num_images):
+        # Display original images
+        ax = axes[0, i]
+        img = original_images[i].detach().cpu().numpy().transpose((1, 2, 0))
+        img = np.clip(img, 0, 1)  # Ensure the pixel values are valid
+        ax.imshow(img)
+        ax.set_title("Original")
+        ax.axis('off')
+
+        # Display reconstructed images
+        ax = axes[1, i]
+        img = reconstructed_images[i].detach().cpu().numpy().transpose((1, 2, 0))
+        img = np.clip(img, 0, 1)  # Ensure the pixel values are valid
+        ax.imshow(img)
+        ax.set_title("Reconstructed")
+        ax.axis('off')
+    
     plt.tight_layout()
     plt.show()
