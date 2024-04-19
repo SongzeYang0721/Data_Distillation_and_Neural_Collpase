@@ -2,6 +2,7 @@ import sys
 import wandb
 from utils import *
 import matplotlib.pyplot as plt
+from Visualization import visualize_autoencoder_results
 
 def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None, visualize = False):
 
@@ -29,28 +30,6 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         autoencoder.eval()
         losses.update(loss.item(), inputs.size(0))
     
-    if visualize:
-        channels, height, width = inputs[0].shape
-        fig, axs = plt.subplots(2, 1, figsize=(5, 10))
-        with torch.no_grad():
-            # Clear current axes
-            axs[0].clear()
-            axs[1].clear()
-            
-            # Display original and reconstructed images
-            axs[0].imshow(inputs[0].cpu().view(height,width,channels).numpy())
-            axs[0].set_title("Original")
-            axs[0].axis('off')
-            
-            axs[1].imshow(outputs[0].cpu().view(height,width,channels).numpy())
-            axs[1].set_title("Reconstructed")
-            axs[1].axis('off')
-            
-            # Draw the updated plot
-            plt.draw()
-            plt.pause(0.001)  # Pause briefly to update plots
-        
-
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
           (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg))
 
@@ -60,8 +39,16 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
             "LR":scheduler.get_last_lr()[-1]
         })
 
-    if args.optimizer != 'LBFGS':
+    if args.optimizer != 'LBFGS' and scheduler:
         scheduler.step()
+    
+    # Visualization check
+    if visualize and epoch_id % 10 == 0:  # Optionally visualize every 10 epochs
+        with torch.no_grad():
+            # Taking a subset for visualization
+            sample_inputs = inputs[:5]  # Assuming batch size is at least 5
+            sample_outputs = autoencoder(sample_inputs)
+            visualize_autoencoder_results(sample_inputs, sample_outputs)
 
 def AE_train(args, model, trainloader, visualize = False):
     criterion = make_criterion(args)
@@ -74,3 +61,25 @@ def AE_train(args, model, trainloader, visualize = False):
 
         AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, visualize = visualize)
         torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")
+
+
+#  if visualize:
+#         channels, height, width = inputs[0].shape
+#         fig, axs = plt.subplots(2, 1, figsize=(5, 10))
+#         with torch.no_grad():
+#             # Clear current axes
+#             axs[0].clear()
+#             axs[1].clear()
+            
+#             # Display original and reconstructed images
+#             axs[0].imshow(inputs[0].cpu().view(height,width,channels).numpy())
+#             axs[0].set_title("Original")
+#             axs[0].axis('off')
+            
+#             axs[1].imshow(outputs[0].cpu().view(height,width,channels).numpy())
+#             axs[1].set_title("Reconstructed")
+#             axs[1].axis('off')
+            
+#             # Draw the updated plot
+#             plt.draw()
+#             plt.pause(0.001)  # Pause briefly to update plots
