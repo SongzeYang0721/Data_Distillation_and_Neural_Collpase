@@ -48,6 +48,8 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
     # Visualization check
     if visualize:  # Optionally visualize every 10 epochs
         inputs, labels = images_from_index(trainloader.dataset, indices)
+        inputs, labels = inputs.to(args.device), labels.to(args.device)
+        inputs
         with torch.no_grad():
             # Taking a subset for visualization
             outputs = autoencoder(inputs)
