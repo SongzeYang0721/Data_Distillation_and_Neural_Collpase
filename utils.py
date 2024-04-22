@@ -72,7 +72,7 @@ def make_scheduler(args, my_optimizer):
 
 def make_criterion(args):
     if args.loss == 'CrossEntropy':
-        criterion = nn.CrossEntropyLoss()
+        criterion = nn.functional.binary_cross_entropy()
     elif args.loss == 'MSE':
         criterion = nn.MSELoss()
     return criterion
