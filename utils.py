@@ -6,6 +6,7 @@ import torch.nn as nn
 import torch.optim as optim
 import torch.optim.lr_scheduler as lrs
 
+
 def set_seed(manualSeed=666):
     random.seed(manualSeed)
     np.random.seed(manualSeed)
@@ -15,6 +16,7 @@ def set_seed(manualSeed=666):
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
     os.environ['PYTHONHASHSEED'] = str(manualSeed)
+
 
 def make_optimizer(args, my_model):
     trainable = filter(lambda x: x.requires_grad, my_model.parameters())
@@ -73,7 +75,14 @@ def make_criterion(args):
         criterion = nn.CrossEntropyLoss()
     elif args.loss == 'MSE':
         criterion = nn.MSELoss()
+    return criterion
 
+
+def make_criterion_AE(args):
+    if args.loss == 'CrossEntropy':
+        criterion = nn.CrossEntropyLoss(reduction='sum')
+    elif args.loss == 'MSE':
+        criterion = nn.MSELoss(reduction='sum')
     return criterion
 
 

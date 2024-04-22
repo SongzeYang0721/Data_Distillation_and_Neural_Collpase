@@ -211,6 +211,7 @@ class ResNet(nn.Module):
                                               bias=False) # o = 30 + a + 1, output_padding a = 1
         self.bn1 = norm_layer(3)
         self.relu = nn.ReLU(inplace=True)
+        self.sigmoid = nn.Sigmoid()
 
         self.unmaxpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) # o = 14 + a +1, output_padding = 1
 
@@ -330,7 +331,7 @@ class ResNet(nn.Module):
 
         x = self.deconv1(x)
         x = self.bn1(x)
-        x = self.relu(x)
+        x = self.sigmoid(x)
         
         return x
     

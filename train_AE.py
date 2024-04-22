@@ -55,11 +55,10 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
             visualize_images(inputs.cpu(),labels.cpu())
             visualize_images(outputs.cpu(),labels.cpu())
 
+
 def AE_train(args, model, trainloader, visualize = False):
-    if args.loss == 'CrossEntropy':
-        criterion = nn.CrossEntropyLoss(size_average=False)
-    elif args.loss == 'MSE':
-        criterion = nn.MSELoss(size_average=False)
+    
+    criterion = make_criterion(args)
     optimizer = make_optimizer(args, model)
     scheduler = make_scheduler(args, optimizer)
 
