@@ -33,17 +33,17 @@ def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=
                 transforms.RandomHorizontalFlip(p=0.5),
 
                 transforms.ToTensor(),
-                transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
+                # transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
                 ]))
         else:
             trainset = CIFAR10(root=data_dir, train=True, download=True, transform=transforms.Compose([
                 transforms.ToTensor(),
-                transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
+                # transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
             ]))
 
         testset = CIFAR10(root=data_dir, train=False, download=True, transform=transforms.Compose([
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
+            # transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
             ]))
         num_classes = 10
     elif dataset_name == 'mnist':
@@ -52,26 +52,26 @@ def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=
             transforms.Grayscale(3),
             transforms.Resize(32),
             transforms.ToTensor(),
-            transforms.Normalize((0.1307,), (0.3081,))
+            # transforms.Normalize((0.1307,), (0.3081,))
             ]))
 
         testset = MNIST(root=data_dir, train=False, download=True, transform=transforms.Compose([
             transforms.Grayscale(3),
             transforms.Resize(32),
             transforms.ToTensor(),
-            transforms.Normalize((0.1307,), (0.3081,))
+            # transforms.Normalize((0.1307,), (0.3081,))
             ]))
         num_classes = 10
     elif dataset_name == 'cifar10_random':
         print('Dataset: CIFAR10 with random label.')
         trainset = CIFAR10RandomLabels(root=data_dir, train=True, download=True, transform=transforms.Compose([
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
             ]))
 
         testset = CIFAR10RandomLabels(root=data_dir, train=False, download=True, transform=transforms.Compose([
             transforms.ToTensor(),
-            transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
             ]))
         num_classes = 10
     else:

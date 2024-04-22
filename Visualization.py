@@ -3,19 +3,20 @@ import numpy as np
 import random
 import torch
 
-def imshow(img, ax, source="cifar10"):
+def imshow(img, ax, normalize_data = False, source="cifar10"):
     """ Function to show a torch image on a given Matplotlib axis. """
     img = img.numpy().transpose((1, 2, 0))  # Convert from PyTorch to numpy format
-    if source == "cifar10":
-        mean = np.array([0.4914, 0.4822, 0.4465])
-        std = np.array([0.2023, 0.1994, 0.2010])
-    elif source == "mnist":
-        mean = np.array([0.1307])
-        std = np.array([0.3081])
-    else:
-        raise ValueError("Unsupported dataset specified")
+    if normalize_data:
+        if source == "cifar10":
+            mean = np.array([0.4914, 0.4822, 0.4465])
+            std = np.array([0.2023, 0.1994, 0.2010])
+        elif source == "mnist":
+            mean = np.array([0.1307])
+            std = np.array([0.3081])
+        else:
+            raise ValueError("Unsupported dataset specified")
 
-    img = img * std + mean  # Denormalize
+        img = img * std + mean  # Denormalize
     img = np.clip(img, 0, 1)  # Clip values to ensure they're between 0 and 1
     ax.imshow(img)
     ax.axis('off')  # Hide axis
