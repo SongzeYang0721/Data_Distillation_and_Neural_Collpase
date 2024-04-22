@@ -23,7 +23,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         autoencoder.train()
         outputs = autoencoder(inputs)
         
-        loss = criterion(outputs, inputs, size_average=False).to(args.device)
+        loss = criterion(outputs, inputs).to(args.device)
 
         optimizer.zero_grad()
         loss.backward()
@@ -56,7 +56,10 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
             visualize_images(outputs.cpu(),labels.cpu())
 
 def AE_train(args, model, trainloader, visualize = False):
-    criterion = make_criterion(args)
+    if args.loss == 'CrossEntropy':
+        criterion = nn.CrossEntropyLoss(size_average=False)
+    elif args.loss == 'MSE':
+        criterion = nn.MSELoss(size_average=False)
     optimizer = make_optimizer(args, model)
     scheduler = make_scheduler(args, optimizer)
 
