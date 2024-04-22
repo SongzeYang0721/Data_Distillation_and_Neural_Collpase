@@ -23,7 +23,8 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         autoencoder.train()
         outputs = autoencoder(inputs)
         
-        loss = criterion(outputs, inputs).to(args.device)
+        # loss = criterion(outputs, inputs).to(args.device)
+        loss = nn.functional.binary_cross_entropy(outputs, inputs).to(args.device)
 
         optimizer.zero_grad()
         loss.backward()
