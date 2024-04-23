@@ -80,9 +80,9 @@ def make_criterion(args):
 
 def make_criterion_AE(args):
     if args.loss == 'CrossEntropy':
-        criterion = nn.CrossEntropyLoss(reduction='mean')
+        criterion = nn.CrossEntropyLoss(reduction='sum')
     elif args.loss == 'MSE':
-        criterion = nn.MSELoss(reduction='mean')
+        criterion = nn.MSELoss(reduction='sum')
     return criterion
 
 
