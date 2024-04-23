@@ -330,7 +330,7 @@ class ResNet(nn.Module):
             x = self.unmaxpool(x)
 
         x = self.deconv1(x)
-        x = self.bn1(x)
+        # x = self.bn1(x)
         # x = self.relu(x)
         
         return x
