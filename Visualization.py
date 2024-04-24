@@ -47,7 +47,7 @@ def random_sample_images(dataloader, num_images=10, seed=512):
     indices = random.sample(range(len(dataset)), num_images)
     return images_from_index(dataset, indices)
 
-def visualize_images(images, labels, source="cifar10"):
+def visualize_images(images, labels, normalize_data = False, source="cifar10"):
     num_images = len(images)
     fig, axes = plt.subplots(1, num_images, figsize=(num_images * 2, 2))  # Create a row of subplots
 
@@ -56,14 +56,14 @@ def visualize_images(images, labels, source="cifar10"):
         axes = [axes]
 
     for ax, img, lbl in zip(axes, images, labels):
-        imshow(img, ax, source=source)  # Pass ax to imshow
+        imshow(img, ax, normalize_data, source=source)  # Pass ax to imshow
         ax.set_title(f'Label: {lbl}')
         ax.axis('off')  # Hide axis
 
     plt.tight_layout()  # Adjust subplots to fit in the figure area
     plt.show()
 
-def visualize_image_loader(dataloader, index=0, source="cifar10"):
+def visualize_image_loader(dataloader, index=0, normalize_data = False, source="cifar10"):
     dataset = dataloader.dataset
     if index >= len(dataset) or index < 0:
         print(f"\nIndex out of bound, please pick another index in range (0, {len(dataset)-1})")
@@ -74,10 +74,10 @@ def visualize_image_loader(dataloader, index=0, source="cifar10"):
     fig, ax = plt.subplots()  # Create a new figure and an axes.
     ax.set_title(f'Label: {label}')
     # ax.set_title("Original")
-    imshow(image, ax, source=source)  # Pass ax to imshow
+    imshow(image, ax, normalize_data, source=source)  # Pass ax to imshow
     plt.show()
 
-def visualize_images_per_class_loader(dataloader, num_classes=10, seed=512, source="cifar10"):
+def visualize_images_per_class_loader(dataloader, num_classes=10, seed=512, normalize_data = False, source="cifar10"):
     dataset = dataloader.dataset
     class_indices = {i: [] for i in range(num_classes)}
 
@@ -93,7 +93,7 @@ def visualize_images_per_class_loader(dataloader, num_classes=10, seed=512, sour
 
     fig, axes = plt.subplots(1, num_classes, figsize=(num_classes * 2, 3))
     for ax, img, label in zip(axes, ranked_images, ranked_labels):
-        imshow(img, ax, source=source)
+        imshow(img, ax, normalize_data, source=source)
         ax.set_title(f'Label: {label}')
 
     plt.tight_layout()
