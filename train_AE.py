@@ -53,8 +53,8 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         with torch.no_grad():
             # Taking a subset for visualization
             outputs = autoencoder(inputs)
-            visualize_images(inputs.cpu(),labels.cpu(), True)
-            visualize_images(outputs.cpu(),labels.cpu(), True)
+            visualize_images(inputs.cpu(),labels.cpu(), False)
+            visualize_images(outputs.cpu(),labels.cpu(), False)
 
 
 def AE_train(args, model, trainloader, visualize = False):
