@@ -59,7 +59,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
 
 def AE_train(args, model, trainloader, visualize = False):
     
-    criterion = make_criterion_AE(args)
+    criterion = make_criterion(args)
     optimizer = make_optimizer(args, model)
     scheduler = make_scheduler(args, optimizer)
 
