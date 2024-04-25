@@ -331,8 +331,8 @@ class ResNet(nn.Module):
 
         x = self.deconv1(x)
         x = self.bn1(x)
-        # x = self.relu(x)
-        x = self.sigmoid(x)
+        x = self.relu(x)
+        # x = self.sigmoid(x)
         
         return x
     

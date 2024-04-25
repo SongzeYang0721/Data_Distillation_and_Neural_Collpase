@@ -23,55 +23,73 @@ class CIFAR10RandomLabels(CIFAR10):
                 test_all = pickle.load(f)
                 self.targets = test_all["label"]
 
-def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=False):
+def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=False, normalize = True):
 
     if dataset_name == 'cifar10':
         print('Dataset: CIFAR10.')
+        if normalize:
+            mean = [0.4914, 0.4822, 0.4465]
+            std = [0.2023, 0.1994, 0.2010]
+        else:
+            mean = [0, 0, 0]
+            std = [1, 1, 1]
         if SOTA:
             trainset = CIFAR10(root=data_dir, train=True, download=True, transform=transforms.Compose([
                 transforms.RandomCrop(size=32, padding=4),
                 transforms.RandomHorizontalFlip(p=0.5),
 
                 transforms.ToTensor(),
-                # transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
+                transforms.Normalize(mean=mean, std=std),
                 ]))
         else:
             trainset = CIFAR10(root=data_dir, train=True, download=True, transform=transforms.Compose([
                 transforms.ToTensor(),
-                # transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
-            ]))
+                transforms.Normalize(mean=mean, std=std),
+                ]))
 
         testset = CIFAR10(root=data_dir, train=False, download=True, transform=transforms.Compose([
             transforms.ToTensor(),
-            # transforms.Normalize(mean=[0.4914, 0.4822, 0.4465], std=[0.2023, 0.1994, 0.2010]),
+            transforms.Normalize(mean=mean, std=std),
             ]))
         num_classes = 10
     elif dataset_name == 'mnist':
         print('Dataset: MNIST.')
+        if normalize:
+            mean = (0.1307,)
+            std = (0.3081,)
+        else:
+            mean = (0,)
+            std = (1,)
         trainset = MNIST(root=data_dir, train=True, download=True, transform=transforms.Compose([
             transforms.Grayscale(3),
             transforms.Resize(32),
             transforms.ToTensor(),
-            # transforms.Normalize((0.1307,), (0.3081,))
+            transforms.Normalize(mean, std)
             ]))
 
         testset = MNIST(root=data_dir, train=False, download=True, transform=transforms.Compose([
             transforms.Grayscale(3),
             transforms.Resize(32),
             transforms.ToTensor(),
-            # transforms.Normalize((0.1307,), (0.3081,))
+            transforms.Normalize(mean, std)
             ]))
         num_classes = 10
     elif dataset_name == 'cifar10_random':
         print('Dataset: CIFAR10 with random label.')
+        if normalize:
+            mean = [0.485, 0.456, 0.406]
+            std = [0.229, 0.224, 0.225]
+        else:
+            mean = (0,)
+            std = (1,)
         trainset = CIFAR10RandomLabels(root=data_dir, train=True, download=True, transform=transforms.Compose([
             transforms.ToTensor(),
-            # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            transforms.Normalize(mean=mean, std=std)
             ]))
 
         testset = CIFAR10RandomLabels(root=data_dir, train=False, download=True, transform=transforms.Compose([
             transforms.ToTensor(),
-            # transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225])
+            transforms.Normalize(mean=mean, std=std)
             ]))
         num_classes = 10
     else:
