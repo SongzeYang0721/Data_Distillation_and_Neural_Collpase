@@ -80,38 +80,14 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
     return mu_G, mu_c_dict, top1.avg, top5.avg
 
 
-def compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloader, ontest = False):
+def compute_nearest_neighbor(args, model, fc_features, H, dataloader):
     
-    if not ontest:
-        top1_train = AverageMeter()
-        top5_train = AverageMeter()
-    top1_test = AverageMeter()
-    top5_test = AverageMeter()
+    top1 = AverageMeter()
+    top5 = AverageMeter()
     device = H.device
+    H = torch.transpose(H, 0, 1)
 
-    if not ontest:
-        for batch_idx, (inputs, targets) in enumerate(trainloader):
-
-            inputs, targets = inputs.to(args.device), targets.to(args.device)
-
-            with torch.no_grad():
-                outputs = model(inputs)
-
-            features = fc_features.outputs[0][0]
-            features = features.to(device)
-            fc_features.clear()
-
-            features_exp = torch.unsqueeze(features, dim=1) 
-            H_exp = torch.unsqueeze(H, dim=0)
-
-            # Compute squared differences, sum over features (axis=2), and take square root
-            distances = torch.sqrt(torch.sum((features_exp - H_exp) ** 2, dim=2))
-
-            prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, 5), is_distance=True)
-            top1_train.update(prec1.item(), inputs.size(0))
-            top5_train.update(prec5.item(), inputs.size(0))
-
-    for batch_idx, (inputs, targets) in enumerate(testloader):
+    for batch_idx, (inputs, targets) in enumerate(dataloader):
 
         inputs, targets = inputs.to(args.device), targets.to(args.device)
 
@@ -129,13 +105,10 @@ def compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloade
         distances = torch.sqrt(torch.sum((features_exp - H_exp) ** 2, dim=2))
 
         prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, 5), is_distance=True)
-        top1_test.update(prec1.item(), inputs.size(0))
-        top5_test.update(prec5.item(), inputs.size(0))
+        top1.update(prec1.item(), inputs.size(0))
+        top5.update(prec5.item(), inputs.size(0))
 
-    if not ontest:
-        return top1_train.avg, top5_train.avg, top1_test.avg, top5_test.avg
-    else:
-        return top1_test.avg, top5_test.avg
+    return top1.avg, top5.avg
 
 
 def compute_Sigma_W(args, model, fc_features, mu_c_dict, dataloader, isTrain=True):
@@ -271,9 +244,10 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
             Wh_b_relation_metric = compute_Wh_b_relation(W, mu_G_train, torch.zeros((W.shape[0], )))
 
         if nearest_neighbor:
-            near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5 = compute_nearest_neighbor(args, model, fc_features, H, trainloader, testloader)
+            near_train_acc1, near_train_acc5 = compute_nearest_neighbor(args, model, fc_features, H, trainloader)
+            near_test_acc1, near_test_acc5 = compute_nearest_neighbor(args, model, fc_features, H, testloader)
             if ontest:
-                near_test_acc1_ontest, near_test_acc5_ontest = compute_nearest_neighbor(args, model, fc_features, H_test, trainloader, testloader, ontest= True)
+                near_test_acc1_ontest, near_test_acc5_ontest = compute_nearest_neighbor(args, model, fc_features, H_test, testloader)
         
         info_dict['collapse_metric'].append(collapse_metric)
         info_dict['ETF_metric'].append(ETF_metric)
