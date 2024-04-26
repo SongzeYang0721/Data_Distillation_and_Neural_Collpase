@@ -69,6 +69,7 @@ def AE_train(args, model, trainloader, visualize = False):
 
         AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, visualize = visualize)
         torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")
+        torch.cuda.empty_cache()
 
 
 #  if visualize:
