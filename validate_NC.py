@@ -298,6 +298,7 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
                             "nearest neighbor (Test ETF): test_acc1":near_test_acc1_ontest,
                             "nearest neighbor (Test ETF): test_acc5":near_test_acc5_ontest
                             })
+
             else:
                 wandb.log({
                             "train_acc1":train_acc1, 
@@ -316,7 +317,6 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
             
     with open(args.load_path + 'info.pkl', 'wb') as f:
         pickle.dump(info_dict, f)
-
 
 
 def main():

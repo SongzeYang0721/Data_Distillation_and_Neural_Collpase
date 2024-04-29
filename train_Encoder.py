@@ -161,10 +161,6 @@ def train(args, model, trainloader):
         else:
             trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, scheduler)
         torch.save(model.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")
-        columns=["id", "image", "guess", "truth"]
-        for digit in range(10):
-            columns.append("score_" + str(digit))
-        test_table = wandb.Table(columns=columns)
 
 
 def main():
