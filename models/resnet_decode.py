@@ -223,7 +223,7 @@ class ResNet(nn.Module):
             self.layer3 = self._make_layer(block, 256, layers[2], stride = 2, output_padding = 1,
                                            dilate=replace_stride_with_dilation[1])
             if not SOTA:
-                self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=1, stride=1, padding=0, output_padding=1,
+                self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=2, stride=1, padding=0,
                                                 bias=False)
             else:
                 self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
@@ -232,7 +232,7 @@ class ResNet(nn.Module):
             self.layer4 = self._make_layer(block, 256, layers[2], stride=2, output_padding = 1,
                                            dilate=replace_stride_with_dilation[1],outdim=num_classes)
             if not SOTA:
-                self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=1, stride=1, padding=0, output_padding=1,
+                self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=2, stride=1, padding=0,
                                                 bias=False)
             else:
                 self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=4, stride=1, padding=0, 
