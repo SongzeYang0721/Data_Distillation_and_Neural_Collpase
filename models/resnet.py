@@ -234,8 +234,8 @@ class ResNet(nn.Module):
                     if fixdim:
                         m.weight = nn.Parameter(weight)
                     else:
-                        # m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 512 * block.expansion)))
-                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 256 * block.expansion)))
+                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 512 * block.expansion)))
+                        # m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 256 * block.expansion)))
                     m.weight.requires_grad_(False)
 
         # Zero-initialize the last BN in each residual branch,
