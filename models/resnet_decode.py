@@ -213,8 +213,8 @@ class ResNet(nn.Module):
         self.relu = nn.ReLU(inplace=True)
         self.sigmoid = nn.Sigmoid()
 
-        # self.unmaxpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) # o = 14 + a +1, output_padding = 1
-        self.unmaxpool = nn.Upsample(scale_factor=2, mode='bilinear') # NOTE: invert max pooling
+        self.unmaxpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) # o = 14 + a +1, output_padding = 1
+        # self.unmaxpool = nn.Upsample(scale_factor=2, mode='bilinear') # NOTE: invert max pooling
 
         self.layer1 = self._make_layer(block, 64, layers[0])  # No upsampling in the first layer
         self.layer2 = self._make_layer(block, 128, layers[1], stride = 2, output_padding = 1,
