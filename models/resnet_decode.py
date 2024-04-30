@@ -213,7 +213,8 @@ class ResNet(nn.Module):
         self.relu = nn.ReLU(inplace=True)
         self.sigmoid = nn.Sigmoid()
 
-        self.unmaxpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) # o = 14 + a +1, output_padding = 1
+        # self.unmaxpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=3, stride=2, padding=1, output_padding=1) # o = 14 + a +1, output_padding = 1
+        self.unmaxpool = nn.Upsample(scale_factor=2, mode='bilinear') # NOTE: invert max pooling
 
         self.layer1 = self._make_layer(block, 64, layers[0])  # No upsampling in the first layer
         self.layer2 = self._make_layer(block, 128, layers[1], stride = 2, output_padding = 1,
@@ -223,20 +224,24 @@ class ResNet(nn.Module):
             self.layer3 = self._make_layer(block, 256, layers[2], stride = 2, output_padding = 1,
                                            dilate=replace_stride_with_dilation[1])
             if not SOTA:
-                self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=2, stride=1, padding=0,
-                                                bias=False)
+                # self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=2, stride=1, padding=0,
+                #                                 bias=False)
+                self.unavgpool = nn.Upsample(scale_factor=2, mode='bilinear') # NOTE: invert max pooling
             else:
-                self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
-                                                bias=False)
+                # self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
+                #                                 bias=False)
+                self.unavgpool = nn.Upsample(scale_factor=4, mode='bilinear') # NOTE: invert max pooling
         else:
             self.layer4 = self._make_layer(block, 256, layers[2], stride=2, output_padding = 1,
                                            dilate=replace_stride_with_dilation[1],outdim=num_classes)
             if not SOTA:
-                self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=2, stride=1, padding=0,
-                                                bias=False)
+                # self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=2, stride=1, padding=0,
+                #                                 bias=False)
+                self.unavgpool = nn.Upsample(scale_factor=2, mode='bilinear') # NOTE: invert max pooling
             else:
-                self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=4, stride=1, padding=0, 
-                                                bias=False)
+                # self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=4, stride=1, padding=0, 
+                #                                 bias=False)
+                self.unavgpool = nn.Upsample(scale_factor=4, mode='bilinear') # NOTE: invert max pooling
         # if not fixdim:
         #     self.layer4 = self._make_layer(block, 512, layers[3], stride=2, output_padding = 1,
         #                                    dilate=replace_stride_with_dilation[2])
