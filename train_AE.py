@@ -1,16 +1,17 @@
 import sys
+import gc
 import wandb
 from utils import *
 import matplotlib.pyplot as plt
 from Visualization import *
 
-def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None, visualize = False):
+def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None, visualize=False):
 
     losses = AverageMeter()
 
     if args.optimizer == 'LBFGS':
         print('\nTraining Epoch: [%d | %d]' % (epoch_id + 1, args.epochs))
-    else:
+    elif args.optimizer == 'SGD' or args.optimizer == 'Adam':
         print('\nTraining Epoch: [%d | %d] LR: %f' % (epoch_id + 1, args.epochs, scheduler.get_last_lr()[-1]))
     
     if visualize:
@@ -28,11 +29,12 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
 
         optimizer.zero_grad()
         loss.backward()
+        del loss, outputs
         optimizer.step()
 
         # measure accuracy and record loss
         autoencoder.eval()
-        losses.update(loss.item(), inputs.size(0))
+        losses.update(loss.detach().item(), inputs.size(0))
     
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
           (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg))
@@ -47,7 +49,7 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         scheduler.step()
     
     # Visualization check
-    if visualize:  # Optionally visualize every 10 epochs
+    if visualize:
         inputs, labels = images_from_index(trainloader.dataset, indices)
         inputs, labels = inputs.to(args.device), labels.to(args.device)
         with torch.no_grad():
@@ -67,10 +69,13 @@ def AE_train(args, model, trainloader, visualize = False):
     print('--------------------- Training -------------------------------')
     for epoch_id in range(args.epochs):
 
+        torch.cuda.empty_cache()
+        gc.collect()
+
         AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, visualize = visualize)
         if epoch_id == args.epochs-1:
             torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")
-        torch.cuda.empty_cache()
+        print(f"Memory cached in GPU: {torch.cuda.memory_cached()}")
 
 
 #  if visualize:

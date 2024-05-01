@@ -123,9 +123,9 @@ def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=
             trainset, batch_size=batch_size, sampler=SubsetRandomSampler(train_indices), num_workers=1)
 
     else:
-        trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=4)
+        trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=1)
 
-    testloader = DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=4)
+    testloader = DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=1)
 
     return trainloader, testloader, num_classes
 
