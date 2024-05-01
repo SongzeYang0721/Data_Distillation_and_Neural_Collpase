@@ -29,12 +29,12 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
 
         optimizer.zero_grad()
         loss.backward()
-        del loss, outputs
         optimizer.step()
 
         # measure accuracy and record loss
         autoencoder.eval()
         losses.update(loss.detach().item(), inputs.size(0))
+        del loss, outputs
     
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
           (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg))
