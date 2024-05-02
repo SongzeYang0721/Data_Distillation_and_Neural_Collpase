@@ -304,7 +304,8 @@ class ResNet(nn.Module):
         # features = F.normalize(x) # normalized H ready to feed to the linear layer
         # x = self.fc(x)
 
-        features = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
+        x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
+        features = x
         x = self.fc(x)
 
         return x, features
