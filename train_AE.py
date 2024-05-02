@@ -76,7 +76,7 @@ def AE_train(args, model, trainloader, visualize = False):
 
         AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, visualize = visualize)
         if epoch_id == args.epochs-1:
-            torch.save(model.decoder.state_dict().clone(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
+            torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
 
 
