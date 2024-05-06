@@ -84,6 +84,8 @@ def compute_nearest_neighbor(args, model, fc_features, H, dataloader):
     
     top1 = AverageMeter()
     top5 = AverageMeter()
+    Avg_distance = AverageMeter()
+
     device = H.device
     H = torch.transpose(H, 0, 1)
 
@@ -107,8 +109,9 @@ def compute_nearest_neighbor(args, model, fc_features, H, dataloader):
         prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, 5), is_distance=True)
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
+        Avg_distance.update(torch.mean(torch.min(distances, 1)[0]), inputs.size(0))
 
-    return top1.avg, top5.avg
+    return top1.avg, top5.avg, Avg_distance.avg
 
 
 def compute_Sigma_W(args, model, fc_features, mu_c_dict, dataloader, isTrain=True):
@@ -244,10 +247,10 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
             Wh_b_relation_metric = compute_Wh_b_relation(W, mu_G_train, torch.zeros((W.shape[0], )))
 
         if nearest_neighbor:
-            near_train_acc1, near_train_acc5 = compute_nearest_neighbor(args, model, fc_features, H, trainloader)
-            near_test_acc1, near_test_acc5 = compute_nearest_neighbor(args, model, fc_features, H, testloader)
+            near_train_acc1, near_train_acc5, avg_distance_train = compute_nearest_neighbor(args, model, fc_features, H, trainloader)
+            near_test_acc1, near_test_acc5, avg_distance_test = compute_nearest_neighbor(args, model, fc_features, H, testloader)
             if ontest:
-                near_test_acc1_ontest, near_test_acc5_ontest = compute_nearest_neighbor(args, model, fc_features, H_test, testloader)
+                near_test_acc1_ontest, near_test_acc5_ontest, avg_distance_ontest = compute_nearest_neighbor(args, model, fc_features, H_test, testloader)
         
         info_dict['collapse_metric'].append(collapse_metric)
         info_dict['ETF_metric'].append(ETF_metric)
@@ -296,7 +299,10 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
                             "nearest neighbor: test_acc1":near_test_acc1,
                             "nearest neighbor: test_acc5":near_test_acc5,
                             "nearest neighbor (Test ETF): test_acc1":near_test_acc1_ontest,
-                            "nearest neighbor (Test ETF): test_acc5":near_test_acc5_ontest
+                            "nearest neighbor (Test ETF): test_acc5":near_test_acc5_ontest,
+                            "nearest neighbor: avg_distance_train":avg_distance_train,
+                            "nearest neighbor: avg_distance_test":avg_distance_test,
+                            "nearest neighbor: avg_distance_test":avg_distance_ontest,
                             })
 
             else:
@@ -312,7 +318,9 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
                             "nearest neighbor: train_acc1":near_train_acc1, 
                             "nearest neighbor: train_acc5":near_train_acc5,
                             "nearest neighbor: test_acc1":near_test_acc1,
-                            "nearest neighbor: test_acc5":near_test_acc5
+                            "nearest neighbor: test_acc5":near_test_acc5,
+                            "nearest neighbor: test_acc5":avg_distance_train,
+                            "nearest neighbor: test_acc5":avg_distance_test
                             })
             
     with open(args.load_path + 'info.pkl', 'wb') as f:
