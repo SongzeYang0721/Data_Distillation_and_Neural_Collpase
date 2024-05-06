@@ -319,8 +319,8 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
                             "nearest neighbor: train_acc5":near_train_acc5,
                             "nearest neighbor: test_acc1":near_test_acc1,
                             "nearest neighbor: test_acc5":near_test_acc5,
-                            "nearest neighbor: test_acc5":avg_distance_train,
-                            "nearest neighbor: test_acc5":avg_distance_test
+                            "nearest neighbor: avg_distance_train":avg_distance_train,
+                            "nearest neighbor: avg_distance_test":avg_distance_test
                             })
             
     with open(args.load_path + 'info.pkl', 'wb') as f:
