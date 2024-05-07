@@ -22,15 +22,31 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
         inputs, targets = inputs.to(args.device), targets.to(args.device)
 
         autoencoder.train()
-        outputs = autoencoder(inputs)
-        
-        loss = criterion(outputs, inputs)
-        # loss = criterion(outputs, inputs).to(args.device)
-        # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
 
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+        if args.optimizer != 'LBFGS' and scheduler:
+
+            outputs = autoencoder(inputs)
+            
+            loss = criterion(outputs, inputs)
+            # loss = criterion(outputs, inputs).to(args.device)
+            # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
+
+            optimizer.zero_grad()
+            loss.backward()
+            optimizer.step()
+            
+        else:
+            def closure():
+                outputs = autoencoder(inputs)
+
+                loss = criterion(outputs, inputs)
+
+                optimizer.zero_grad()
+                loss.backward()
+                
+                return loss
+
+            optimizer.step(closure)
 
         # measure accuracy and record loss
         autoencoder.eval()
