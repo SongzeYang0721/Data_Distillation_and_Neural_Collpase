@@ -4,7 +4,7 @@ import torch
 import numpy as np
 import torch.nn as nn
 import torch.optim as optim
-from sophia import SophiaG
+# from sophia import SophiaG
 import torch.optim.lr_scheduler as lrs
 
 
