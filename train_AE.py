@@ -5,6 +5,15 @@ from utils import *
 import matplotlib.pyplot as plt
 from Visualization import *
 
+def weight_decay(args, model):
+
+    penalty = 0
+    for p in model.parameters():
+        if p.requires_grad:
+            penalty += 0.5 * args.weight_decay * torch.norm(p) ** 2
+
+    return penalty.to(args.device)
+
 def AE_trainer_1st(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler):
 
     losses = AverageMeter()
@@ -58,7 +67,7 @@ def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimize
         def closure():
             outputs = autoencoder(inputs)
             
-            loss = criterion(outputs, inputs)
+            loss = criterion(outputs, inputs) + weight_decay(args, autoencoder)
             # loss = criterion(outputs, inputs).to(args.device)
             # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
 
@@ -72,7 +81,7 @@ def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimize
         # measure accuracy and record loss
         autoencoder.eval()
         outputs = autoencoder(inputs)
-        loss = criterion(outputs, inputs)
+        loss = criterion(outputs, inputs) + weight_decay(args, autoencoder)
         losses.update(loss.detach().item(), inputs.size(0))
         del loss, outputs
     
@@ -121,25 +130,3 @@ def AE_train(args, model, trainloader, visualize = False):
         if epoch_id % 100 == 0:
             torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
-
-
-#  if visualize:
-#         channels, height, width = inputs[0].shape
-#         fig, axs = plt.subplots(2, 1, figsize=(5, 10))
-#         with torch.no_grad():
-#             # Clear current axes
-#             axs[0].clear()
-#             axs[1].clear()
-            
-#             # Display original and reconstructed images
-#             axs[0].imshow(inputs[0].cpu().view(height,width,channels).numpy())
-#             axs[0].set_title("Original")
-#             axs[0].axis('off')
-            
-#             axs[1].imshow(outputs[0].cpu().view(height,width,channels).numpy())
-#             axs[1].set_title("Reconstructed")
-#             axs[1].axis('off')
-            
-#             # Draw the updated plot
-#             plt.draw()
-#             plt.pause(0.001)  # Pause briefly to update plots
