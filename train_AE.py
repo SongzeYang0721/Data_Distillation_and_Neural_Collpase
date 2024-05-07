@@ -5,17 +5,11 @@ from utils import *
 import matplotlib.pyplot as plt
 from Visualization import *
 
-def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler=None, visualize=False):
+def AE_trainer_1st(args, autoencoder, trainloader, epoch_id, criterion, optimizer, scheduler):
 
     losses = AverageMeter()
 
-    if args.optimizer == 'LBFGS':
-        print('\nTraining Epoch: [%d | %d]' % (epoch_id + 1, args.epochs))
-    elif args.optimizer == 'SGD' or args.optimizer == 'Adam':
-        print('\nTraining Epoch: [%d | %d] LR: %f' % (epoch_id + 1, args.epochs, scheduler.get_last_lr()[-1]))
-    
-    if visualize:
-        indices = random_sample_images_index(trainloader)
+    print('\nTraining Epoch: [%d | %d] LR: %f' % (epoch_id + 1, args.epochs, scheduler.get_last_lr()[-1]))
 
     for batch_idx, (inputs, targets) in enumerate(trainloader):
 
@@ -23,30 +17,15 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
 
         autoencoder.train()
 
-        if args.optimizer != 'LBFGS' and scheduler:
+        outputs = autoencoder(inputs)
+        
+        loss = criterion(outputs, inputs)
+        # loss = criterion(outputs, inputs).to(args.device)
+        # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
 
-            outputs = autoencoder(inputs)
-            
-            loss = criterion(outputs, inputs)
-            # loss = criterion(outputs, inputs).to(args.device)
-            # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
-
-            optimizer.zero_grad()
-            loss.backward()
-            optimizer.step()
-            
-        else:
-            def closure():
-                outputs = autoencoder(inputs)
-
-                loss = criterion(outputs, inputs)
-
-                optimizer.zero_grad()
-                loss.backward()
-                
-                return loss
-
-            optimizer.step(closure)
+        optimizer.zero_grad()
+        loss.backward()
+        optimizer.step()
 
         # measure accuracy and record loss
         autoencoder.eval()
@@ -62,19 +41,48 @@ def AE_trainer(args, autoencoder, trainloader, epoch_id, criterion, optimizer, s
             "LR":scheduler.get_last_lr()[-1]
         })
 
-    if args.optimizer != 'LBFGS' and scheduler:
-        scheduler.step()
-    
-    # Visualization check
-    if visualize:
-        inputs, labels = images_from_index(trainloader.dataset, indices)
-        inputs, labels = inputs.to(args.device), labels.to(args.device)
-        with torch.no_grad():
-            # Taking a subset for visualization
+    scheduler.step()
+
+def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimizer):
+
+    losses = AverageMeter()
+
+    print('\nTraining Epoch: [%d | %d]' % (epoch_id + 1, args.epochs))
+
+    for batch_idx, (inputs, targets) in enumerate(trainloader):
+
+        inputs, targets = inputs.to(args.device), targets.to(args.device)
+
+        autoencoder.train()
+
+        def closure():
             outputs = autoencoder(inputs)
-            visualize_images(inputs.cpu(),labels.cpu(), False)
-            visualize_images(outputs.cpu(),labels.cpu(), False)
-            del outputs, inputs, labels
+            
+            loss = criterion(outputs, inputs)
+            # loss = criterion(outputs, inputs).to(args.device)
+            # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
+
+            optimizer.zero_grad()
+            loss.backward()
+
+            return loss
+        
+        optimizer.step(closure)
+
+        # measure accuracy and record loss
+        autoencoder.eval()
+        outputs = autoencoder(inputs)
+        loss = criterion(outputs, inputs)
+        losses.update(loss.detach().item(), inputs.size(0))
+        del loss, outputs
+    
+    print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
+          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg))
+
+    if 'wandb' in sys.modules:
+        wandb.log({
+            "losses.avg":losses.avg
+        })
 
 
 def AE_train(args, model, trainloader, visualize = False):
@@ -85,13 +93,32 @@ def AE_train(args, model, trainloader, visualize = False):
 
     print('# of model parameters: ' + str(count_network_parameters(model)))
     print('--------------------- Training -------------------------------')
+
+    if visualize:
+        indices = random_sample_images_index(trainloader)
+
     for epoch_id in range(args.epochs):
 
         torch.cuda.empty_cache()
         gc.collect()
 
-        AE_trainer(args, model, trainloader, epoch_id, criterion, optimizer, scheduler, visualize = visualize)
-        if epoch_id % 20 == 0:
+        if args.optimizer == 'LBFGS':
+            AE_trainer_2nd(args, model, trainloader, epoch_id, criterion, optimizer)
+        else:
+            AE_trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, scheduler)
+
+        # Visualization check
+        if visualize:
+            inputs, labels = images_from_index(trainloader.dataset, indices)
+            inputs, labels = inputs.to(args.device), labels.to(args.device)
+            with torch.no_grad():
+                # Taking a subset for visualization
+                outputs = model(inputs)
+                visualize_images(inputs.cpu(),labels.cpu(), False)
+                visualize_images(outputs.cpu(),labels.cpu(), False)
+                del outputs, inputs, labels
+
+        if epoch_id % 100 == 0:
             torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
 
