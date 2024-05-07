@@ -4,6 +4,7 @@ import torch
 import numpy as np
 import torch.nn as nn
 import torch.optim as optim
+from sophia import SophiaG
 import torch.optim.lr_scheduler as lrs
 
 
@@ -45,6 +46,14 @@ def make_optimizer(args, my_model):
         kwargs = {'lr': args.lr,
                   'history_size': args.history_size,
                   'line_search_fn': 'strong_wolfe'
+        }
+    elif args.optimizer == 'AdamW':
+        optimizer_function = optim.Adam
+        kwargs = {
+            'betas': (0.9, 0.999),
+            'eps': 1e-08,
+            'lr': args.lr,
+            'weight_decay': wd_term#args.weight_decay
         }
 
     return optimizer_function(trainable, **kwargs)
