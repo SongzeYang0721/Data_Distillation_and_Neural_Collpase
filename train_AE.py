@@ -67,7 +67,7 @@ def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimize
         def closure():
             outputs = autoencoder(inputs)
             
-            loss = criterion(outputs, inputs) + weight_decay(args, autoencoder)
+            loss = criterion(outputs, inputs)
             # loss = criterion(outputs, inputs).to(args.device)
             # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
 
@@ -81,7 +81,7 @@ def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimize
         # measure accuracy and record loss
         autoencoder.eval()
         outputs = autoencoder(inputs)
-        loss = criterion(outputs, inputs) + weight_decay(args, autoencoder)
+        loss = criterion(outputs, inputs)
         losses.update(loss.detach().item(), inputs.size(0))
         del loss, outputs
     
