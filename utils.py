@@ -55,6 +55,12 @@ def make_optimizer(args, my_model):
             'lr': args.lr,
             'weight_decay': wd_term#args.weight_decay
         }
+    elif args.optimizer == 'Adadelta':
+        optimizer_function = optim.Adadelta
+        kwargs = {
+            'lr': args.lr,
+            'weight_decay': wd_term#args.weight_decay
+        }
 
     return optimizer_function(trainable, **kwargs)
 
