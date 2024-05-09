@@ -81,6 +81,11 @@ def make_scheduler(args, my_optimizer):
             milestones=milestones,
             gamma=args.gamma
         )
+    elif args.decay_type == 'cosine':
+        scheduler = lrs.CosineAnnealingLR(
+            my_optimizer,
+            T_max=args.epochs,  # Number of epochs until the first restart
+        )
 
     return scheduler
 
