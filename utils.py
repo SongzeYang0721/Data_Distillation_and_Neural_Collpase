@@ -4,7 +4,7 @@ import torch
 import numpy as np
 import torch.nn as nn
 import torch.optim as optim
-# from sophia import SophiaG
+from sophia import SophiaG
 import torch.optim.lr_scheduler as lrs
 
 
@@ -60,6 +60,11 @@ def make_optimizer(args, my_model):
         kwargs = {
             'lr': args.lr,
             'weight_decay': wd_term#args.weight_decay
+        }
+    elif args.optimizer == "Sophia":
+        optimizer_function = SophiaG
+        kwargs = {
+            "lr": args.lr
         }
 
     return optimizer_function(trainable, **kwargs)
