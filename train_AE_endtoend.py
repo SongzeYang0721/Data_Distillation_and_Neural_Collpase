@@ -72,7 +72,7 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         del loss_AE
         with torch.no_grad():
             outputs = autoencoder.encoder(inputs)
-        prec1, prec5 = compute_accuracy(outputs.detach().data, targets.detach().data, topk=(1, 5))
+        prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, 5))
         losses_encoder.update(loss_encoder.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
@@ -137,12 +137,12 @@ def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         del loss_AE
         with torch.no_grad():
             outputs = autoencoder.encoder(inputs)
-        prec1, prec5 = compute_accuracy(outputs.data, targets.data, topk=(1, 5))
+        prec1, prec5 = compute_accuracy(outputs[0].data, targets.data, topk=(1, 5))
 
         if args_encoder.loss == 'CrossEntropy':
-            loss_encoder = criterion_encoder(outputs, targets) + weight_decay(args_encoder, autoencoder.encoder)
+            loss_encoder = criterion_encoder(outputs[0], targets) + weight_decay(args_encoder, autoencoder.encoder)
         elif args_encoder.loss == 'MSE':
-            loss_encoder = criterion_encoder(outputs, nn.functional.one_hot(targets,num_classes=outputs.shape[1]).type(torch.FloatTensor).to(args_encoder.device)) \
+            loss_encoder = criterion_encoder(outputs[0], nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args_encoder.device)) \
                    + weight_decay(args_encoder, autoencoder.encoder)
 
         losses_encoder.update(loss_encoder.item(), inputs.size(0))
