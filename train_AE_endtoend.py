@@ -49,16 +49,17 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
 
         reconstruction, outputs = autoencoder(inputs)
         
-        loss = criterion_decoder(reconstruction, inputs)
+        loss_AE = criterion_decoder(reconstruction, inputs)
         # loss = criterion(outputs, inputs).to(args.device)
         # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
         if args_encoder.sep_decay:
-            loss = loss_compute(args_encoder, autoencoder.encoder, criterion_encoder, outputs, targets)
+            loss_encoder = loss_compute(args_encoder, autoencoder.encoder, criterion_encoder, outputs, targets)
         else:
             if args_encoder.loss == 'CrossEntropy':
-                loss += criterion_encoder(outputs, targets)
+                loss_encoder = criterion_encoder(outputs, targets)
             elif args_encoder.loss == 'MSE':
-                loss += criterion_encoder(outputs, nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args_decoder.device))
+                loss_encoder = criterion_encoder(outputs, nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args_decoder.device))
+        loss = loss_encoder + loss_AE
 
         optimizer.zero_grad()
         loss.backward()
@@ -67,12 +68,12 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
 
         # measure accuracy and record loss
         autoencoder.eval()
-        losses_AE.update(loss.detach().item(), inputs.size(0))
-        del loss
+        losses_AE.update(loss_AE.detach().item(), inputs.size(0))
+        del loss_AE
         with torch.no_grad():
             outputs = autoencoder.encoder(inputs)
         prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, 5))
-        losses_encoder.update(loss.item(), inputs.size(0))
+        losses_encoder.update(losses_encoder.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
 
@@ -119,7 +120,7 @@ def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
             elif args_encoder.loss == 'MSE':
                 loss += criterion_encoder(outputs, nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args_encoder.device)) \
                        + weight_decay(args_encoder, autoencoder.encoder)
-
+            
             optimizer.zero_grad()
             loss.backward()
 
@@ -131,20 +132,20 @@ def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         autoencoder.eval()
         with torch.no_grad():
             reconstruction, _ = autoencoder(inputs)
-        loss = criterion_decoder(reconstruction, inputs)
-        losses_AE.update(loss.detach().item(), inputs.size(0))
-        del loss
+        loss_AE = criterion_decoder(reconstruction, inputs)
+        losses_AE.update(loss_AE.detach().item(), inputs.size(0))
+        del loss_AE
         with torch.no_grad():
             outputs = autoencoder.encoder(inputs)
-        prec1, prec5 = compute_accuracy(outputs[0].data, targets.data, topk=(1, 5))
+        prec1, prec5 = compute_accuracy(outputs.data, targets.data, topk=(1, 5))
 
         if args_encoder.loss == 'CrossEntropy':
-            loss = criterion_encoder(outputs[0], targets) + weight_decay(args_encoder, autoencoder.encoder)
+            loss_encoder = criterion_encoder(outputs, targets) + weight_decay(args_encoder, autoencoder.encoder)
         elif args_encoder.loss == 'MSE':
-            loss = criterion_encoder(outputs[0], nn.functional.one_hot(targets,num_classes=outputs[0].shape[1]).type(torch.FloatTensor).to(args_encoder.device)) \
+            loss_encoder = criterion_encoder(outputs, nn.functional.one_hot(targets,num_classes=outputs.shape[1]).type(torch.FloatTensor).to(args_encoder.device)) \
                    + weight_decay(args_encoder, autoencoder.encoder)
 
-        losses_encoder.update(loss.item(), inputs.size(0))
+        losses_encoder.update(loss_encoder.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
         del loss, outputs
