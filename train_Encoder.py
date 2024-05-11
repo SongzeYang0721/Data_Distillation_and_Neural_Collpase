@@ -162,7 +162,7 @@ def train(args, model, trainloader):
             trainer_2nd(args, model, trainloader, epoch_id, criterion, optimizer)
         else:
             trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, scheduler)
-        torch.save(model.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")
+        torch.save(model.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
 
 
 def main():

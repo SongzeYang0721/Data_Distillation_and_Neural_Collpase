@@ -64,18 +64,18 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         optimizer.zero_grad()
         loss.backward()
         optimizer.step()
-        del reconstruction, outputs
+        del reconstruction, outputs, loss
 
         # measure accuracy and record loss
         autoencoder.eval()
         losses_AE.update(loss_AE.detach().item(), inputs.size(0))
-        del loss_AE
         with torch.no_grad():
             outputs = autoencoder.encoder(inputs)
         prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, 5))
         losses_encoder.update(loss_encoder.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
+        del loss_AE, loss_encoder, outputs
 
     print('[epoch: %d] (%d/%d) | Loss(encoder): %.4f | Loss(AE): %.4f | top1: %.4f | top5: %.4f ' %
           (epoch_id + 1, batch_idx + 1, len(trainloader), losses_encoder.avg, losses_AE.avg, top1.avg, top5.avg))
@@ -90,8 +90,6 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         })
 
     scheduler.step()
-
-    del losses_AE, losses_encoder, outputs
 
 def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_id, criterion_encoder, criterion_decoder, optimizer):
 
@@ -148,7 +146,7 @@ def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         losses_encoder.update(loss_encoder.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
-        del loss, outputs
+        del loss_AE, loss_encoder, outputs
     
     print('[epoch: %d] (%d/%d) | Loss(encoder): %.4f | Loss(AE): %.4f | top1: %.4f | top5: %.4f ' %
           (epoch_id + 1, batch_idx + 1, len(trainloader), losses_encoder.avg, losses_AE.avg, top1.avg, top5.avg))
@@ -195,7 +193,7 @@ def AE_train_endtoend(args_encoder,args_decoder,model,trainloader,visualize = Fa
                 visualize_images(inputs.cpu(),labels.cpu(), False)
                 visualize_images(reconstruction.cpu(),labels.cpu(), False)
                 del reconstruction, inputs, labels
-        torch.save(model.encoder.state_dict(), args_encoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")
+        torch.save(model.encoder.state_dict(), args_encoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         if epoch_id % 100 == 0:
             torch.save(model.decoder.state_dict(), args_decoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
