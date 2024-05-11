@@ -65,7 +65,8 @@ def trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, schedu
 
         # measure accuracy and record loss
         model.eval()
-        outputs = model(inputs)
+        with torch.no_grad():
+            outputs = model(inputs)
         prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, 5))
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
@@ -120,7 +121,8 @@ def trainer_2nd(args, model, trainloader, epoch_id, criterion, optimizer):
 
         # measure accuracy and record loss
         model.eval()
-        outputs = model(inputs)
+        with torch.no_grad():
+            outputs = model(inputs)
         prec1, prec5 = compute_accuracy(outputs[0].data, targets.data, topk=(1, 5))
 
         if args.loss == 'CrossEntropy':

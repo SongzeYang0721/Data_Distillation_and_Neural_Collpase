@@ -161,12 +161,12 @@ def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         })
 
 
-def AE_train_endtoend(args_encoder, args_decoder,Decoder_args,model,trainloader,visualize = False):
+def AE_train_endtoend(args_encoder,args_decoder,model,trainloader,visualize = False):
 
     criterion_encoder = make_criterion(args_encoder)
     criterion_decoder = make_criterion(args_decoder)
-    optimizer = make_optimizer(Decoder_args, model)
-    scheduler = make_scheduler(Decoder_args, optimizer)
+    optimizer = make_optimizer(args_decoder, model)
+    scheduler = make_scheduler(args_decoder, optimizer)
 
     print('# of model parameters: ' + str(count_network_parameters(model)))
     print('--------------------- Training -------------------------------')
@@ -174,12 +174,12 @@ def AE_train_endtoend(args_encoder, args_decoder,Decoder_args,model,trainloader,
     if visualize:
         indices = random_sample_images_index(trainloader)
 
-    for epoch_id in range(Decoder_args.epochs):
+    for epoch_id in range(args_decoder.epochs):
 
         torch.cuda.empty_cache()
         gc.collect()
 
-        if Decoder_args.optimizer == 'LBFGS':
+        if args_decoder.optimizer == 'LBFGS':
             AE_trainer_2nd(args_encoder, args_decoder, model, trainloader, epoch_id, criterion_encoder, criterion_decoder, optimizer)
         else:
             AE_trainer_1st(args_encoder, args_decoder, model, trainloader, epoch_id, criterion_encoder, criterion_decoder, optimizer, scheduler)
