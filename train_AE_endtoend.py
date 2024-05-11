@@ -91,7 +91,7 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
 
     scheduler.step()
 
-    del losses_AE, losses_encoder, outputs, reconstruction
+    del losses_AE, losses_encoder, outputs
 
 def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_id, criterion_encoder, criterion_decoder, optimizer):
 
