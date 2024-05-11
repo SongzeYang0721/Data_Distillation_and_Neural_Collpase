@@ -81,7 +81,8 @@ def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimize
         # measure accuracy and record loss
         autoencoder.eval()
         outputs = autoencoder(inputs)
-        loss = criterion(outputs, inputs)
+        with torch.no_grad():
+            loss = criterion(outputs, inputs)
         losses.update(loss.detach().item(), inputs.size(0))
         del loss, outputs
     
@@ -130,3 +131,4 @@ def AE_train(args, model, trainloader, visualize = False):
         if epoch_id % 100 == 0:
             torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
+
