@@ -194,6 +194,6 @@ def AE_train_endtoend(args_encoder,args_decoder,model,trainloader,visualize = Fa
                 visualize_images(reconstruction.cpu(),labels.cpu(), False)
                 del reconstruction, inputs, labels
         torch.save(model.encoder.state_dict(), args_encoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
-        if epoch_id % 100 == 0:
+        if epoch_id % 50 == 0:
             torch.save(model.decoder.state_dict(), args_decoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
