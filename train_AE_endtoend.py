@@ -72,8 +72,8 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         del loss_AE
         with torch.no_grad():
             outputs = autoencoder.encoder(inputs)
-        prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, 5))
-        losses_encoder.update(losses_encoder.item(), inputs.size(0))
+        prec1, prec5 = compute_accuracy(outputs.detach().data, targets.detach().data, topk=(1, 5))
+        losses_encoder.update(loss_encoder.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
 
