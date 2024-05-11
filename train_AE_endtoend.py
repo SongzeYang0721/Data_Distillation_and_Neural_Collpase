@@ -191,10 +191,10 @@ def AE_train_endtoend(args_encoder,args_decoder,model,trainloader,visualize = Fa
             inputs, labels = inputs.to(args_decoder.device), labels.to(args_decoder.device)
             with torch.no_grad():
                 # Taking a subset for visualization
-                outputs = model(inputs)
+                reconstruction, _ = model(inputs)
                 visualize_images(inputs.cpu(),labels.cpu(), False)
-                visualize_images(outputs.cpu(),labels.cpu(), False)
-                del outputs, inputs, labels
+                visualize_images(reconstruction.cpu(),labels.cpu(), False)
+                del reconstruction, inputs, labels
         torch.save(model.encoder.state_dict(), args_encoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pth")
         if epoch_id % 100 == 0:
             torch.save(model.decoder.state_dict(), args_decoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
