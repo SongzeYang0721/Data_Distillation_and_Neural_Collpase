@@ -43,7 +43,7 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
 
     for batch_idx, (inputs, targets) in enumerate(trainloader):
 
-        inputs, targets = inputs.to(args_decoder.device), args_decoder.to(args_decoder.device)
+        inputs, targets = inputs.to(args_decoder.device), targets.to(args_decoder.device)
 
         autoencoder.train()
 
