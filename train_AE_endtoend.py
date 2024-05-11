@@ -78,7 +78,7 @@ def AE_trainer_1st(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         top5.update(prec5.item(), inputs.size(0))
 
     print('[epoch: %d] (%d/%d) | Loss(encoder): %.4f | Loss(AE): %.4f | top1: %.4f | top5: %.4f ' %
-          (epoch_id + 1, batch_idx + 1, len(trainloader), losses_encoder.avg), losses_AE.avg, top1.avg, top5.avg)
+          (epoch_id + 1, batch_idx + 1, len(trainloader), losses_encoder.avg, losses_AE.avg, top1.avg, top5.avg))
 
     if 'wandb' in sys.modules:
         wandb.log({
@@ -151,7 +151,7 @@ def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
         del loss, outputs
     
     print('[epoch: %d] (%d/%d) | Loss(encoder): %.4f | Loss(AE): %.4f | top1: %.4f | top5: %.4f ' %
-          (epoch_id + 1, batch_idx + 1, len(trainloader), losses_encoder.avg), losses_AE.avg, top1.avg, top5.avg)
+          (epoch_id + 1, batch_idx + 1, len(trainloader), losses_encoder.avg, losses_AE.avg, top1.avg, top5.avg))
 
     if 'wandb' in sys.modules:
         wandb.log({
