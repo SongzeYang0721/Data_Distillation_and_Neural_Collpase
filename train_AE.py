@@ -26,11 +26,11 @@ def AE_trainer_1st(args, autoencoder, trainloader, epoch_id, criterion, optimize
 
         autoencoder.train()
 
-        outputs = autoencoder(inputs)
+        reconstruction, _ = autoencoder(inputs)
         
-        loss = criterion(outputs, inputs)
-        # loss = criterion(outputs, inputs).to(args.device)
-        # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
+        loss = criterion(reconstruction, inputs)
+        # loss = criterion(reconstruction, inputs).to(args.device)
+        # loss = nn.functional.binary_cross_entropy(reconstruction,inputs,reduction="mean").to(args.device)
 
         optimizer.zero_grad()
         loss.backward()
@@ -39,7 +39,7 @@ def AE_trainer_1st(args, autoencoder, trainloader, epoch_id, criterion, optimize
         # measure accuracy and record loss
         autoencoder.eval()
         losses.update(loss.detach().item(), inputs.size(0))
-        del loss, outputs
+        del loss, reconstruction
     
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
           (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg))
@@ -65,11 +65,11 @@ def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimize
         autoencoder.train()
 
         def closure():
-            outputs = autoencoder(inputs)
+            reconstruction, _ = autoencoder(inputs)
             
-            loss = criterion(outputs, inputs) #+ weight_decay(args, autoencoder)
-            # loss = criterion(outputs, inputs).to(args.device)
-            # loss = nn.functional.binary_cross_entropy(outputs,inputs,reduction="mean").to(args.device)
+            loss = criterion(reconstruction, inputs) #+ weight_decay(args, autoencoder)
+            # loss = criterion(reconstruction, inputs).to(args.device)
+            # loss = nn.functional.binary_cross_entropy(reconstruction,inputs,reduction="mean").to(args.device)
 
             optimizer.zero_grad()
             loss.backward()
@@ -80,11 +80,11 @@ def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimize
 
         # measure accuracy and record loss
         autoencoder.eval()
-        outputs = autoencoder(inputs)
+        reconstruction, _ = autoencoder(inputs)
         with torch.no_grad():
-            loss = criterion(outputs, inputs)
+            loss = criterion(reconstruction, inputs)
         losses.update(loss.detach().item(), inputs.size(0))
-        del loss, outputs
+        del loss, reconstruction
     
     print('[epoch: %d] (%d/%d) | Loss: %.4f |' %
           (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg))

@@ -10,7 +10,7 @@ class Autoencoder(nn.Module):
         # features = self.encoder(x)
         x, features = self.encoder(x)
         decoded = self.decoder(features)
-        return decoded, x
+        return decoded, (x, features)
 
     def set_requires_grad(self, model, value):
         for param in model.parameters():
