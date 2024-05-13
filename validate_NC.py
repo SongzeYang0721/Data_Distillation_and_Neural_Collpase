@@ -218,7 +218,7 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
         
         
         map_location=torch.device(args.device)
-        model.load_state_dict(torch.load(args.load_path + 'epoch_' + str(i + 1).zfill(3) + '.pth', 
+        model.load_state_dict(torch.load(args.load_path + 'epoch_' + str(i + 1).zfill(3) + '.pt', 
                                          map_location=map_location))
 
         model.eval()
