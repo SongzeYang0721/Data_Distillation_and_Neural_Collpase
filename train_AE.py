@@ -128,7 +128,7 @@ def AE_train(args, model, trainloader, visualize = False):
                 visualize_images(outputs.cpu(),labels.cpu(), False)
                 del outputs, inputs, labels
 
-        if epoch_id % 100 == 0:
+        if epoch_id % 40 == 0:
             torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
 
