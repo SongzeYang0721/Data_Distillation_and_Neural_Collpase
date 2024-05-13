@@ -160,6 +160,8 @@ def AE_trainer_2nd(args_encoder, args_decoder, autoencoder, trainloader, epoch_i
 
 def AE_train_endtoend(args_encoder,args_decoder,model,trainloader,visualize = False):
 
+    set_seed(manualSeed = args_decoder.seed)
+
     criterion_encoder = make_criterion(args_encoder)
     criterion_decoder = make_criterion(args_decoder)
     optimizer = make_optimizer(args_decoder, model)
