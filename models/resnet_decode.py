@@ -348,11 +348,11 @@ class ResNet(nn.Module):
     def _forward_impl(self, x: Tensor):
 
         x = x.view(x.shape[0], x.shape[1], 1, 1)
-        # x = self.unnormalize(x)
-        # x = self.unavgpool(x)
+        x = self.unnormalize(x)
+        x = self.unavgpool(x)
 
-        # x = self.layer4(x)
-        # x = self.layer3(x)
+        x = self.layer4(x)
+        x = self.layer3(x)
         x = self.layer2(x)
         x = self.layer1(x)
 
