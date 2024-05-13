@@ -123,10 +123,10 @@ def AE_train(args, model, trainloader, visualize = False):
             inputs, labels = inputs.to(args.device), labels.to(args.device)
             with torch.no_grad():
                 # Taking a subset for visualization
-                outputs = model(inputs)
+                reconstruction, _ = model(inputs)
                 visualize_images(inputs.cpu(),labels.cpu(), False)
-                visualize_images(outputs.cpu(),labels.cpu(), False)
-                del outputs, inputs, labels
+                visualize_images(reconstruction.cpu(),labels.cpu(), False)
+                del reconstruction, inputs, labels
 
         if epoch_id % 40 == 0:
             torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
