@@ -3,7 +3,7 @@ import gc
 import wandb
 from utils import *
 import matplotlib.pyplot as plt
-from Visualization import *
+from utils import *
 
 def loss_compute(args, model, criterion, outputs, targets):
     if args.loss == 'CrossEntropy':

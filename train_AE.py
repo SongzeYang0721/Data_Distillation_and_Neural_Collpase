@@ -3,7 +3,7 @@ import gc
 import wandb
 from utils import *
 import matplotlib.pyplot as plt
-from Visualization import *
+from utils import *
 
 def weight_decay(args, model):
 
