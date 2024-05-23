@@ -5,6 +5,7 @@ from torch.utils.data import DataLoader
 from torchvision.datasets import CIFAR10, MNIST
 import torchvision.transforms as transforms
 from torch.utils.data.sampler import SubsetRandomSampler
+from data.FilteredDataset import FilteredDataset
 
 class CIFAR10RandomLabels(CIFAR10):
     # Part from https://github.com/pluskid/fitting-random-labels/blob/master/cifar10_data.py
@@ -23,7 +24,7 @@ class CIFAR10RandomLabels(CIFAR10):
                 test_all = pickle.load(f)
                 self.targets = test_all["label"]
 
-def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=False, normalize = True):
+def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=False, normalize = True, classes_to_include = None):
 
     if dataset_name == 'cifar10':
         print('Dataset: CIFAR10.')
@@ -119,12 +120,20 @@ def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=
                     indices.append(i)
 
         train_indices = torch.tensor(indices)
+        if classes_to_include != None:
+            trainset = FilteredDataset(trainset, classes_to_include)
         trainloader = DataLoader(
             trainset, batch_size=batch_size, sampler=SubsetRandomSampler(train_indices), num_workers=1)
 
     else:
+        if classes_to_include != None:
+            trainset = FilteredDataset(trainset, classes_to_include)
         trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=1)
 
+
+    if classes_to_include != None:
+        trainset = FilteredDataset(testset, classes_to_include)
+        num_classes = len(classes_to_include)
     testloader = DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=1)
 
     return trainloader, testloader, num_classes
