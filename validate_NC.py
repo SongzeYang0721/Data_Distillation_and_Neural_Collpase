@@ -67,7 +67,7 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
         
-    if args.num_classes != 10 or len(args.classes_to_include) != 10:
+    if args.num_classes != len(args.classes_to_include):
         process_samples(args)
         
     if args.dataset == 'mnist':
