@@ -76,8 +76,8 @@ def trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, schedu
         #     print_and_save('[epoch: %d] (%d/%d) | Loss: %.4f | top1: %.4f | top5: %.4f ' %
         #                    (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, top1.avg, top5.avg), logfile)
     
-    print('[epoch: %d] (%d/%d) | Loss: %.4f | top1: %.4f | top5: %.4f ' %
-          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, top1.avg, top5.avg))
+    print('[epoch: %d] (%d/%d) | Loss: %.4f | top1: %.4f | top%d: %.4f ' %
+          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, top1.avg, int(args.num_classes/2), top5.avg))
 
     if 'wandb' in sys.modules:
         wandb.log({

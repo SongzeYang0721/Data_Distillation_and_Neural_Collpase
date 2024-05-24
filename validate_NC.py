@@ -54,7 +54,7 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
             else:
                 mu_c_dict[y] += features[b, :]
 
-        prec1, prec5 = compute_accuracy(outputs[0].data, targets.data, topk=(1, 5))
+        prec1, prec5 = compute_accuracy(outputs[0].data, targets.data, topk=(1, int(args.num_classes/2)))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
 
@@ -106,7 +106,7 @@ def compute_nearest_neighbor(args, model, fc_features, H, dataloader):
         # Compute squared differences, sum over features (axis=2), and take square root
         distances = torch.sqrt(torch.sum((features_exp - H_exp) ** 2, dim=2))
 
-        prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, 5), is_distance=True)
+        prec1, prec5 = compute_accuracy(distances, targets.data, topk=(1, int(args.num_classes/2)), is_distance=True)
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
         Avg_distance.update(torch.mean(torch.min(distances, 1)[0]), inputs.size(0))
@@ -274,14 +274,14 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
         print('[epoch: %d] | collapsemetric: %.4f | ETF metric: %.4f | WH metric: %.4f | Wh_b metric: %.4f ' %
                         (i + 1, collapse_metric, ETF_metric, WH_relation_metric, Wh_b_relation_metric))
 
-        print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f ' %
-                        (i + 1, train_acc1, train_acc5, test_acc1, test_acc5))
+        print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top%d: %.4f ' %
+                        (i + 1, train_acc1, train_acc5, test_acc1, int(args.num_classes/2), test_acc5))
         if not ontest:
-            print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f ' %
-                            (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5),"(nearest neighbor accuracy)")
+            print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top%d: %.4f ' %
+                            (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, int(args.num_classes/2), near_test_acc5),"(nearest neighbor accuracy)")
         else:
-            print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top5: %.4f | Test ETF test top1: %.4f | Test ETF test top5: %.4f ' %
-                            (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, near_test_acc5, near_test_acc1_ontest, near_test_acc5_ontest),"(nearest neighbor accuracy)")
+            print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top%d: %.4f | Test ETF test top1: %.4f | Test ETF test top%d: %.4f ' %
+                            (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, int(args.num_classes/2),near_test_acc5, near_test_acc1_ontest, int(args.num_classes/2),near_test_acc5_ontest),"(nearest neighbor accuracy)")
         
         if 'wandb' in sys.modules:
             if ontest:
