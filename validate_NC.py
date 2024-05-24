@@ -58,10 +58,13 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
         
+    if args.num_classes != 10 or len(args.classes_to_include) != 10:
+        MNIST_TRAIN_SAMPLES = [MNIST_TRAIN_SAMPLES[i] for i in args.classes_to_include]
+        MNIST_TEST_SAMPLES = [MNIST_TEST_SAMPLES[i] for i in args.classes_to_include] 
+        CIFAR10_TRAIN_SAMPLES = [CIFAR10_TRAIN_SAMPLES[i] for i in args.classes_to_include]
+        CIFAR10_TEST_SAMPLES = [CIFAR10_TEST_SAMPLES[i] for i in args.classes_to_include]
+        
     if args.dataset == 'mnist':
-        if args.num_classes != 10 or len(args.classes_to_include) != 10:
-            MNIST_TRAIN_SAMPLES = [MNIST_TRAIN_SAMPLES[i] for i in args.classes_to_include]
-            MNIST_TEST_SAMPLES = [MNIST_TEST_SAMPLES[i] for i in args.classes_to_include] 
         if isTrain:
             mu_G /= sum(MNIST_TRAIN_SAMPLES)
             for i in range(len(MNIST_TRAIN_SAMPLES)):
@@ -70,10 +73,7 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
             mu_G /= sum(MNIST_TEST_SAMPLES)
             for i in range(len(MNIST_TEST_SAMPLES)):
                 mu_c_dict[i] /= MNIST_TEST_SAMPLES[i]
-    elif args.dataset == 'cifar10' or args.dataset == 'cifar10_random':
-        if args.num_classes != 10 or len(args.classes_to_include) != 10:
-            CIFAR10_TRAIN_SAMPLES = [CIFAR10_TRAIN_SAMPLES[i] for i in args.classes_to_include]
-            CIFAR10_TEST_SAMPLES = [CIFAR10_TEST_SAMPLES[i] for i in args.classes_to_include]
+    elif args.dataset == 'cifar10' or args.dataset == 'cifar10_random': 
         if isTrain:
             mu_G /= sum(CIFAR10_TRAIN_SAMPLES)
             for i in range(len(CIFAR10_TRAIN_SAMPLES)):
