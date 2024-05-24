@@ -78,7 +78,6 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
             mu_G /= sum(CIFAR10_TRAIN_SAMPLES)
             for i in range(len(CIFAR10_TRAIN_SAMPLES)):
                 mu_c_dict[i] /= CIFAR10_TRAIN_SAMPLES[i]
-                if args.
         else:
             mu_G /= sum(CIFAR10_TEST_SAMPLES)
             for i in range(len(CIFAR10_TEST_SAMPLES)):
