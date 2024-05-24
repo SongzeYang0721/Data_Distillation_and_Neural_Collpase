@@ -67,7 +67,7 @@ def trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, schedu
         model.eval()
         with torch.no_grad():
             outputs = model(inputs)
-        prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, int(args.args.num_classes/2)))
+        prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, int(args.num_classes/2)))
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
