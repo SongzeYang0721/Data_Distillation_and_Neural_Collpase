@@ -38,6 +38,7 @@ class train_args:
 
         # Directory Setting
         self.dataset = dataset
+        self.num_classes = num_classes
         self.data_dir = data_dir
         self.uid = uid
         self.force = force # force to override the given uid
@@ -55,22 +56,14 @@ class train_args:
         self.gamma = gamma # learning rate decay factor for step decay
         self.optimizer = optimizer
         self.weight_decay = weight_decay
+        
         # The following two should be specified when testing adding wd on Features
         self.sep_decay = sep_decay # whether to separate weight decay to last feature and last weights
         self.feature_decay_rate = feature_decay_rate # weight decay for last layer feature
         self.history_size = history_size # history size for LBFGS
         self.ghost_batch = ghost_batch # ghost size for LBFGS variants
         self.device = device
-        
-        # distill setting
-        self.distill_steps = distill_steps
-        self.distill_epochs = distill_epochs
-        self.num_classes = num_classes
-        self.distilled_images_per_class_per_step = distilled_images_per_class_per_step
-        self.distill_lr = distill_lr
-        self.decay_epochs = decay_epochs,
-        self.decay_factor = decay_factor
-        
+                
         if self.uid is None:
             unique_id = str(np.random.randint(0, 100000))
             print("revise the unique id to a random number " + str(unique_id))

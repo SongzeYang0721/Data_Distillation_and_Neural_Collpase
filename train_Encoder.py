@@ -67,7 +67,7 @@ def trainer_1st(args, model, trainloader, epoch_id, criterion, optimizer, schedu
         model.eval()
         with torch.no_grad():
             outputs = model(inputs)
-        prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, 5))
+        prec1, prec5 = compute_accuracy(outputs[0].detach().data, targets.detach().data, topk=(1, int(args.args.num_classes/2)))
         losses.update(loss.item(), inputs.size(0))
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
@@ -123,7 +123,7 @@ def trainer_2nd(args, model, trainloader, epoch_id, criterion, optimizer):
         model.eval()
         with torch.no_grad():
             outputs = model(inputs)
-        prec1, prec5 = compute_accuracy(outputs[0].data, targets.data, topk=(1, 5))
+        prec1, prec5 = compute_accuracy(outputs[0].data, targets.data, topk=(1, int(args.num_classes/2)))
 
         if args.loss == 'CrossEntropy':
             loss = criterion(outputs[0], targets) + weight_decay(args, model)
@@ -139,8 +139,8 @@ def trainer_2nd(args, model, trainloader, epoch_id, criterion, optimizer):
         #     print_and_save('[epoch: %d] (%d/%d) | Loss: %.4f | top1: %.4f | top5: %.4f ' %
         #                    (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, top1.avg, top5.avg), logfile)
     
-    print('[epoch: %d] (%d/%d) | Loss: %.4f | top1: %.4f | top5: %.4f ' %
-          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, top1.avg, top5.avg))
+    print('[epoch: %d] (%d/%d) | Loss: %.4f | top1: %.4f | top%d: %.4f ' %
+          (epoch_id + 1, batch_idx + 1, len(trainloader), losses.avg, top1.avg, int(args.num_classes/2) ,top5.avg))
 
     if 'wandb' in sys.modules:
         wandb.log({
