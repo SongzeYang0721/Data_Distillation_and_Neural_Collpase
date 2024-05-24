@@ -14,10 +14,9 @@ class train_args:
                  weight_decay=5e-4, sep_decay=False, feature_decay_rate=1e-4,
                  history_size=10, ghost_batch=128, device = "cpu",
                  
-                 # distill setting
-                 distill_steps=10, distill_epochs=3,
-                 distilled_images_per_class_per_step=1, num_classes = None,
-                 distill_lr = 0.02, decay_epochs = 40, decay_factor = 0.5
+                 # additional data setting
+                 num_classes = None,
+                 classes_to_include = None,
                 ):
         
         # parse train arguments
@@ -39,6 +38,7 @@ class train_args:
         # Directory Setting
         self.dataset = dataset
         self.num_classes = num_classes
+        self.classes_to_include = classes_to_include
         self.data_dir = data_dir
         self.uid = uid
         self.force = force # force to override the given uid
