@@ -132,7 +132,7 @@ def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=
 
 
     if classes_to_include != None:
-        trainset = FilteredDataset(testset, classes_to_include)
+        testset = FilteredDataset(testset, classes_to_include)
         num_classes = len(classes_to_include)
     testloader = DataLoader(testset, batch_size=batch_size, shuffle=False, num_workers=1)
 
