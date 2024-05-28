@@ -95,7 +95,7 @@ def AE_trainer_2nd(args, autoencoder, trainloader, epoch_id, criterion, optimize
         })
 
 
-def AE_train(args, model, trainloader, visualize = False, save_encoder = False, args_encoder = None):
+def AE_train(args, model, trainloader, visualize = False, save_encoder = False, save_decoder = True, args_encoder = None):
 
     set_seed(manualSeed = args.seed)
     
@@ -129,10 +129,10 @@ def AE_train(args, model, trainloader, visualize = False, save_encoder = False, 
                 visualize_images(inputs.cpu(),labels.cpu(), False)
                 visualize_images(reconstruction.cpu(),labels.cpu(), False)
                 del reconstruction, inputs, labels
-
-        if (epoch_id+1) % 40 == 0:
-            torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         if save_encoder:
             torch.save(model.encoder.state_dict(), args_encoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
+        if save_decoder:
+            if (epoch_id+1) % 40 == 0:
+                torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
 
