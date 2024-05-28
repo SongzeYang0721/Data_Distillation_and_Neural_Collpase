@@ -171,7 +171,7 @@ class Bottleneck(nn.Module):
         return out
     
 
-class ResNet_deocder(nn.Module):
+class ResNet_decoder(nn.Module):
 
     def __init__(
         self,
@@ -371,76 +371,76 @@ class ResNet_deocder(nn.Module):
 
 
 
-def _resnet_deocder(
+def _resnet_decoder(
     arch: str,
     block: Type[Union[BasicBlock, Bottleneck]],
     layers: List[int],
     pretrained: bool,
     progress: bool,
     **kwargs: Any
-) -> ResNet_deocder:
-    model = ResNet_deocder(block, layers, **kwargs)
+) -> ResNet_decoder:
+    model = ResNet_decoder(block, layers, **kwargs)
     if pretrained:
         sys.exit('No pre-trained model is allowed here!')
     return model
 
 
-def resnet18_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def resnet18_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-18 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet18_decoder', BasicBlock, [2, 2, 2, 2], pretrained, progress,
+    return _resnet_decoder('resnet18_decoder', BasicBlock, [2, 2, 2, 2], pretrained, progress,
                    **kwargs)
 
 
-def resnet34_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def resnet34_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-34 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet34_decoder', BasicBlock, [3, 4, 6, 3], pretrained, progress,
+    return _resnet_decoder('resnet34_decoder', BasicBlock, [3, 4, 6, 3], pretrained, progress,
                    **kwargs)
 
 
-def resnet50_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def resnet50_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-50 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet50_decoder', Bottleneck, [3, 4, 6, 3], pretrained, progress,
+    return _resnet_decoder('resnet50_decoder', Bottleneck, [3, 4, 6, 3], pretrained, progress,
                    **kwargs)
 
 
-def resnet101_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def resnet101_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-101 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet101_decoder', Bottleneck, [3, 4, 23, 3], pretrained, progress,
+    return _resnet_decoder('resnet101_decoder', Bottleneck, [3, 4, 23, 3], pretrained, progress,
                    **kwargs)
 
 
-def resnet152_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def resnet152_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-152 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet152_decoder', Bottleneck, [3, 8, 36, 3], pretrained, progress,
+    return _resnet_decoder('resnet152_decoder', Bottleneck, [3, 8, 36, 3], pretrained, progress,
                    **kwargs)
 
 
-def resnext50_32x4d_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def resnext50_32x4d_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNeXt-50 32x4d model from
     `"Aggregated Residual Transformation for Deep Neural Networks" <https://arxiv.org/pdf/1611.05431.pdf>`_.
     Args:
@@ -449,11 +449,11 @@ def resnext50_32x4d_deocder(pretrained: bool = False, progress: bool = True, **k
     """
     kwargs['groups'] = 32
     kwargs['width_per_group'] = 4
-    return _resnet_deocder('resnext50_32x4d_decoder', Bottleneck, [3, 4, 6, 3],
+    return _resnet_decoder('resnext50_32x4d_decoder', Bottleneck, [3, 4, 6, 3],
                    pretrained, progress, **kwargs)
 
 
-def resnext101_32x8d_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def resnext101_32x8d_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNeXt-101 32x8d model from
     `"Aggregated Residual Transformation for Deep Neural Networks" <https://arxiv.org/pdf/1611.05431.pdf>`_.
     Args:
@@ -462,11 +462,11 @@ def resnext101_32x8d_deocder(pretrained: bool = False, progress: bool = True, **
     """
     kwargs['groups'] = 32
     kwargs['width_per_group'] = 8
-    return _resnet_deocder('resnext101_32x8d_decoder', Bottleneck, [3, 4, 23, 3],
+    return _resnet_decoder('resnext101_32x8d_decoder', Bottleneck, [3, 4, 23, 3],
                    pretrained, progress, **kwargs)
 
 
-def wide_resnet50_2_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def wide_resnet50_2_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""Wide ResNet-50-2 model from
     `"Wide Residual Networks" <https://arxiv.org/pdf/1605.07146.pdf>`_.
     The model is the same as ResNet except for the bottleneck number of channels
@@ -478,11 +478,11 @@ def wide_resnet50_2_deocder(pretrained: bool = False, progress: bool = True, **k
         progress (bool): If True, displays a progress bar of the download to stderr
     """
     kwargs['width_per_group'] = 64 * 2
-    return _resnet_deocder('wide_resnet50_2_decoder', Bottleneck, [3, 4, 6, 3],
+    return _resnet_decoder('wide_resnet50_2_decoder', Bottleneck, [3, 4, 6, 3],
                    pretrained, progress, **kwargs)
 
 
-def wide_resnet101_2_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
+def wide_resnet101_2_decoder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""Wide ResNet-101-2 model from
     `"Wide Residual Networks" <https://arxiv.org/pdf/1605.07146.pdf>`_.
     The model is the same as ResNet except for the bottleneck number of channels
@@ -494,5 +494,5 @@ def wide_resnet101_2_deocder(pretrained: bool = False, progress: bool = True, **
         progress (bool): If True, displays a progress bar of the download to stderr
     """
     kwargs['width_per_group'] = 64 * 2
-    return _resnet_deocder('wide_resnet101_2_decoder', Bottleneck, [3, 4, 23, 3],
+    return _resnet_decoder('wide_resnet101_2_decoder', Bottleneck, [3, 4, 23, 3],
                    pretrained, progress, **kwargs)
