@@ -385,7 +385,7 @@ def _resnet_deocder(
     return model
 
 
-def resnet18_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def resnet18_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-18 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
@@ -396,7 +396,7 @@ def resnet18_deocder(pretrained: bool = False, progress: bool = True, **kwargs: 
                    **kwargs)
 
 
-def resnet34_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def resnet34_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-34 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
@@ -407,7 +407,7 @@ def resnet34_deocder(pretrained: bool = False, progress: bool = True, **kwargs: 
                    **kwargs)
 
 
-def resnet50_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def resnet50_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-50 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
@@ -418,7 +418,7 @@ def resnet50_deocder(pretrained: bool = False, progress: bool = True, **kwargs: 
                    **kwargs)
 
 
-def resnet101_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def resnet101_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-101 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
@@ -429,7 +429,7 @@ def resnet101_deocder(pretrained: bool = False, progress: bool = True, **kwargs:
                    **kwargs)
 
 
-def resnet152_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def resnet152_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNet-152 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
@@ -440,7 +440,7 @@ def resnet152_deocder(pretrained: bool = False, progress: bool = True, **kwargs:
                    **kwargs)
 
 
-def resnext50_32x4d_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def resnext50_32x4d_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNeXt-50 32x4d model from
     `"Aggregated Residual Transformation for Deep Neural Networks" <https://arxiv.org/pdf/1611.05431.pdf>`_.
     Args:
@@ -453,7 +453,7 @@ def resnext50_32x4d_deocder(pretrained: bool = False, progress: bool = True, **k
                    pretrained, progress, **kwargs)
 
 
-def resnext101_32x8d_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def resnext101_32x8d_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""ResNeXt-101 32x8d model from
     `"Aggregated Residual Transformation for Deep Neural Networks" <https://arxiv.org/pdf/1611.05431.pdf>`_.
     Args:
@@ -466,7 +466,7 @@ def resnext101_32x8d_deocder(pretrained: bool = False, progress: bool = True, **
                    pretrained, progress, **kwargs)
 
 
-def wide_resnet50_2_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def wide_resnet50_2_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""Wide ResNet-50-2 model from
     `"Wide Residual Networks" <https://arxiv.org/pdf/1605.07146.pdf>`_.
     The model is the same as ResNet except for the bottleneck number of channels
@@ -482,7 +482,7 @@ def wide_resnet50_2_deocder(pretrained: bool = False, progress: bool = True, **k
                    pretrained, progress, **kwargs)
 
 
-def wide_resnet101_2_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet:
+def wide_resnet101_2_deocder(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> ResNet_deocder:
     r"""Wide ResNet-101-2 model from
     `"Wide Residual Networks" <https://arxiv.org/pdf/1605.07146.pdf>`_.
     The model is the same as ResNet except for the bottleneck number of channels
