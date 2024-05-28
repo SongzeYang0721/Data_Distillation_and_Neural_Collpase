@@ -392,7 +392,7 @@ def resnet18_deocder(pretrained: bool = False, progress: bool = True, **kwargs: 
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet18', BasicBlock, [2, 2, 2, 2], pretrained, progress,
+    return _resnet_deocder('resnet18_decoder', BasicBlock, [2, 2, 2, 2], pretrained, progress,
                    **kwargs)
 
 
@@ -403,7 +403,7 @@ def resnet34_deocder(pretrained: bool = False, progress: bool = True, **kwargs: 
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet34', BasicBlock, [3, 4, 6, 3], pretrained, progress,
+    return _resnet_deocder('resnet34_decoder', BasicBlock, [3, 4, 6, 3], pretrained, progress,
                    **kwargs)
 
 
@@ -414,7 +414,7 @@ def resnet50_deocder(pretrained: bool = False, progress: bool = True, **kwargs: 
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet50', Bottleneck, [3, 4, 6, 3], pretrained, progress,
+    return _resnet_deocder('resnet50_decoder', Bottleneck, [3, 4, 6, 3], pretrained, progress,
                    **kwargs)
 
 
@@ -425,7 +425,7 @@ def resnet101_deocder(pretrained: bool = False, progress: bool = True, **kwargs:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet101', Bottleneck, [3, 4, 23, 3], pretrained, progress,
+    return _resnet_deocder('resnet101_decoder', Bottleneck, [3, 4, 23, 3], pretrained, progress,
                    **kwargs)
 
 
@@ -436,7 +436,7 @@ def resnet152_deocder(pretrained: bool = False, progress: bool = True, **kwargs:
         pretrained (bool): If True, returns a model pre-trained on ImageNet
         progress (bool): If True, displays a progress bar of the download to stderr
     """
-    return _resnet_deocder('resnet152', Bottleneck, [3, 8, 36, 3], pretrained, progress,
+    return _resnet_deocder('resnet152_decoder', Bottleneck, [3, 8, 36, 3], pretrained, progress,
                    **kwargs)
 
 
@@ -449,7 +449,7 @@ def resnext50_32x4d_deocder(pretrained: bool = False, progress: bool = True, **k
     """
     kwargs['groups'] = 32
     kwargs['width_per_group'] = 4
-    return _resnet_deocder('resnext50_32x4d', Bottleneck, [3, 4, 6, 3],
+    return _resnet_deocder('resnext50_32x4d_decoder', Bottleneck, [3, 4, 6, 3],
                    pretrained, progress, **kwargs)
 
 
@@ -462,7 +462,7 @@ def resnext101_32x8d_deocder(pretrained: bool = False, progress: bool = True, **
     """
     kwargs['groups'] = 32
     kwargs['width_per_group'] = 8
-    return _resnet_deocder('resnext101_32x8d', Bottleneck, [3, 4, 23, 3],
+    return _resnet_deocder('resnext101_32x8d_decoder', Bottleneck, [3, 4, 23, 3],
                    pretrained, progress, **kwargs)
 
 
@@ -478,7 +478,7 @@ def wide_resnet50_2_deocder(pretrained: bool = False, progress: bool = True, **k
         progress (bool): If True, displays a progress bar of the download to stderr
     """
     kwargs['width_per_group'] = 64 * 2
-    return _resnet_deocder('wide_resnet50_2', Bottleneck, [3, 4, 6, 3],
+    return _resnet_deocder('wide_resnet50_2_decoder', Bottleneck, [3, 4, 6, 3],
                    pretrained, progress, **kwargs)
 
 
@@ -494,5 +494,5 @@ def wide_resnet101_2_deocder(pretrained: bool = False, progress: bool = True, **
         progress (bool): If True, displays a progress bar of the download to stderr
     """
     kwargs['width_per_group'] = 64 * 2
-    return _resnet_deocder('wide_resnet101_2', Bottleneck, [3, 4, 23, 3],
+    return _resnet_deocder('wide_resnet101_2_decoder', Bottleneck, [3, 4, 23, 3],
                    pretrained, progress, **kwargs)
