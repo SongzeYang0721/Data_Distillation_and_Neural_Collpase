@@ -21,12 +21,11 @@ CIFAR10_TEST_SAMPLES = 10 * (1000,)
 
 def process_samples(args):
     global MNIST_TRAIN_SAMPLES, MNIST_TEST_SAMPLES, CIFAR10_TRAIN_SAMPLES, CIFAR10_TEST_SAMPLES
+    MNIST_TRAIN_SAMPLES = [MNIST_TRAIN_SAMPLES[i] for i in args.classes_to_include]
+    MNIST_TEST_SAMPLES = [MNIST_TEST_SAMPLES[i] for i in args.classes_to_include]
+    CIFAR10_TRAIN_SAMPLES = [CIFAR10_TRAIN_SAMPLES[i] for i in args.classes_to_include]
+    CIFAR10_TEST_SAMPLES = [CIFAR10_TEST_SAMPLES[i] for i in args.classes_to_include]
 
-    if args.num_classes != 10 or len(args.classes_to_include) != 10:
-        MNIST_TRAIN_SAMPLES = [MNIST_TRAIN_SAMPLES[i] for i in args.classes_to_include]
-        MNIST_TEST_SAMPLES = [MNIST_TEST_SAMPLES[i] for i in args.classes_to_include]
-        CIFAR10_TRAIN_SAMPLES = [CIFAR10_TRAIN_SAMPLES[i] for i in args.classes_to_include]
-        CIFAR10_TEST_SAMPLES = [CIFAR10_TEST_SAMPLES[i] for i in args.classes_to_include]
 
 class FCFeatures:
     def __init__(self):
@@ -67,7 +66,7 @@ def compute_info(args, model, fc_features, dataloader, isTrain=True):
         top1.update(prec1.item(), inputs.size(0))
         top5.update(prec5.item(), inputs.size(0))
         
-    if args.num_classes != len(args.classes_to_include) and args.num_classes != 10:
+    if len(MNIST_TRAIN_SAMPLES) != len(args.classes_to_include):
         process_samples(args)
         
     if args.dataset == 'mnist':
