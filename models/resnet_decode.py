@@ -5,7 +5,7 @@ import torch.nn as nn
 from typing import Type, Any, Callable, Union, List, Optional
 
 
-__all__ = ['ResNet', 'resnet18_decoder', 'resnet34_decoder', 'resnet50_decoder', 'resnet101_decoder',
+__all__ = ['ResNet_decoder', 'resnet18_decoder', 'resnet34_decoder', 'resnet50_decoder', 'resnet101_decoder',
            'resnet152_decoder', 'resnext50_32x4d_decoder', 'resnext101_32x8d_decoder',
            'wide_resnet50_2_decoder', 'wide_resnet101_2_decoder']
 
@@ -186,7 +186,7 @@ class ResNet_decoder(nn.Module):
         fixdim: int = False,
         SOTA: bool = False,
     ) -> None:
-        super(ResNet, self).__init__()
+        super(ResNet_decoder, self).__init__()
         if norm_layer is None:
             norm_layer = nn.BatchNorm2d
         self._norm_layer = norm_layer
