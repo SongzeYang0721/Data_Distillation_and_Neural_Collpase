@@ -285,14 +285,14 @@ def evaluate_NC(args,load_path,model,trainloader,testloader,nearest_neighbor = F
         print('[epoch: %d] | collapsemetric: %.4f | ETF metric: %.4f | WH metric: %.4f | Wh_b metric: %.4f ' %
                         (i + 1, collapse_metric, ETF_metric, WH_relation_metric, Wh_b_relation_metric))
 
-        print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top%d: %.4f ' %
-                        (i + 1, train_acc1, train_acc5, test_acc1, int(args.num_classes/2), test_acc5))
+        print('[epoch: %d] | train top1: %.4f | train top%d: %.4f | test top1: %.4f | test top%d: %.4f ' %
+                        (i + 1, train_acc1, int(args.num_classes/2), train_acc5, test_acc1, int(args.num_classes/2), test_acc5))
         if not ontest:
             print('[epoch: %d] | train top1: %.4f | train top%d: %.4f | test top1: %.4f | test top%d: %.4f ' %
                             (i + 1, near_train_acc1, int(args.num_classes/2), near_train_acc5, near_test_acc1, int(args.num_classes/2), near_test_acc5),"(nearest neighbor accuracy)")
         else:
-            print('[epoch: %d] | train top1: %.4f | train top5: %.4f | test top1: %.4f | test top%d: %.4f | Test ETF test top1: %.4f | Test ETF test top%d: %.4f ' %
-                            (i + 1, near_train_acc1, near_train_acc5, near_test_acc1, int(args.num_classes/2),near_test_acc5, near_test_acc1_ontest, int(args.num_classes/2), near_test_acc5_ontest),"(nearest neighbor accuracy)")
+            print('[epoch: %d] | train top1: %.4f | train top%d: %.4f | test top1: %.4f | test top%d: %.4f | Test ETF test top1: %.4f | Test ETF test top%d: %.4f ' %
+                            (i + 1, near_train_acc1, int(args.num_classes/2), near_train_acc5, near_test_acc1, int(args.num_classes/2),near_test_acc5, near_test_acc1_ontest, int(args.num_classes/2), near_test_acc5_ontest),"(nearest neighbor accuracy)")
         
         if 'wandb' in sys.modules:
             if ontest:
