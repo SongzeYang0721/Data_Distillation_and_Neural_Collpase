@@ -217,9 +217,9 @@ class ResNet_decoder(nn.Module):
         # self.unmaxpool = nn.Upsample(scale_factor=2, mode='bilinear') # NOTE: invert max pooling
 
         self.layer1 = self._make_layer(block, 64, layers[0])  # No upsampling in the first layer
-        self.layer2 = self._make_layer(block, 128, layers[1], stride = 2, output_padding = 1,
+        self.layer2 = self._make_layer(block, 128*2, layers[1], stride = 2, output_padding = 1,
                                        dilate=replace_stride_with_dilation[0])
-        self.layer3 = self._make_layer(block, 256, layers[2], stride = 2, output_padding = 1,
+        self.layer3 = self._make_layer(block, 256*4, layers[2], stride = 2, output_padding = 1,
                                        dilate=replace_stride_with_dilation[1])
         
         # if not fixdim:
@@ -347,13 +347,13 @@ class ResNet_decoder(nn.Module):
 
     def _forward_impl(self, x: Tensor):
 
-        x = x.view(x.shape[0], x.shape[1], 8, 8)
+        x = x.view(x.shape[0], x.shape[1], 1, 1)
         # x = self.unnormalize(x)
         # x = self.unavgpool(x)
 
-        # x = self.layer4(x)
-        # x = self.layer3(x)
-        # x = self.layer2(x)
+        x = self.layer4(x)
+        x = self.layer3(x)
+        x = self.layer2(x)
         x = self.layer1(x)
 
         if not self.SOTA:
