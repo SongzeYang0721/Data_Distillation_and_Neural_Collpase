@@ -347,13 +347,13 @@ class ResNet_decoder(nn.Module):
 
     def _forward_impl(self, x: Tensor):
 
-        x = x.view(x.shape[0], x.shape[1], 1, 1)
+        x = x.view(x.shape[0], x.shape[1], 8, 8)
         # x = self.unnormalize(x)
         # x = self.unavgpool(x)
 
-        x = self.layer4(x)
-        x = self.layer3(x)
-        x = self.layer2(x)
+        # x = self.layer4(x)
+        # x = self.layer3(x)
+        # x = self.layer2(x)
         x = self.layer1(x)
 
         if not self.SOTA:
@@ -361,8 +361,8 @@ class ResNet_decoder(nn.Module):
 
         x = self.deconv1(x)
         x = self.bn1(x)
-        x = self.relu(x)
-        # x = self.sigmoid(x)
+        # x = self.relu(x)
+        x = self.sigmoid(x)
         
         return x
     

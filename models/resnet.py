@@ -235,7 +235,7 @@ class ResNet(nn.Module):
                     if fixdim:
                         m.weight = nn.Parameter(weight)
                     else:
-                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 32*32*3 * block.expansion)))
+                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, self.inplanes*8*8 * block.expansion)))
                         # m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 256 * block.expansion)))
                     m.weight.requires_grad_(False)
 
@@ -294,13 +294,13 @@ class ResNet(nn.Module):
             x = self.maxpool(x)
 
         x = self.layer1(x)
-        x = self.layer2(x)
-        x = self.layer3(x)
-        x = self.layer4(x)
+        # x = self.layer2(x)
+        # x = self.layer3(x)
+        # x = self.layer4(x)
 
         # return x
         
-        x = self.avgpool(x)
+        # x = self.avgpool(x)
         x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
         features = F.normalize(x) # normalized H ready to feed to the linear layer
         x = self.fc(x)
