@@ -132,7 +132,7 @@ def AE_train(args, model, trainloader, visualize = False, save_encoder = False, 
         if save_encoder:
             torch.save(model.encoder.state_dict(), args_encoder.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         if save_decoder:
-            if (epoch_id+1) % 40 == 0:
+            if (epoch_id+1) % 20 == 0:
                 torch.save(model.decoder.state_dict(), args.save_path + "/epoch_" + str(epoch_id + 1).zfill(3) + ".pt")
         print(f"Memory cached in GPU: {torch.cuda.memory_reserved()}")
 
