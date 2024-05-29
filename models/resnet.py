@@ -235,7 +235,7 @@ class ResNet(nn.Module):
                     if fixdim:
                         m.weight = nn.Parameter(weight)
                     else:
-                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, self.inplanes*8*8 * block.expansion)))
+                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 64*8*8 * block.expansion)))
                         # m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 256 * block.expansion)))
                     m.weight.requires_grad_(False)
 
