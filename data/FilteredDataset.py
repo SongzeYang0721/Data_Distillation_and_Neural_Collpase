@@ -1,5 +1,6 @@
 import torch
 from torch.utils.data import Dataset
+
 class FilteredDataset(Dataset):
     def __init__(self, dataset, classes_to_include):
         self.dataset = dataset
@@ -18,3 +19,15 @@ class FilteredDataset(Dataset):
         image, label = self.dataset[actual_idx]
         remapped_label = self.label_map[label]
         return image, remapped_label
+
+class SubsetDataset(Dataset):
+    def __init__(self, dataset, indices):
+        self.dataset = dataset
+        self.indices = indices
+
+    def __len__(self):
+        return len(self.indices)
+
+    def __getitem__(self, idx):
+        actual_idx = self.indices[idx]
+        return self.dataset[actual_idx]
