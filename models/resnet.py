@@ -195,9 +195,9 @@ class ResNet(nn.Module):
         # self.maxpool = nn.Conv2d(64, 64, kernel_size=3, stride=2, padding=1) # height and width 16 ----> 8
 
         self.layer1 = self._make_layer(block, 64, layers[0])
-        self.layer2 = self._make_layer(block, 128*2, layers[1], stride=2,
+        self.layer2 = self._make_layer(block, 128, layers[1], stride=2,
                                        dilate=replace_stride_with_dilation[0])
-        self.layer3 = self._make_layer(block, 256*4, layers[2], stride=2, 
+        self.layer3 = self._make_layer(block, 256, layers[2], stride=2, 
                                            dilate=replace_stride_with_dilation[1])
         
         # if not fixdim:
@@ -211,12 +211,12 @@ class ResNet(nn.Module):
         #     self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
         #     self.fc = nn.Linear(num_classes, num_classes, bias=fc_bias)
         if not fixdim:
-            self.layer4 = self._make_layer(block, 32*32*3, layers[3], stride=2,
+            self.layer4 = self._make_layer(block, 512, layers[3], stride=2,
                                            dilate=replace_stride_with_dilation[2])
             self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
             self.fc = nn.Linear(512 * block.expansion, num_classes, bias=fc_bias)
         else:
-            self.layer4 = self._make_layer(block, 32*32*3, layers[3], stride=2,
+            self.layer4 = self._make_layer(block, 512, layers[3], stride=2,
                                            dilate=replace_stride_with_dilation[2], outdim=num_classes)
             self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
             self.fc = nn.Linear(num_classes, num_classes, bias=fc_bias)
@@ -235,7 +235,7 @@ class ResNet(nn.Module):
                     if fixdim:
                         m.weight = nn.Parameter(weight)
                     else:
-                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 32*32*3 * block.expansion)))
+                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 512 * block.expansion)))
                         # m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 256 * block.expansion)))
                     m.weight.requires_grad_(False)
 
