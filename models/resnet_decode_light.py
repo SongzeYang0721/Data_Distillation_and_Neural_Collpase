@@ -86,10 +86,13 @@ class LightDecoder(nn.Module):
         self,
         block: Type[LightBasicBlockDec],
         layers: List[int],
+        num_classes: int = 1000,
         zero_init_residual: bool = False,
         groups: int = 1,
         width_per_group: int = 64,
-        norm_layer: Optional[Callable[..., nn.Module]] = None
+        norm_layer: Optional[Callable[..., nn.Module]] = None,
+        fixdim: int = False,
+        SOTA: bool = False
     ) -> None:
         super().__init__()
         if norm_layer is None:

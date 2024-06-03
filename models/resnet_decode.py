@@ -184,7 +184,7 @@ class ResNet_decoder(nn.Module):
         replace_stride_with_dilation: Optional[List[bool]] = None,
         norm_layer: Optional[Callable[..., nn.Module]] = None,
         fixdim: int = False,
-        SOTA: bool = False,
+        SOTA: bool = False
     ) -> None:
         super(ResNet_decoder, self).__init__()
         if norm_layer is None:
