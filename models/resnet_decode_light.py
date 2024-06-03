@@ -173,6 +173,7 @@ class LightDecoder(nn.Module):
 
     def _forward_impl(self, x: Tensor) -> Tensor:
         
+        x = x.view(x.shape[0], 64, 8, 8)
         
         x = self.layer3(x)
         x = self.layer2(x)
