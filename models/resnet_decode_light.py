@@ -216,7 +216,7 @@ def resnet18_decoder_light(pretrained: bool = False, progress: bool = True, **kw
                    **kwargs)
 
 
-def resnet34_decoder_light(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> LightDecoder:
+def resnet20_decoder_light(pretrained: bool = False, progress: bool = True, **kwargs: Any) -> LightDecoder:
     r"""ResNet-34 model from
     `"Deep Residual Learning for Image Recognition" <https://arxiv.org/pdf/1512.03385.pdf>`_.
     Args:
