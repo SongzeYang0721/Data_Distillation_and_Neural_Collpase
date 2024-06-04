@@ -125,14 +125,13 @@ def make_dataset(dataset_name, data_dir, batch_size=128, sample_size=None, SOTA=
         # trainloader = DataLoader(
         #     trainset, batch_size=batch_size, sampler=SubsetRandomSampler(train_indices), num_workers=1)
         subset_dataset = SubsetDataset(trainset, indices)
-        trainloader = DataLoader(
-            subset_dataset, batch_size=batch_size, shuffle=True, num_workers=1)
+        trainloader = DataLoader(subset_dataset, batch_size=batch_size, shuffle=False, num_workers=1)
         print("len(trainloader)", len(trainloader))
         print("len(trainloader)", len(trainloader.dataset))
     else:
         if classes_to_include != None:
             trainset = FilteredDataset(trainset, classes_to_include)
-        trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=True, num_workers=1)
+        trainloader = DataLoader(trainset, batch_size=batch_size, shuffle=False, num_workers=1)
 
 
     if classes_to_include != None:
