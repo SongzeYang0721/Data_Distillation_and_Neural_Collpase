@@ -249,8 +249,13 @@ class ResNet(nn.Module):
                 elif isinstance(m, BasicBlock):
                     nn.init.constant_(m.bn2.weight, 0)  # type: ignore[arg-type]
 
-    def _make_layer(self, block: Type[Union[BasicBlock, Bottleneck]], planes: int, blocks: int,
-                    stride: int = 1, dilate: bool = False, outdim: int = 0) -> nn.Sequential:
+    def _make_layer(self, 
+                    block: Type[Union[BasicBlock, Bottleneck]], 
+                    planes: int, 
+                    blocks: int,
+                    stride: int = 1, 
+                    dilate: bool = False, 
+                    outdim: int = 0) -> nn.Sequential:
         norm_layer = self._norm_layer
         downsample = None
         previous_dilation = self.dilation

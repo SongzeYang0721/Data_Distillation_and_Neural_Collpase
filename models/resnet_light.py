@@ -44,6 +44,7 @@ class LightBasicBlockEnc(nn.Module):
         base_width: int = 64,
         dilation: int = 1,
         norm_layer: Optional[Callable[..., nn.Module]] = None,
+        outdim: int = 0
     ) -> None:
         super().__init__()
         if norm_layer is None:
@@ -56,12 +57,19 @@ class LightBasicBlockEnc(nn.Module):
         self.conv1 = conv3x3(inplanes, planes, stride)
         self.bn1 = norm_layer(planes)
         self.relu = nn.ReLU(inplace=True)
-        self.conv2 = conv3x3(planes, planes)
-        self.bn2 = norm_layer(planes)
+        if outdim == 0:
+            self.conv2 = conv3x3(planes, planes)
+            self.bn2 = norm_layer(planes)
+        else:
+            self.conv2 = conv3x3(planes, outdim)
+            self.bn2 = norm_layer(outdim)
+        
         self.downsample = downsample
+        self.stride = stride
 
     def forward(self, x: Tensor) -> Tensor:
         identity = x
+        
         out = self.conv1(x)
         out = self.bn1(out)
         out = self.relu(out)
@@ -129,12 +137,14 @@ class LightEncoder(nn.Module):
         
         self.layer1 = self._make_layer(block, 16, layers[0])
         self.layer2 = self._make_layer(block, 32, layers[1], stride=2, dilate=replace_stride_with_dilation[0])
-        self.layer3 = self._make_layer(block, 64, layers[2], stride=2, dilate=replace_stride_with_dilation[1])
         
-        # if not fixdim:
-        #     self.fc = nn.Linear(512 * block.expansion, num_classes, bias=fc_bias)
-        # else:
-        #     self.fc = nn.Linear(num_classes, num_classes, bias=fc_bias)
+        if not fixdim:
+            self.layer3 = self._make_layer(block, 64, layers[2], stride=2, dilate=replace_stride_with_dilation[1])
+            self.fc = nn.Linear(64*8*8 * block.expansion, num_classes, bias=fc_bias)
+        else:
+            self.layer3 = self._make_layer(block, 64, layers[2], stride=2, dilate=replace_stride_with_dilation[1],
+                                           outdim=num_classes)
+            self.fc = nn.Linear(num_classes, num_classes, bias=fc_bias)
                 
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
@@ -149,8 +159,7 @@ class LightEncoder(nn.Module):
                     if fixdim:
                         m.weight = nn.Parameter(weight)
                     else:
-                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 512 * block.expansion)))
-                        # m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 256 * block.expansion)))
+                        m.weight = nn.Parameter(torch.mm(weight, torch.eye(num_classes, 64*8*8 * block.expansion)))
                     m.weight.requires_grad_(False)
 
         # Zero-initialize the last BN in each residual branch,
@@ -161,14 +170,13 @@ class LightEncoder(nn.Module):
                 if isinstance(m, LightBasicBlockEnc) and m.bn2.weight is not None:
                     nn.init.constant_(m.bn2.weight, 0)  # type: ignore[arg-type]
 
-    def _make_layer(
-        self,
-        block: Type[LightBasicBlockEnc],
-        planes: int,
-        blocks: int,
-        stride: int = 1,
-        dilate: bool = False,
-    ) -> nn.Sequential:
+    def _make_layer(self,
+                    block: Type[LightBasicBlockEnc],
+                    planes: int,
+                    blocks: int,
+                    stride: int = 1,
+                    dilate: bool = False,
+                    outdim: int = 0) -> nn.Sequential:
         norm_layer = self._norm_layer
         downsample = None
         previous_dilation = self.dilation
@@ -186,11 +194,12 @@ class LightEncoder(nn.Module):
         layers = []
         layers.append(
             block(
-                self.inplanes, planes, stride, downsample, self.groups, self.base_width, previous_dilation, norm_layer
+                self.inplanes, planes, stride, downsample, self.groups, 
+                self.base_width, previous_dilation, norm_layer
             )
         )
         self.inplanes = planes * block.expansion
-        for _ in range(1, blocks):
+        for _ in range(1, blocks-1):
             layers.append(
                 block(
                     self.inplanes,
@@ -201,6 +210,21 @@ class LightEncoder(nn.Module):
                     norm_layer=norm_layer,
                 )
             )
+        downsample = None
+        if outdim != 0:
+            downsample = nn.Sequential(
+                conv1x1(self.inplanes, outdim),
+                norm_layer(outdim),
+            )
+
+        layers.append(block(self.inplanes, 
+                            planes, 
+                            groups=self.groups,
+                            base_width=self.base_width, 
+                            dilation=self.dilation,
+                            norm_layer=norm_layer, 
+                            downsample=downsample, 
+                            outdim=outdim))
 
         return nn.Sequential(*layers)
 
@@ -215,11 +239,11 @@ class LightEncoder(nn.Module):
         
         x = torch.flatten(x, 1) # flatten the second dimension from (n, m, k) to (n, m*k), here m*k = d
         features = F.normalize(x) # normalized H ready to feed to the linear layer
-        # x = self.fc(x)
+        x = self.fc(x)
 
 
-        return x, features
-
+        return x, features 
+         
     def forward(self, x: Tensor) -> Tensor:
         return self._forward_impl(x)
     
