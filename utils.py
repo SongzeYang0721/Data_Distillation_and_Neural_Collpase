@@ -169,6 +169,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 import random
 import torch
+import torchvision
+import torchvision.transforms as transforms
 
 def imshow(img, ax, normalize_data = False, source="cifar10"):
     """ Function to show a torch image on a given Matplotlib axis. """
@@ -291,4 +293,42 @@ def visualize_autoencoder_results(dataloader, device, num_images=5, seed = 512):
         ax.axis('off')
     
     plt.tight_layout()
+    plt.show()
+    
+# Function to find misclassified images
+def find_misclassified_images(model, dataloader):
+    misclassified_images = []
+    misclassified_labels = []
+    misclassified_preds = []
+    
+    device = next(model.parameters()).device
+    
+    model.to(device)
+    model.eval()
+
+    with torch.no_grad():
+        for inputs, labels in dataloader:
+            inputs, labels = inputs.to(device), labels.to(device)
+            outputs = model(inputs)
+            _, preds = torch.max(outputs[0], 1)
+            
+            # Find misclassified images
+            incorrect_mask = preds != labels
+            incorrect_indices = incorrect_mask.nonzero(as_tuple=True)[0]
+            
+            for idx in incorrect_indices:
+                misclassified_images.append(inputs[idx].cpu().numpy())
+                misclassified_labels.append(labels[idx].cpu().item())
+                misclassified_preds.append(preds[idx].cpu().item())
+    
+    return misclassified_images, misclassified_labels, misclassified_preds
+
+# Display some misclassified images
+def show_images(images, labels, preds):
+    plt.figure(figsize=(10, 5))
+    for i in range(len(images)):
+        plt.subplot(1, len(images), i+1)
+        plt.imshow(images[i].transpose(1, 2, 0).squeeze(), cmap='gray')
+        plt.title(f'True: {labels[i]}\nPred: {preds[i]}')
+        plt.axis('off')
     plt.show()
