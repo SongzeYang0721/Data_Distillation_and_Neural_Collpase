@@ -1,5 +1,6 @@
 import os
 import random
+import math
 import torch
 import numpy as np
 import torch.nn as nn
@@ -325,10 +326,13 @@ def find_misclassified_images(model, dataloader):
 
 # Display some misclassified images
 def show_images(images, labels, preds):
-    plt.figure(figsize=(10, 5))
-    for i in range(len(images)):
-        plt.subplot(1, len(images), i+1)
+    num_images = len(images)
+    rows = math.ceil(num_images / 10)
+    plt.figure(figsize=(15, 15))
+    for i in range(num_images):
+        plt.subplot(rows, 10, i + 1)
         plt.imshow(images[i].transpose(1, 2, 0).squeeze(), cmap='gray')
-        plt.title(f'True: {labels[i]}\nPred: {preds[i]}')
+        plt.title(f'True: {labels[i]}\nPred: {preds[i]}', fontsize=8)
         plt.axis('off')
+    plt.tight_layout()
     plt.show()
