@@ -19,7 +19,7 @@ class MLP(nn.Module):
     def forward(self, x):
         x = x.view(x.shape[0], -1)
         x = self.layers(x)
-        features = F.normalize(x)
+        features = x
         x = self.fc(x)
         return x, features
     
