@@ -71,13 +71,13 @@ class train_args:
             timestamp = datetime.datetime.now().strftime("%a-%b-%d-%H-%M")
             # create the save path for the dijkstra
             if socket.gethostname() == "dijkstra":
-                save_path = '/data5/model_weights/' + self.uid + '-' + timestamp
+                save_path = '/data5//songze/model_weights/' + self.uid + '-' + timestamp
             else:
                 save_path = './model_weights/' + self.uid + '-' + timestamp
         else:
             # create the save path for the dijkstra
             if socket.gethostname() == "dijkstra":
-                save_path = '/data5/model_weights/' + str(self.uid)
+                save_path = '/data5/songze/model_weights/' + str(self.uid)
             else:
                 save_path = './model_weights/' + str(self.uid)
         
