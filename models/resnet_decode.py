@@ -249,14 +249,16 @@ class ResNet_decoder(nn.Module):
             self.layer4 = self._make_layer(block, 512, layers[3], stride=2, output_padding = 1,
                                            dilate=replace_stride_with_dilation[2])
             if SOTA:
-                self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
-                                                bias=False)
+                self.unavgpool = nn.Upsample(scale_factor=4, mode='bilinear', align_corners=True)
+                # self.unavgpool = nn.ConvTranspose2d(self.inplanes, self.inplanes, kernel_size=4, stride=1, padding=0, 
+                #                                 bias=False)
         else:
             self.layer4 = self._make_layer(block, 512, layers[3], stride=2, output_padding = 1,
                                            dilate=replace_stride_with_dilation[2],outdim=num_classes)
             if SOTA:
-                self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=4, stride=1, padding=0, 
-                                                bias=False)
+                self.unavgpool = nn.Upsample(scale_factor=4, mode='bilinear', align_corners=True)
+                # self.unavgpool = nn.ConvTranspose2d(num_classes, num_classes, kernel_size=4, stride=1, padding=0, 
+                #                                 bias=False)
         
         for m in self.modules():
             if isinstance(m, nn.Conv2d):
