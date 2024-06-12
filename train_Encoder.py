@@ -150,6 +150,7 @@ def trainer_2nd(args, model, trainloader, epoch_id, criterion, optimizer):
         })
 
 def train(args, model, trainloader):
+    set_seed(manualSeed = args.seed)
 
     criterion = make_criterion(args)
     optimizer = make_optimizer(args, model)
