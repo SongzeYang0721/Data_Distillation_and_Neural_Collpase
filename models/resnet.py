@@ -67,7 +67,7 @@ class BasicBlock(nn.Module):
         self.stride = stride
 
     def forward(self, x: Tensor) -> Tensor:
-        # identity = x
+        identity = x
 
         out = self.conv1(x)
         out = self.bn1(out)
@@ -76,10 +76,10 @@ class BasicBlock(nn.Module):
         out = self.conv2(out)
         out = self.bn2(out)
 
-        # if self.downsample is not None:
-        #     identity = self.downsample(x)
+        if self.downsample is not None:
+            identity = self.downsample(x)
 
-        # out += identity
+        out += identity
         out = self.relu(out)
 
         return out
