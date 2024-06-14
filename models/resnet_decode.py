@@ -89,7 +89,7 @@ class BasicBlock(nn.Module):
         self.stride = stride
 
     def forward(self, x):
-        # identity = x
+        identity = x
 
         out = self.deconv2(x)
         out = self.bn2(out)
@@ -98,10 +98,10 @@ class BasicBlock(nn.Module):
         out = self.deconv1(out)
         out = self.bn1(out)
 
-        # if self.upsample is not None:
-        #     identity = self.upsample(x)
+        if self.upsample is not None:
+            identity = self.upsample(x)
         
-        # out += identity
+        out += identity
         out = self.relu(out)
 
         return out
@@ -149,7 +149,7 @@ class Bottleneck(nn.Module):
         self.stride = stride
 
     def forward(self, x):
-        # identity = x
+        identity = x
 
         out = self.deconv3(x)
         out = self.bn3(out)
@@ -346,7 +346,7 @@ class ResNet_decoder(nn.Module):
 
         x = x.view(x.shape[0], x.shape[1], 1, 1)
         # if self.SOTA:
-        x = self.unavgpool(x)
+        # x = self.unavgpool(x)
 
         x = self.layer4(x)
         x = self.layer3(x)
