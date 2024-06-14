@@ -162,10 +162,10 @@ class Bottleneck(nn.Module):
         out = self.deconv1(out)
         out = self.bn1(out)
 
-        # if self.upsample is not None:
-        #     identity = self.upsample(x)
+        if self.upsample is not None:
+            identity = self.upsample(x)
 
-        # out += identity
+        out += identity
         out = self.relu(out)
 
         return out
@@ -339,8 +339,8 @@ class ResNet_decoder(nn.Module):
     def _forward_impl(self, x: Tensor):
 
         x = x.view(x.shape[0], x.shape[1], 1, 1)
-        if self.SOTA:
-            x = self.unavgpool(x)
+        # if self.SOTA:
+        #     x = self.unavgpool(x)
 
         x = self.layer4(x)
         x = self.layer3(x)
