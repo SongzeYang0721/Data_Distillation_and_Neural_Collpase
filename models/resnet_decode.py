@@ -346,7 +346,7 @@ class ResNet_decoder(nn.Module):
 
         x = x.view(x.shape[0], x.shape[1], 1, 1)
         # if self.SOTA:
-        # x = self.unavgpool(x)
+        x = self.unavgpool(x)
 
         x = self.layer4(x)
         x = self.layer3(x)
