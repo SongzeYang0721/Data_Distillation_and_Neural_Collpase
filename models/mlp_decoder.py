@@ -19,6 +19,6 @@ class MLP_DECODER(nn.Module):
 
     def forward(self, x):
         x = self.layers(x)
-        x.view(-1, 3, 32, 32)
+        x = x.view(3, 32, 32)
         return x
     
