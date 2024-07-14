@@ -12,7 +12,7 @@ class MLP_DECODER(nn.Module):
         for i in range(1, depth):
             layers += [nn.Linear(hidden, hidden), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
             if i == depth-1:
-                layers += [nn.Linear(hidden, 3072), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
+                layers += [nn.Linear(hidden, 3072), nn.BatchNorm1d(num_features=3072), nn.ReLU()]
         
         self.layers = nn.Sequential(*layers)
         print(fc_bias)
