@@ -9,7 +9,7 @@ class MLP_DECODER(nn.Module):
         
         super(MLP_DECODER, self).__init__()
         layers = [nn.Linear(hidden, hidden), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
-        for i in range(1, depth):
+        for i in range(1, depth+1):
             layers += [nn.Linear(hidden, hidden), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
             if i == depth:
                 layers += [nn.Linear(hidden, 3072), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
@@ -19,5 +19,6 @@ class MLP_DECODER(nn.Module):
 
     def forward(self, x):
         x = self.layers(x)
+        x.view(3, 32, 32)
         return x
     
