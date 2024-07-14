@@ -9,9 +9,9 @@ class MLP_DECODER(nn.Module):
         
         super(MLP_DECODER, self).__init__()
         layers = [nn.Linear(hidden, hidden), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
-        for i in range(1, depth+1):
+        for i in range(1, depth):
             layers += [nn.Linear(hidden, hidden), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
-            if i == depth:
+            if i == depth-1:
                 layers += [nn.Linear(hidden, 3072), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
         
         self.layers = nn.Sequential(*layers)
