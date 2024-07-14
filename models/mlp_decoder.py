@@ -15,11 +15,9 @@ class MLP_DECODER(nn.Module):
                 layers += [nn.Linear(hidden, 3072), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
         
         self.layers = nn.Sequential(*layers)
-        self.fc = nn.Linear(num_classes, hidden, bias = fc_bias)
         print(fc_bias)
 
     def forward(self, x):
-        x = self.fc(x)
         x = self.layers(x)
         return x
     
