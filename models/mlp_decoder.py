@@ -8,10 +8,11 @@ class MLP_DECODER(nn.Module):
         # Depth means how many layers before final linear layer
         
         super(MLP_DECODER, self).__init__()
-        
-        for i in range(depth - 1):
+        layers = [nn.Linear(hidden, hidden), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
+        for i in range(1, depth):
             layers += [nn.Linear(hidden, hidden), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
-        layers = [nn.Linear(hidden, 3072), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
+            if i == depth:
+                layers += [nn.Linear(hidden, 3072), nn.BatchNorm1d(num_features=hidden), nn.ReLU()]
         
         self.layers = nn.Sequential(*layers)
         self.fc = nn.Linear(num_classes, hidden, bias = fc_bias)
